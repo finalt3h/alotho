@@ -5,7 +5,8 @@ part 'login_state.freezed.dart';
 @freezed
 class LoginState with _$LoginState {
   const factory LoginState({
-    @Default('') String phoneNumber,
+    @Default('') String identifier,
+    @Default('') String password,
     @Default(false) bool isSubmitting,
     String? errorMessage,
   }) = _LoginState;

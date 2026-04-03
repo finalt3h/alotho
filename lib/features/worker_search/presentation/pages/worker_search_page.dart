@@ -1,5 +1,6 @@
 import 'package:alo_tho/core/constants/app_spacing.dart';
 import 'package:alo_tho/core/l10n/app_localizations.dart';
+import 'package:alo_tho/core/preview/app_preview.dart';
 import 'package:alo_tho/core/widgets/app_empty_state.dart';
 import 'package:alo_tho/core/widgets/app_error_view.dart';
 import 'package:alo_tho/core/widgets/app_loading_state.dart';
@@ -12,8 +13,15 @@ import 'package:alo_tho/features/worker_search/presentation/widgets/service_cate
 import 'package:alo_tho/features/worker_search/presentation/widgets/worker_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter/widget_previews.dart';
 import 'package:go_router/go_router.dart';
-
+@Preview(
+  group: 'Screens',
+  name: 'Worker Search Page',
+  size: phonePreviewSize,
+  wrapper: appPreviewWrapper,
+)
+Widget previewWorkerSearchPage() => const WorkerSearchPage();
 class WorkerSearchPage extends ConsumerWidget {
   const WorkerSearchPage({super.key});
 
@@ -121,3 +129,5 @@ class WorkerSearchPage extends ConsumerWidget {
     );
   }
 }
+
+

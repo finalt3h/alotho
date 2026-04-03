@@ -10,7 +10,7 @@ import 'package:flutter_test/flutter_test.dart';
 
 void main() {
   group('LoginController', () {
-    test('rejects invalid phone number before calling repository', () async {
+    test('rejects invalid identifier before calling repository', () async {
       final fakeRepository = _FakeAuthRepository();
       final container = ProviderContainer(
         overrides: [authRepositoryProvider.overrideWithValue(fakeRepository)],
@@ -18,17 +18,18 @@ void main() {
       addTearDown(container.dispose);
 
       final notifier = container.read(loginControllerProvider.notifier);
-      notifier.updatePhoneNumber('123');
+      notifier.updateIdentifier('abc');
+      notifier.updatePassword('123456');
 
-      final result = await notifier.loginWithPhone();
+      final result = await notifier.loginWithCredentials();
       final state = container.read(loginControllerProvider);
 
       expect(result, isFalse);
-      expect(state.errorMessage, 'So dien thoai chua hop le.');
-      expect(fakeRepository.phoneLoginCallCount, 0);
+      expect(state.errorMessage, 'So dien thoai hoac email chua hop le.');
+      expect(fakeRepository.credentialsLoginCallCount, 0);
     });
 
-    test('signs in successfully with valid phone number', () async {
+    test('signs in successfully with valid credentials', () async {
       final fakeRepository = _FakeAuthRepository();
       final container = ProviderContainer(
         overrides: [authRepositoryProvider.overrideWithValue(fakeRepository)],
@@ -36,13 +37,14 @@ void main() {
       addTearDown(container.dispose);
 
       final notifier = container.read(loginControllerProvider.notifier);
-      notifier.updatePhoneNumber('0912345678');
+      notifier.updateIdentifier('0912345678');
+      notifier.updatePassword('123456');
 
-      final result = await notifier.loginWithPhone();
+      final result = await notifier.loginWithCredentials();
       final authState = container.read(authSessionControllerProvider);
 
       expect(result, isTrue);
-      expect(fakeRepository.phoneLoginCallCount, 1);
+      expect(fakeRepository.credentialsLoginCallCount, 1);
       expect(authState.status, AuthStatus.authenticated);
       expect(authState.user?.fullName, 'Test User');
     });
@@ -50,7 +52,7 @@ void main() {
 }
 
 class _FakeAuthRepository implements AuthRepository {
-  int phoneLoginCallCount = 0;
+  int credentialsLoginCallCount = 0;
 
   @override
   Future<Result<User>> loginWithGoogle() async {
@@ -58,9 +60,12 @@ class _FakeAuthRepository implements AuthRepository {
   }
 
   @override
-  Future<Result<User>> loginWithPhone(String phoneNumber) async {
-    phoneLoginCallCount += 1;
-    return Success(_testUser.copyWith(phoneNumber: phoneNumber));
+  Future<Result<User>> loginWithCredentials({
+    required String identifier,
+    required String password,
+  }) async {
+    credentialsLoginCallCount += 1;
+    return Success(_testUser.copyWith(phoneNumber: identifier));
   }
 }
 

@@ -1,5 +1,6 @@
 import 'package:alo_tho/core/constants/app_spacing.dart';
 import 'package:alo_tho/core/l10n/app_localizations.dart';
+import 'package:alo_tho/core/preview/app_preview.dart';
 import 'package:alo_tho/core/widgets/app_empty_state.dart';
 import 'package:alo_tho/core/widgets/app_error_view.dart';
 import 'package:alo_tho/core/widgets/app_loading_state.dart';
@@ -13,8 +14,16 @@ import 'package:alo_tho/features/chat/presentation/widgets/chat_preview_card.dar
 import 'package:alo_tho/features/chat/presentation/widgets/recommended_worker_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter/widget_previews.dart';
 import 'package:go_router/go_router.dart';
 
+@Preview(
+  group: 'Screens',
+  name: 'Message List Page',
+  size: phonePreviewSize,
+  wrapper: appPreviewWrapper,
+)
+Widget previewMessageListPage() => const MessageListPage();
 class MessageListPage extends ConsumerWidget {
   const MessageListPage({super.key});
   @override
@@ -122,3 +131,5 @@ class MessageListPage extends ConsumerWidget {
     );
   }
 }
+
+

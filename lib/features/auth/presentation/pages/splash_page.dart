@@ -1,7 +1,16 @@
 import 'package:alo_tho/core/constants/app_constants.dart';
+import 'package:alo_tho/core/preview/app_preview.dart';
 import 'package:alo_tho/core/constants/app_spacing.dart';
 import 'package:alo_tho/core/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widget_previews.dart';
+@Preview(
+  group: 'Screens',
+  name: 'Splash Page',
+  size: phonePreviewSize,
+  wrapper: appPreviewWrapper,
+)
+Widget previewSplashPage() => const SplashPage();
 
 class SplashPage extends StatelessWidget {
   const SplashPage({super.key});

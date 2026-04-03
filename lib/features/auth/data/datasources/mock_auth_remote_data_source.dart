@@ -9,8 +9,16 @@ final authRemoteDataSourceProvider = Provider<MockAuthRemoteDataSource>(
 class MockAuthRemoteDataSource {
   const MockAuthRemoteDataSource();
 
-  Future<UserModel> loginWithPhone(String phoneNumber) async {
+  Future<UserModel> loginWithCredentials({
+    required String identifier,
+    required String password,
+  }) async {
     await Future<void>.delayed(const Duration(milliseconds: 800));
+
+    final normalizedIdentifier = identifier.trim();
+    final phoneNumber = normalizedIdentifier.contains('@')
+        ? '0901234567'
+        : normalizedIdentifier;
 
     return UserModel(
       id: 'user-001',

@@ -1,5 +1,6 @@
 import 'package:alo_tho/core/constants/app_spacing.dart';
 import 'package:alo_tho/core/l10n/app_localizations.dart';
+import 'package:alo_tho/core/preview/app_preview.dart';
 import 'package:alo_tho/core/widgets/app_error_view.dart';
 import 'package:alo_tho/core/widgets/app_loading_state.dart';
 import 'package:alo_tho/core/widgets/app_page_body.dart';
@@ -8,7 +9,29 @@ import 'package:alo_tho/features/worker_search/presentation/widgets/worker_detai
 import 'package:alo_tho/features/worker_search/presentation/widgets/worker_detail_summary_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flutter/widget_previews.dart';
 
+@Preview(name: 'CommonLabel')
+Widget previewCommonLabel() {
+  return const MaterialApp(
+    home: Scaffold(
+      body: Center(
+        child: Text('Xin chào'),
+      ),
+    ),
+  );
+}
+
+@Preview(name: 'Simple Text')
+Widget previewSimpleText() {
+  return const MaterialApp(
+    home: Scaffold(
+      body: Center(
+        child: Text('Hello Preview'),
+      ),
+    ),
+  );
+}
 class WorkerDetailPage extends ConsumerWidget {
   const WorkerDetailPage({required this.workerId, super.key});
 
@@ -48,3 +71,5 @@ class WorkerDetailPage extends ConsumerWidget {
     );
   }
 }
+
+

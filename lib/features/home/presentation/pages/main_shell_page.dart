@@ -1,7 +1,53 @@
 import 'package:alo_tho/core/l10n/app_localizations.dart';
+import 'package:alo_tho/core/preview/app_preview.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widget_previews.dart';
 import 'package:go_router/go_router.dart';
 
+@Preview(
+  group: 'Screens',
+  name: 'Main Shell Page',
+  size: phonePreviewSize,
+  wrapper: appPreviewWrapper,
+)
+Widget previewMainShellPage() => MainShellScaffold(
+  currentIndex: 0,
+  onDestinationSelected: (_) {},
+  body: const _MainShellPreviewBody(),
+);
+
+class _MainShellPreviewBody extends StatelessWidget {
+  const _MainShellPreviewBody();
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
+    return SafeArea(
+      child: ListView(
+        padding: const EdgeInsets.all(24),
+        children: [
+          Text('Tim tho gan day', style: theme.textTheme.headlineSmall),
+          const SizedBox(height: 12),
+          Text(
+            'Preview nay dung de xem nhanh khung dieu huong chinh va thanh bottom navigation.',
+            style: theme.textTheme.bodyLarge,
+          ),
+          const SizedBox(height: 24),
+          Card(
+            child: Padding(
+              padding: const EdgeInsets.all(20),
+              child: Text(
+                'Noi dung tab se duoc render tai day khi app chay qua GoRouter.',
+                style: theme.textTheme.bodyMedium,
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
 class MainShellPage extends StatelessWidget {
   const MainShellPage({required this.navigationShell, super.key});
 
@@ -9,19 +55,41 @@ class MainShellPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return MainShellScaffold(
+      body: navigationShell,
+      currentIndex: navigationShell.currentIndex,
+      onDestinationSelected: (index) {
+        navigationShell.goBranch(
+          index,
+          initialLocation: index == navigationShell.currentIndex,
+        );
+      },
+    );
+  }
+}
+
+class MainShellScaffold extends StatelessWidget {
+  const MainShellScaffold({
+    required this.body,
+    required this.currentIndex,
+    required this.onDestinationSelected,
+    super.key,
+  });
+
+  final Widget body;
+  final int currentIndex;
+  final ValueChanged<int> onDestinationSelected;
+
+  @override
+  Widget build(BuildContext context) {
     final l10n = context.l10n;
 
     return Scaffold(
-      body: navigationShell,
+      body: body,
       bottomNavigationBar: NavigationBar(
         height: 72,
-        selectedIndex: navigationShell.currentIndex,
-        onDestinationSelected: (index) {
-          navigationShell.goBranch(
-            index,
-            initialLocation: index == navigationShell.currentIndex,
-          );
-        },
+        selectedIndex: currentIndex,
+        onDestinationSelected: onDestinationSelected,
         destinations: [
           NavigationDestination(
             icon: const Icon(Icons.search_rounded),
@@ -44,3 +112,4 @@ class MainShellPage extends StatelessWidget {
     );
   }
 }
+

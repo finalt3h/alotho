@@ -13,15 +13,27 @@ class LoginController extends Notifier<LoginState> {
   @override
   LoginState build() => const LoginState();
 
-  void updatePhoneNumber(String value) {
-    state = state.copyWith(phoneNumber: value, errorMessage: null);
+  void updateIdentifier(String value) {
+    state = state.copyWith(identifier: value, errorMessage: null);
   }
 
-  Future<bool> loginWithPhone() async {
-    final normalizedPhone = state.phoneNumber.trim();
+  void updatePassword(String value) {
+    state = state.copyWith(password: value, errorMessage: null);
+  }
 
-    if (normalizedPhone.length < AppConstants.minimumPhoneLength) {
-      state = state.copyWith(errorMessage: 'So dien thoai chua hop le.');
+  Future<bool> loginWithCredentials() async {
+    final normalizedIdentifier = state.identifier.trim();
+    final password = state.password.trim();
+
+    if (!_isValidIdentifier(normalizedIdentifier)) {
+      state = state.copyWith(
+        errorMessage: 'So dien thoai hoac email chua hop le.',
+      );
+      return false;
+    }
+
+    if (password.length < AppConstants.minimumPasswordLength) {
+      state = state.copyWith(errorMessage: 'Mat khau chua hop le.');
       return false;
     }
 
@@ -29,7 +41,10 @@ class LoginController extends Notifier<LoginState> {
 
     final result = await ref
         .read(authRepositoryProvider)
-        .loginWithPhone(normalizedPhone);
+        .loginWithCredentials(
+          identifier: normalizedIdentifier,
+          password: password,
+        );
 
     state = state.copyWith(isSubmitting: false);
 
@@ -43,6 +58,20 @@ class LoginController extends Notifier<LoginState> {
         return false;
       },
     );
+  }
+
+  bool _isValidIdentifier(String value) {
+    if (value.isEmpty) {
+      return false;
+    }
+
+    if (value.contains('@')) {
+      final emailRegex = RegExp(r'^[^@\s]+@[^@\s]+\.[^@\s]+$');
+      return emailRegex.hasMatch(value);
+    }
+
+    final digitsOnly = value.replaceAll(RegExp(r'\D'), '');
+    return digitsOnly.length >= AppConstants.minimumPhoneLength;
   }
 
   Future<bool> loginWithGoogle() async {

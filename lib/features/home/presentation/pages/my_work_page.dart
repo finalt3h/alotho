@@ -1,5 +1,6 @@
 import 'package:alo_tho/core/constants/app_spacing.dart';
 import 'package:alo_tho/core/l10n/app_localizations.dart';
+import 'package:alo_tho/core/preview/app_preview.dart';
 import 'package:alo_tho/core/widgets/app_error_view.dart';
 import 'package:alo_tho/core/widgets/app_loading_state.dart';
 import 'package:alo_tho/core/widgets/app_page_body.dart';
@@ -8,7 +9,14 @@ import 'package:alo_tho/features/home/presentation/viewmodels/my_work_view_model
 import 'package:alo_tho/features/home/presentation/widgets/work_listing_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
+import 'package:flutter/widget_previews.dart';
+@Preview(
+  group: 'Screens',
+  name: 'My Work Page',
+  size: phonePreviewSize,
+  wrapper: appPreviewWrapper,
+)
+Widget previewMyWorkPage() => const MyWorkPage();
 class MyWorkPage extends ConsumerWidget {
   const MyWorkPage({super.key});
   @override
@@ -56,3 +64,5 @@ class MyWorkPage extends ConsumerWidget {
     );
   }
 }
+
+

@@ -17,7 +17,8 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$LoginState {
-  String get phoneNumber => throw _privateConstructorUsedError;
+  String get identifier => throw _privateConstructorUsedError;
+  String get password => throw _privateConstructorUsedError;
   bool get isSubmitting => throw _privateConstructorUsedError;
   String? get errorMessage => throw _privateConstructorUsedError;
 
@@ -35,7 +36,12 @@ abstract class $LoginStateCopyWith<$Res> {
     $Res Function(LoginState) then,
   ) = _$LoginStateCopyWithImpl<$Res, LoginState>;
   @useResult
-  $Res call({String phoneNumber, bool isSubmitting, String? errorMessage});
+  $Res call({
+    String identifier,
+    String password,
+    bool isSubmitting,
+    String? errorMessage,
+  });
 }
 
 /// @nodoc
@@ -53,15 +59,20 @@ class _$LoginStateCopyWithImpl<$Res, $Val extends LoginState>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? phoneNumber = null,
+    Object? identifier = null,
+    Object? password = null,
     Object? isSubmitting = null,
     Object? errorMessage = freezed,
   }) {
     return _then(
       _value.copyWith(
-            phoneNumber: null == phoneNumber
-                ? _value.phoneNumber
-                : phoneNumber // ignore: cast_nullable_to_non_nullable
+            identifier: null == identifier
+                ? _value.identifier
+                : identifier // ignore: cast_nullable_to_non_nullable
+                      as String,
+            password: null == password
+                ? _value.password
+                : password // ignore: cast_nullable_to_non_nullable
                       as String,
             isSubmitting: null == isSubmitting
                 ? _value.isSubmitting
@@ -86,7 +97,12 @@ abstract class _$$LoginStateImplCopyWith<$Res>
   ) = __$$LoginStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String phoneNumber, bool isSubmitting, String? errorMessage});
+  $Res call({
+    String identifier,
+    String password,
+    bool isSubmitting,
+    String? errorMessage,
+  });
 }
 
 /// @nodoc
@@ -103,15 +119,20 @@ class __$$LoginStateImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? phoneNumber = null,
+    Object? identifier = null,
+    Object? password = null,
     Object? isSubmitting = null,
     Object? errorMessage = freezed,
   }) {
     return _then(
       _$LoginStateImpl(
-        phoneNumber: null == phoneNumber
-            ? _value.phoneNumber
-            : phoneNumber // ignore: cast_nullable_to_non_nullable
+        identifier: null == identifier
+            ? _value.identifier
+            : identifier // ignore: cast_nullable_to_non_nullable
+                  as String,
+        password: null == password
+            ? _value.password
+            : password // ignore: cast_nullable_to_non_nullable
                   as String,
         isSubmitting: null == isSubmitting
             ? _value.isSubmitting
@@ -130,14 +151,18 @@ class __$$LoginStateImplCopyWithImpl<$Res>
 
 class _$LoginStateImpl implements _LoginState {
   const _$LoginStateImpl({
-    this.phoneNumber = '',
+    this.identifier = '',
+    this.password = '',
     this.isSubmitting = false,
     this.errorMessage,
   });
 
   @override
   @JsonKey()
-  final String phoneNumber;
+  final String identifier;
+  @override
+  @JsonKey()
+  final String password;
   @override
   @JsonKey()
   final bool isSubmitting;
@@ -146,7 +171,7 @@ class _$LoginStateImpl implements _LoginState {
 
   @override
   String toString() {
-    return 'LoginState(phoneNumber: $phoneNumber, isSubmitting: $isSubmitting, errorMessage: $errorMessage)';
+    return 'LoginState(identifier: $identifier, password: $password, isSubmitting: $isSubmitting, errorMessage: $errorMessage)';
   }
 
   @override
@@ -154,8 +179,10 @@ class _$LoginStateImpl implements _LoginState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$LoginStateImpl &&
-            (identical(other.phoneNumber, phoneNumber) ||
-                other.phoneNumber == phoneNumber) &&
+            (identical(other.identifier, identifier) ||
+                other.identifier == identifier) &&
+            (identical(other.password, password) ||
+                other.password == password) &&
             (identical(other.isSubmitting, isSubmitting) ||
                 other.isSubmitting == isSubmitting) &&
             (identical(other.errorMessage, errorMessage) ||
@@ -163,8 +190,13 @@ class _$LoginStateImpl implements _LoginState {
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, phoneNumber, isSubmitting, errorMessage);
+  int get hashCode => Object.hash(
+    runtimeType,
+    identifier,
+    password,
+    isSubmitting,
+    errorMessage,
+  );
 
   /// Create a copy of LoginState
   /// with the given fields replaced by the non-null parameter values.
@@ -177,13 +209,16 @@ class _$LoginStateImpl implements _LoginState {
 
 abstract class _LoginState implements LoginState {
   const factory _LoginState({
-    final String phoneNumber,
+    final String identifier,
+    final String password,
     final bool isSubmitting,
     final String? errorMessage,
   }) = _$LoginStateImpl;
 
   @override
-  String get phoneNumber;
+  String get identifier;
+  @override
+  String get password;
   @override
   bool get isSubmitting;
   @override

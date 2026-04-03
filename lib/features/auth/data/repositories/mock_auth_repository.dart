@@ -26,12 +26,20 @@ class MockAuthRepository implements AuthRepository {
   }
 
   @override
-  Future<Result<User>> loginWithPhone(String phoneNumber) async {
+  Future<Result<User>> loginWithCredentials({
+    required String identifier,
+    required String password,
+  }) async {
     try {
-      final user = await _remoteDataSource.loginWithPhone(phoneNumber);
+      final user = await _remoteDataSource.loginWithCredentials(
+        identifier: identifier,
+        password: password,
+      );
       return Success(user.toEntity());
     } catch (_) {
-      return const Error(Failure('Khong the dang nhap bang so dien thoai.'));
+      return const Error(
+        Failure('Khong the dang nhap bang so dien thoai hoac email.'),
+      );
     }
   }
 }

@@ -42,18 +42,29 @@ class AppLocalizations {
     en: 'Sign in to find the right worker',
   );
   String get loginDescription => _text(
-    vi: 'Nhap so dien thoai hoac dung Google. Backend that co the duoc gan vao sau ma khong can doi UI.',
-    en: 'Use your phone number or Google. A real backend can be connected later without rebuilding the UI.',
+    vi: 'Dang nhap bang so dien thoai, email va mat khau. Google sign-in van san sang de gan backend that sau.',
+    en: 'Sign in with your phone number or email and password. Google sign-in remains ready for real backend integration later.',
   );
-  String get phoneNumberLabel => _text(vi: 'So dien thoai', en: 'Phone number');
+  String get loginIdentifierLabel =>
+      _text(vi: 'So dien thoai hoac email', en: 'Phone number or email');
+  String get loginIdentifierHint => _text(
+    vi: '0912 345 678 hoac ban@example.com',
+    en: '0912 345 678 or you@example.com',
+  );
+  String get passwordLabel => _text(vi: 'Mat khau', en: 'Password');
+  String get passwordHint =>
+      _text(vi: 'Nhap mat khau cua ban', en: 'Enter your password');
   String get processing => _text(vi: 'Dang xu ly...', en: 'Processing...');
-  String get signInWithPhone => _text(
-    vi: 'Dang nhap bang so dien thoai',
-    en: 'Sign in with phone number',
-  );
+  String get signInWithCredentials => _text(vi: 'Dang nhap', en: 'Sign in');
   String get orLabel => _text(vi: 'hoac', en: 'or');
   String get signInWithGoogle =>
       _text(vi: 'Dang nhap bang Google', en: 'Sign in with Google');
+  String get forgotPassword =>
+      _text(vi: 'Quen mat khau?', en: 'Forgot password?');
+  String get forgotPasswordPlaceholder => _text(
+    vi: 'Tam thoi day la nut placeholder cho flow quen mat khau.',
+    en: 'This is currently a placeholder for the forgot password flow.',
+  );
   String get loginBenefitTitle => _text(
     vi: 'Ban xem duoc gi sau khi dang nhap?',
     en: 'What do you get after signing in?',
@@ -62,10 +73,12 @@ class AppLocalizations {
     vi: 'Tim tho theo nghe va khu vuc, xem hoi tho gan day, quan ly bai dang ve cong viec cua ban va cap nhat ho so tho.',
     en: 'Search workers by service and area, review recent conversations, manage your work posts, and update your worker profile.',
   );
-  String get invalidPhoneNumber => _text(
-    vi: 'So dien thoai chua hop le.',
-    en: 'The phone number is invalid.',
+  String get invalidLoginIdentifier => _text(
+    vi: 'So dien thoai hoac email chua hop le.',
+    en: 'The phone number or email is invalid.',
   );
+  String get invalidPassword =>
+      _text(vi: 'Mat khau chua hop le.', en: 'The password is invalid.');
   String get workerSearchNav => _text(vi: 'Tim tho', en: 'Search');
   String get messagesNav => _text(vi: 'Tin nhan', en: 'Messages');
   String get myWorkNav => _text(vi: 'Cong viec', en: 'My work');
@@ -371,14 +384,15 @@ class AppLocalizations {
 
   String localizeFailureMessage(String raw) {
     return switch (raw) {
-      'So dien thoai chua hop le.' => invalidPhoneNumber,
+      'So dien thoai hoac email chua hop le.' => invalidLoginIdentifier,
+      'Mat khau chua hop le.' => invalidPassword,
       'Khong the dang nhap voi Google luc nay.' => _text(
         vi: raw,
         en: 'Google sign-in is unavailable right now.',
       ),
-      'Khong the dang nhap bang so dien thoai.' => _text(
+      'Khong the dang nhap bang so dien thoai hoac email.' => _text(
         vi: raw,
-        en: 'Phone sign-in is unavailable right now.',
+        en: 'Phone or email sign-in is unavailable right now.',
       ),
       'Khong tai duoc danh muc dich vu.' => _text(
         vi: raw,
