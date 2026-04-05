@@ -9,5 +9,6 @@ class LoginState with _$LoginState {
     @Default('') String password,
     @Default(false) bool isSubmitting,
     String? errorMessage,
+    String? pendingActivationIdentifier,
   }) = _LoginState;
 }

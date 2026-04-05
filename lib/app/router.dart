@@ -2,6 +2,7 @@ import 'package:alo_tho/app/app_routes.dart';
 import 'package:alo_tho/features/auth/presentation/pages/login_page.dart';
 import 'package:alo_tho/features/auth/presentation/pages/register_page.dart';
 import 'package:alo_tho/features/auth/presentation/pages/splash_page.dart';
+import 'package:alo_tho/features/auth/presentation/pages/verify_otp_page.dart';
 import 'package:alo_tho/features/auth/presentation/viewmodels/auth_session_controller.dart';
 import 'package:alo_tho/features/auth/presentation/viewmodels/auth_session_state.dart';
 import 'package:alo_tho/features/chat/presentation/pages/message_list_page.dart';
@@ -40,6 +41,14 @@ final routerProvider = Provider<GoRouter>((ref) {
         path: AppRoutes.registerPath,
         name: AppRoutes.registerName,
         builder: (context, state) => const RegisterPage(),
+      ),
+      GoRoute(
+        path: AppRoutes.verifyOtpPath,
+        name: AppRoutes.verifyOtpName,
+        builder: (context, state) {
+          final identifier = state.uri.queryParameters['identifier'] ?? '';
+          return VerifyOtpPage(identifier: identifier);
+        },
       ),
       StatefulShellRoute.indexedStack(
         builder: (context, state, navigationShell) {

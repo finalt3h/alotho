@@ -81,6 +81,44 @@ class AppLocalizationsVi extends AppLocalizations {
       'Bắt đầu kết nối với những người thợ phù hợp';
 
   @override
+  String get verifyOtpTitle => 'Xác thực OTP';
+
+  @override
+  String get verifyOtpHeadline => 'Kích hoạt tài khoản';
+
+  @override
+  String get verifyOtpDescriptionEmail =>
+      'Nhập mã OTP đã được gửi tới email của bạn để hoàn tất kích hoạt tài khoản.';
+
+  @override
+  String get verifyOtpDescriptionPhone =>
+      'Nhập mã OTP đã được gửi tới số điện thoại của bạn để hoàn tất kích hoạt tài khoản.';
+
+  @override
+  String get otpLabel => 'Mã OTP';
+
+  @override
+  String get otpHint => 'Nhập mã gồm 6 số';
+
+  @override
+  String get verifyOtpButton => 'Xác thực OTP';
+
+  @override
+  String get resendOtpButton => 'Gửi lại mã';
+
+  @override
+  String get registerEmailLabel => 'Email';
+
+  @override
+  String get registerEmailHint => 'Nhập email để nhận mã xác thực';
+
+  @override
+  String get registerPhoneLabel => 'Số điện thoại (tùy chọn)';
+
+  @override
+  String get registerPhoneHint => 'Nhập số điện thoại nếu muốn';
+
+  @override
   String get registerFullNameLabel => 'Họ và tên';
 
   @override
@@ -113,10 +151,58 @@ class AppLocalizationsVi extends AppLocalizations {
       'Tìm thợ theo nghề và khu vực, xem hội thoại gần đây, quản lý bài đăng về công việc của bạn và cập nhật hồ sơ thợ.';
 
   @override
+  String get registerSuccessSignedIn => 'Tạo tài khoản thành công.';
+
+  @override
+  String get registerSuccessVerifyEmail =>
+      'Tài khoản đã được tạo. Vui lòng kiểm tra email để xác minh trước khi đăng nhập.';
+
+  @override
+  String get registerSuccessVerifyPhone =>
+      'Tài khoản đã được tạo. Vui lòng kiểm tra tin nhắn để xác minh trước khi đăng nhập.';
+
+  @override
   String get invalidLoginIdentifier => 'Số điện thoại hoặc email chưa hợp lệ.';
 
   @override
+  String get invalidRegisterEmail => 'Email chưa hợp lệ.';
+
+  @override
+  String get invalidRegisterPhone => 'Số điện thoại chưa hợp lệ.';
+
+  @override
+  String get invalidFullName => 'Họ tên chưa hợp lệ.';
+
+  @override
   String get invalidPassword => 'Mật khẩu chưa hợp lệ.';
+
+  @override
+  String get confirmPasswordMismatch => 'Mật khẩu xác nhận không khớp.';
+
+  @override
+  String get activationOtpRequired =>
+      'Tài khoản chưa kích hoạt. Vui lòng nhập OTP để kích hoạt.';
+
+  @override
+  String get invalidOtp => 'Mã OTP đã hết hạn hoặc không hợp lệ.';
+
+  @override
+  String get failureSignOut => 'Không thể đăng xuất lúc này.';
+
+  @override
+  String get failureOtpVerification => 'Xác thực OTP không thành công.';
+
+  @override
+  String get failureResendOtp => 'Không thể gửi lại mã OTP lúc này.';
+
+  @override
+  String get resendOtpSuccess => 'Đã gửi lại mã OTP.';
+
+  @override
+  String get failureRegisterUnavailable => 'Không thể tạo tài khoản lúc này.';
+
+  @override
+  String get failureAccountAlreadyExists => 'Tài khoản đã tồn tại.';
 
   @override
   String get workerSearchNav => 'Tìm thợ';

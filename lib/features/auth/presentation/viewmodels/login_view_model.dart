@@ -1,5 +1,5 @@
 import 'package:alo_tho/core/constants/app_constants.dart';
-import 'package:alo_tho/features/auth/data/repositories/mock_auth_repository.dart';
+import 'package:alo_tho/features/auth/data/repositories/supabase_auth_repository.dart';
 import 'package:alo_tho/features/auth/presentation/viewmodels/auth_session_controller.dart';
 import 'package:alo_tho/features/auth/presentation/viewmodels/login_state.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -14,11 +14,23 @@ class LoginController extends Notifier<LoginState> {
   LoginState build() => const LoginState();
 
   void updateIdentifier(String value) {
-    state = state.copyWith(identifier: value, errorMessage: null);
+    state = state.copyWith(
+      identifier: value,
+      errorMessage: null,
+      pendingActivationIdentifier: null,
+    );
   }
 
   void updatePassword(String value) {
-    state = state.copyWith(password: value, errorMessage: null);
+    state = state.copyWith(
+      password: value,
+      errorMessage: null,
+      pendingActivationIdentifier: null,
+    );
+  }
+
+  void clearPendingActivation() {
+    state = state.copyWith(pendingActivationIdentifier: null);
   }
 
   Future<bool> loginWithCredentials() async {
@@ -54,7 +66,12 @@ class LoginController extends Notifier<LoginState> {
         return true;
       },
       failure: (failure) {
-        state = state.copyWith(errorMessage: failure.message);
+        state = state.copyWith(
+          errorMessage: failure.message,
+          pendingActivationIdentifier: _requiresActivation(failure.message)
+              ? normalizedIdentifier
+              : null,
+        );
         return false;
       },
     );
@@ -72,6 +89,11 @@ class LoginController extends Notifier<LoginState> {
 
     final digitsOnly = value.replaceAll(RegExp(r'\D'), '');
     return digitsOnly.length >= AppConstants.minimumPhoneLength;
+  }
+
+  bool _requiresActivation(String message) {
+    return message ==
+        'Tai khoan chua kich hoat. Vui long nhap OTP de kich hoat.';
   }
 
   Future<bool> loginWithGoogle() async {

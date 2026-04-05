@@ -1,8 +1,12 @@
 import 'package:alo_tho/app/app_routes.dart';
+import 'package:alo_tho/core/constants/app_spacing.dart';
 import 'package:alo_tho/core/l10n/app_localizations.dart';
 import 'package:alo_tho/core/preview/app_preview.dart';
 import 'package:alo_tho/core/widgets/app_page_body.dart';
+import 'package:alo_tho/core/widgets/app_status_dialog.dart';
+import 'package:alo_tho/features/auth/presentation/viewmodels/register_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/widget_previews.dart';
 import 'package:go_router/go_router.dart';
 
@@ -14,14 +18,14 @@ import 'package:go_router/go_router.dart';
 )
 Widget previewRegisterPage() => const RegisterPage();
 
-class RegisterPage extends StatefulWidget {
+class RegisterPage extends ConsumerStatefulWidget {
   const RegisterPage({super.key});
 
   @override
-  State<RegisterPage> createState() => _RegisterPageState();
+  ConsumerState<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _RegisterPageState extends State<RegisterPage> {
+class _RegisterPageState extends ConsumerState<RegisterPage> {
   static const _heroAsset = 'assets/login/login_hero.png';
   static const _googleAsset = 'assets/login/google.png';
 
@@ -32,6 +36,24 @@ class _RegisterPageState extends State<RegisterPage> {
   Widget build(BuildContext context) {
     final l10n = context.l10n;
     final theme = Theme.of(context);
+
+    ref.listen(registerControllerProvider, (previous, next) {
+      if (next.errorMessage != null &&
+          next.errorMessage != previous?.errorMessage) {
+        showAppStatusDialog(
+          context: context,
+          state: AppStatusDialogState.error,
+          title: appStatusDialogDefaultTitle(
+            context,
+            AppStatusDialogState.error,
+          ),
+          message: l10n.localizeFailureMessage(next.errorMessage!),
+        );
+      }
+    });
+
+    final state = ref.watch(registerControllerProvider);
+    final controller = ref.read(registerControllerProvider.notifier);
 
     return Scaffold(
       backgroundColor: const Color(0xFFFCF9F8),
@@ -133,14 +155,25 @@ class _RegisterPageState extends State<RegisterPage> {
                 _RegisterTextField(
                   hintText: l10n.registerFullNameHint,
                   prefixIcon: Icons.badge_outlined,
+                  onChanged: controller.updateFullName,
                 ),
                 const SizedBox(height: 16),
-                _RegisterFieldLabel(label: l10n.loginIdentifierLabel),
+                _RegisterFieldLabel(label: l10n.registerEmailLabel),
                 const SizedBox(height: 8),
                 _RegisterTextField(
-                  hintText: l10n.loginIdentifierHint,
-                  prefixIcon: Icons.person_outline_rounded,
+                  hintText: l10n.registerEmailHint,
+                  prefixIcon: Icons.mail_outline_rounded,
                   keyboardType: TextInputType.emailAddress,
+                  onChanged: controller.updateEmail,
+                ),
+                const SizedBox(height: 16),
+                _RegisterFieldLabel(label: l10n.registerPhoneLabel),
+                const SizedBox(height: 8),
+                _RegisterTextField(
+                  hintText: l10n.registerPhoneHint,
+                  prefixIcon: Icons.phone_outlined,
+                  keyboardType: TextInputType.phone,
+                  onChanged: controller.updatePhoneNumber,
                 ),
                 const SizedBox(height: 16),
                 _RegisterFieldLabel(label: l10n.passwordLabel),
@@ -149,6 +182,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   hintText: l10n.passwordHint,
                   prefixIcon: Icons.lock_outline_rounded,
                   obscureText: _obscurePassword,
+                  onChanged: controller.updatePassword,
                   suffix: IconButton(
                     onPressed: () {
                       setState(() {
@@ -171,6 +205,7 @@ class _RegisterPageState extends State<RegisterPage> {
                   hintText: l10n.registerConfirmPasswordHint,
                   prefixIcon: Icons.verified_user_outlined,
                   obscureText: _obscureConfirmPassword,
+                  onChanged: controller.updateConfirmPassword,
                   suffix: IconButton(
                     onPressed: () {
                       setState(() {
@@ -188,8 +223,43 @@ class _RegisterPageState extends State<RegisterPage> {
                 ),
                 const SizedBox(height: 16),
                 _RegisterPrimaryButton(
-                  label: l10n.createAccount,
-                  onPressed: () => _showPlaceholder(context, l10n),
+                  label: state.isSubmitting
+                      ? l10n.processing
+                      : l10n.createAccount,
+                  onPressed: state.isSubmitting
+                      ? null
+                      : () async {
+                          final submittedEmail = state.email.trim();
+                          final result = await controller
+                              .registerWithCredentials();
+                          if (!context.mounted || result == null) {
+                            return;
+                          }
+
+                          final successMessage = result.hasActiveSession
+                              ? l10n.registerSuccessSignedIn
+                              : l10n.registerSuccessVerifyEmail;
+
+                          await showAppStatusDialog(
+                            context: context,
+                            state: AppStatusDialogState.success,
+                            title: appStatusDialogDefaultTitle(
+                              context,
+                              AppStatusDialogState.success,
+                            ),
+                            message: successMessage,
+                          );
+
+                          if (!context.mounted) {
+                            return;
+                          }
+
+                          if (!result.hasActiveSession) {
+                            context.go(
+                              '${AppRoutes.verifyOtpPath}?identifier=${Uri.encodeComponent(submittedEmail)}',
+                            );
+                          }
+                        },
                 ),
                 const SizedBox(height: 26),
                 Row(
@@ -224,7 +294,11 @@ class _RegisterPageState extends State<RegisterPage> {
                           width: 20,
                           height: 20,
                         ),
-                        onPressed: () => _showPlaceholder(context, l10n),
+                        onPressed: state.isSubmitting
+                            ? null
+                            : () async {
+                                await controller.loginWithGoogle();
+                              },
                       ),
                     ),
                     const SizedBox(width: 16),
@@ -245,7 +319,9 @@ class _RegisterPageState extends State<RegisterPage> {
                             color: Colors.white,
                           ),
                         ),
-                        onPressed: () => _showPlaceholder(context, l10n),
+                        onPressed: state.isSubmitting
+                            ? null
+                            : () => _showPlaceholder(context, l10n),
                       ),
                     ),
                   ],
@@ -260,9 +336,12 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   void _showPlaceholder(BuildContext context, AppLocalizations l10n) {
-    ScaffoldMessenger.of(
-      context,
-    ).showSnackBar(SnackBar(content: Text(l10n.registerPlaceholder)));
+    showAppStatusDialog(
+      context: context,
+      state: AppStatusDialogState.alert,
+      title: appStatusDialogDefaultTitle(context, AppStatusDialogState.alert),
+      message: l10n.registerPlaceholder,
+    );
   }
 }
 
@@ -284,7 +363,7 @@ class _RegisterHeroCard extends StatelessWidget {
     return Container(
       height: 204,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(24),
+        borderRadius: BorderRadius.circular(AppRadius.xxxl),
         boxShadow: const [
           BoxShadow(
             color: Color(0x14000000),
@@ -294,7 +373,7 @@ class _RegisterHeroCard extends StatelessWidget {
         ],
       ),
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(24),
+        borderRadius: BorderRadius.circular(AppRadius.xxxl),
         child: Stack(
           fit: StackFit.expand,
           children: [
@@ -321,7 +400,7 @@ class _RegisterHeroCard extends StatelessWidget {
                 title,
                 style: theme.textTheme.headlineMedium?.copyWith(
                   color: const Color(0xFF1B1C1C),
-                  fontSize: 28,
+                  fontSize: AppTextSize.heroSmall,
                   height: 1.2,
                   fontWeight: FontWeight.w800,
                   letterSpacing: -0.75,
@@ -336,7 +415,7 @@ class _RegisterHeroCard extends StatelessWidget {
                 subtitle,
                 style: theme.textTheme.bodyLarge?.copyWith(
                   color: const Color(0xFF5A4136),
-                  fontSize: 16,
+                  fontSize: AppTextSize.body,
                   fontWeight: FontWeight.w500,
                 ),
               ),
@@ -370,6 +449,7 @@ class _RegisterTextField extends StatelessWidget {
   const _RegisterTextField({
     required this.hintText,
     required this.prefixIcon,
+    this.onChanged,
     this.keyboardType,
     this.obscureText = false,
     this.suffix,
@@ -377,6 +457,7 @@ class _RegisterTextField extends StatelessWidget {
 
   final String hintText;
   final IconData prefixIcon;
+  final ValueChanged<String>? onChanged;
   final TextInputType? keyboardType;
   final bool obscureText;
   final Widget? suffix;
@@ -384,6 +465,7 @@ class _RegisterTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      onChanged: onChanged,
       keyboardType: keyboardType,
       obscureText: obscureText,
       style: Theme.of(
@@ -403,15 +485,15 @@ class _RegisterTextField extends StatelessWidget {
           vertical: 18,
         ),
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(AppRadius.xs),
           borderSide: BorderSide.none,
         ),
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(AppRadius.xs),
           borderSide: BorderSide.none,
         ),
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(AppRadius.xs),
           borderSide: const BorderSide(color: Color(0xFFFF6B00), width: 1.2),
         ),
       ),
@@ -423,7 +505,7 @@ class _RegisterPrimaryButton extends StatelessWidget {
   const _RegisterPrimaryButton({required this.label, required this.onPressed});
 
   final String label;
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -431,7 +513,7 @@ class _RegisterPrimaryButton extends StatelessWidget {
       color: Colors.transparent,
       child: Ink(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(AppRadius.xs),
           gradient: const LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
@@ -447,7 +529,7 @@ class _RegisterPrimaryButton extends StatelessWidget {
         ),
         child: InkWell(
           onTap: onPressed,
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(AppRadius.xs),
           child: SizedBox(
             width: double.infinity,
             height: 58,
@@ -456,7 +538,7 @@ class _RegisterPrimaryButton extends StatelessWidget {
                 label,
                 style: Theme.of(context).textTheme.titleMedium?.copyWith(
                   color: Colors.white,
-                  fontSize: 18,
+                  fontSize: AppTextSize.title,
                   fontWeight: FontWeight.w800,
                 ),
               ),
@@ -477,7 +559,7 @@ class _RegisterSocialButton extends StatelessWidget {
 
   final String label;
   final Widget leading;
-  final VoidCallback onPressed;
+  final VoidCallback? onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -487,7 +569,9 @@ class _RegisterSocialButton extends StatelessWidget {
         minimumSize: const Size.fromHeight(54),
         backgroundColor: Colors.white,
         side: const BorderSide(color: Color(0x4DE2BFB0)),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(AppRadius.xs),
+        ),
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
       ),
       child: Row(

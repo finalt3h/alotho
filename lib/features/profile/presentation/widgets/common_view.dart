@@ -1,13 +1,11 @@
+import 'package:alo_tho/core/constants/app_spacing.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widget_previews.dart';
 
 class CommonView extends StatelessWidget {
   final String title;
 
-  const CommonView({
-    super.key,
-    required this.title,
-  });
+  const CommonView({super.key, required this.title});
 
   @override
   Widget build(BuildContext context) {
@@ -15,12 +13,9 @@ class CommonView extends StatelessWidget {
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: Colors.white,
-        borderRadius: BorderRadius.circular(12),
+        borderRadius: BorderRadius.circular(AppRadius.sm),
       ),
-      child: Text(
-        title,
-        style: const TextStyle(fontSize: 16),
-      ),
+      child: Text(title, style: const TextStyle(fontSize: AppTextSize.body)),
     );
   }
 }
@@ -30,9 +25,7 @@ Widget previewCommonView() {
   return MaterialApp(
     home: Scaffold(
       backgroundColor: Colors.grey.shade200,
-      body: const Center(
-        child: CommonView(title: 'Demo common view'),
-      ),
+      body: const Center(child: CommonView(title: 'Demo common view')),
     ),
   );
 }

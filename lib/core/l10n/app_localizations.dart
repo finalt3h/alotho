@@ -118,7 +118,20 @@ extension AppLocalizationsHelpers on AppLocalizations {
   String localizeFailureMessage(String raw) {
     return switch (raw) {
       'So dien thoai hoac email chua hop le.' => invalidLoginIdentifier,
+      'Email chua hop le.' => invalidRegisterEmail,
+      'So dien thoai chua hop le.' => invalidRegisterPhone,
+      'Ho ten chua hop le.' => invalidFullName,
       'Mat khau chua hop le.' => invalidPassword,
+      'Mat khau xac nhan khong khop.' => confirmPasswordMismatch,
+      'Tai khoan chua kich hoat. Vui long nhap OTP de kich hoat.' =>
+        activationOtpRequired,
+      'Ma OTP chua hop le.' => invalidOtp,
+      'Ma OTP da het han hoac khong hop le.' => invalidOtp,
+      'Xac thuc OTP khong thanh cong.' => failureOtpVerification,
+      'Khong the gui lai ma OTP luc nay.' => failureResendOtp,
+      'Da gui lai ma OTP.' => resendOtpSuccess,
+      'Khong the tao tai khoan luc nay.' => failureRegisterUnavailable,
+      'Tai khoan da ton tai.' => failureAccountAlreadyExists,
       'Khong the dang nhap voi Google luc nay.' => failureGoogleUnavailable,
       'Khong the dang nhap bang so dien thoai hoac email.' =>
         failureCredentialsUnavailable,
@@ -129,6 +142,7 @@ extension AppLocalizationsHelpers on AppLocalizations {
       'Khong tai duoc hoi tho.' => failureLoadRecentConversations,
       'Khong tai duoc danh sach bai dang cong viec.' => failureLoadWorkListings,
       'Khong tai duoc thong tin ho so.' => failureLoadProfile,
+      'Khong the dang xuat luc nay.' => failureSignOut,
       _ => raw,
     };
   }

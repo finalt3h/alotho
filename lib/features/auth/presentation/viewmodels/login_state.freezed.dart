@@ -21,6 +21,7 @@ mixin _$LoginState {
   String get password => throw _privateConstructorUsedError;
   bool get isSubmitting => throw _privateConstructorUsedError;
   String? get errorMessage => throw _privateConstructorUsedError;
+  String? get pendingActivationIdentifier => throw _privateConstructorUsedError;
 
   /// Create a copy of LoginState
   /// with the given fields replaced by the non-null parameter values.
@@ -41,6 +42,7 @@ abstract class $LoginStateCopyWith<$Res> {
     String password,
     bool isSubmitting,
     String? errorMessage,
+    String? pendingActivationIdentifier,
   });
 }
 
@@ -63,6 +65,7 @@ class _$LoginStateCopyWithImpl<$Res, $Val extends LoginState>
     Object? password = null,
     Object? isSubmitting = null,
     Object? errorMessage = freezed,
+    Object? pendingActivationIdentifier = freezed,
   }) {
     return _then(
       _value.copyWith(
@@ -81,6 +84,10 @@ class _$LoginStateCopyWithImpl<$Res, $Val extends LoginState>
             errorMessage: freezed == errorMessage
                 ? _value.errorMessage
                 : errorMessage // ignore: cast_nullable_to_non_nullable
+                      as String?,
+            pendingActivationIdentifier: freezed == pendingActivationIdentifier
+                ? _value.pendingActivationIdentifier
+                : pendingActivationIdentifier // ignore: cast_nullable_to_non_nullable
                       as String?,
           )
           as $Val,
@@ -102,6 +109,7 @@ abstract class _$$LoginStateImplCopyWith<$Res>
     String password,
     bool isSubmitting,
     String? errorMessage,
+    String? pendingActivationIdentifier,
   });
 }
 
@@ -123,6 +131,7 @@ class __$$LoginStateImplCopyWithImpl<$Res>
     Object? password = null,
     Object? isSubmitting = null,
     Object? errorMessage = freezed,
+    Object? pendingActivationIdentifier = freezed,
   }) {
     return _then(
       _$LoginStateImpl(
@@ -142,6 +151,10 @@ class __$$LoginStateImplCopyWithImpl<$Res>
             ? _value.errorMessage
             : errorMessage // ignore: cast_nullable_to_non_nullable
                   as String?,
+        pendingActivationIdentifier: freezed == pendingActivationIdentifier
+            ? _value.pendingActivationIdentifier
+            : pendingActivationIdentifier // ignore: cast_nullable_to_non_nullable
+                  as String?,
       ),
     );
   }
@@ -155,6 +168,7 @@ class _$LoginStateImpl implements _LoginState {
     this.password = '',
     this.isSubmitting = false,
     this.errorMessage,
+    this.pendingActivationIdentifier,
   });
 
   @override
@@ -168,10 +182,12 @@ class _$LoginStateImpl implements _LoginState {
   final bool isSubmitting;
   @override
   final String? errorMessage;
+  @override
+  final String? pendingActivationIdentifier;
 
   @override
   String toString() {
-    return 'LoginState(identifier: $identifier, password: $password, isSubmitting: $isSubmitting, errorMessage: $errorMessage)';
+    return 'LoginState(identifier: $identifier, password: $password, isSubmitting: $isSubmitting, errorMessage: $errorMessage, pendingActivationIdentifier: $pendingActivationIdentifier)';
   }
 
   @override
@@ -186,7 +202,13 @@ class _$LoginStateImpl implements _LoginState {
             (identical(other.isSubmitting, isSubmitting) ||
                 other.isSubmitting == isSubmitting) &&
             (identical(other.errorMessage, errorMessage) ||
-                other.errorMessage == errorMessage));
+                other.errorMessage == errorMessage) &&
+            (identical(
+                  other.pendingActivationIdentifier,
+                  pendingActivationIdentifier,
+                ) ||
+                other.pendingActivationIdentifier ==
+                    pendingActivationIdentifier));
   }
 
   @override
@@ -196,6 +218,7 @@ class _$LoginStateImpl implements _LoginState {
     password,
     isSubmitting,
     errorMessage,
+    pendingActivationIdentifier,
   );
 
   /// Create a copy of LoginState
@@ -213,6 +236,7 @@ abstract class _LoginState implements LoginState {
     final String password,
     final bool isSubmitting,
     final String? errorMessage,
+    final String? pendingActivationIdentifier,
   }) = _$LoginStateImpl;
 
   @override
@@ -223,6 +247,8 @@ abstract class _LoginState implements LoginState {
   bool get isSubmitting;
   @override
   String? get errorMessage;
+  @override
+  String? get pendingActivationIdentifier;
 
   /// Create a copy of LoginState
   /// with the given fields replaced by the non-null parameter values.

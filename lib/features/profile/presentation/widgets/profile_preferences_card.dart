@@ -9,11 +9,13 @@ class ProfilePreferencesCard extends ConsumerWidget {
   const ProfilePreferencesCard({
     required this.title,
     required this.onSignOut,
+    required this.isSigningOut,
     super.key,
   });
 
   final String title;
-  final VoidCallback onSignOut;
+  final Future<void> Function() onSignOut;
+  final bool isSigningOut;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -60,9 +62,18 @@ class ProfilePreferencesCard extends ConsumerWidget {
           ),
           ListTile(
             contentPadding: EdgeInsets.zero,
-            title: Text(l10n.signOut),
-            leading: const Icon(Icons.logout_rounded),
-            onTap: onSignOut,
+            title: Text(isSigningOut ? l10n.processing : l10n.signOut),
+            leading: isSigningOut
+                ? const SizedBox(
+                    width: 24,
+                    height: 24,
+                    child: Padding(
+                      padding: EdgeInsets.all(2),
+                      child: CircularProgressIndicator(strokeWidth: 2.4),
+                    ),
+                  )
+                : const Icon(Icons.logout_rounded),
+            onTap: isSigningOut ? null : onSignOut,
           ),
         ],
       ),

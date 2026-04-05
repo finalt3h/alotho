@@ -4,6 +4,7 @@ import 'package:alo_tho/core/preview/app_preview.dart';
 import 'package:alo_tho/core/widgets/app_error_view.dart';
 import 'package:alo_tho/core/widgets/app_loading_state.dart';
 import 'package:alo_tho/core/widgets/app_page_body.dart';
+import 'package:alo_tho/core/widgets/app_status_dialog.dart';
 import 'package:alo_tho/core/widgets/section_header.dart';
 import 'package:alo_tho/features/profile/presentation/viewmodels/profile_view_model.dart';
 import 'package:alo_tho/features/profile/presentation/widgets/profile_overview_card.dart';
@@ -21,11 +22,28 @@ import 'package:flutter/widget_previews.dart';
   wrapper: appPreviewWrapper,
 )
 Widget previewProfilePage() => const ProfilePage();
+
 class ProfilePage extends ConsumerWidget {
   const ProfilePage({super.key});
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
+
+    ref.listen(profileControllerProvider, (previous, next) {
+      if (next.signOutErrorMessage != null &&
+          next.signOutErrorMessage != previous?.signOutErrorMessage) {
+        showAppStatusDialog(
+          context: context,
+          state: AppStatusDialogState.error,
+          title: appStatusDialogDefaultTitle(
+            context,
+            AppStatusDialogState.error,
+          ),
+          message: l10n.localizeFailureMessage(next.signOutErrorMessage!),
+        );
+      }
+    });
+
     final state = ref.watch(profileControllerProvider);
     final controller = ref.read(profileControllerProvider.notifier);
 
@@ -72,6 +90,7 @@ class ProfilePage extends ConsumerWidget {
                 const SizedBox(height: AppSpacing.md),
                 ProfilePreferencesCard(
                   title: l10n.preferencesTitle,
+                  isSigningOut: state.isSigningOut,
                   onSignOut: controller.signOut,
                 ),
               ],
@@ -82,5 +101,3 @@ class ProfilePage extends ConsumerWidget {
     );
   }
 }
-
-

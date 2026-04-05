@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:alo_tho/core/constants/app_spacing.dart';
 import 'package:alo_tho/core/l10n/app_localizations.dart';
 import 'package:alo_tho/core/preview/app_preview.dart';
 import 'package:flutter/material.dart';
@@ -104,7 +105,7 @@ class _BrandLockup extends StatelessWidget {
       child: DecoratedBox(
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(40),
+          borderRadius: BorderRadius.circular(AppRadius.hero),
           boxShadow: const [
             BoxShadow(
               color: Color(0x40A04100),
@@ -122,7 +123,7 @@ class _BrandLockup extends StatelessWidget {
                 'ALO THỢ',
                 style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                   color: const Color(0xFFA04100),
-                  fontSize: 48,
+                  fontSize: AppTextSize.heroLarge,
                   height: 1,
                   letterSpacing: -2.4,
                   fontWeight: FontWeight.w900,
@@ -171,7 +172,7 @@ class _Tagline extends StatelessWidget {
             textAlign: TextAlign.center,
             style: Theme.of(context).textTheme.titleMedium?.copyWith(
               color: Colors.white,
-              fontSize: 18,
+              fontSize: AppTextSize.title,
               height: 1.55,
               letterSpacing: 3.6,
               fontWeight: FontWeight.w500,
@@ -184,7 +185,7 @@ class _Tagline extends StatelessWidget {
           height: 4,
           decoration: BoxDecoration(
             color: const Color(0xFFFE9A69),
-            borderRadius: BorderRadius.circular(999),
+            borderRadius: BorderRadius.circular(AppRadius.pill),
           ),
         ),
       ],
@@ -200,14 +201,14 @@ class _LoadingPill extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
-      borderRadius: BorderRadius.circular(999),
+      borderRadius: BorderRadius.circular(AppRadius.pill),
       child: BackdropFilter(
         filter: ImageFilter.blur(sigmaX: 6, sigmaY: 6),
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
           decoration: BoxDecoration(
             color: Colors.white.withValues(alpha: 0.10),
-            borderRadius: BorderRadius.circular(999),
+            borderRadius: BorderRadius.circular(AppRadius.pill),
             border: Border.all(color: Colors.white.withValues(alpha: 0.20)),
             boxShadow: const [
               BoxShadow(
@@ -236,7 +237,7 @@ class _LoadingPill extends StatelessWidget {
                   label,
                   style: Theme.of(context).textTheme.labelLarge?.copyWith(
                     color: Colors.white.withValues(alpha: 0.92),
-                    fontSize: 14,
+                    fontSize: AppTextSize.label,
                     letterSpacing: 0.35,
                     fontWeight: FontWeight.w700,
                   ),

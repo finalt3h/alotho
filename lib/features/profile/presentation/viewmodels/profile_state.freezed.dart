@@ -19,6 +19,8 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$ProfileState {
   bool get isLoading => throw _privateConstructorUsedError;
   String? get errorMessage => throw _privateConstructorUsedError;
+  bool get isSigningOut => throw _privateConstructorUsedError;
+  String? get signOutErrorMessage => throw _privateConstructorUsedError;
   ProfileSummary? get summary => throw _privateConstructorUsedError;
 
   /// Create a copy of ProfileState
@@ -35,7 +37,13 @@ abstract class $ProfileStateCopyWith<$Res> {
     $Res Function(ProfileState) then,
   ) = _$ProfileStateCopyWithImpl<$Res, ProfileState>;
   @useResult
-  $Res call({bool isLoading, String? errorMessage, ProfileSummary? summary});
+  $Res call({
+    bool isLoading,
+    String? errorMessage,
+    bool isSigningOut,
+    String? signOutErrorMessage,
+    ProfileSummary? summary,
+  });
 
   $ProfileSummaryCopyWith<$Res>? get summary;
 }
@@ -57,6 +65,8 @@ class _$ProfileStateCopyWithImpl<$Res, $Val extends ProfileState>
   $Res call({
     Object? isLoading = null,
     Object? errorMessage = freezed,
+    Object? isSigningOut = null,
+    Object? signOutErrorMessage = freezed,
     Object? summary = freezed,
   }) {
     return _then(
@@ -68,6 +78,14 @@ class _$ProfileStateCopyWithImpl<$Res, $Val extends ProfileState>
             errorMessage: freezed == errorMessage
                 ? _value.errorMessage
                 : errorMessage // ignore: cast_nullable_to_non_nullable
+                      as String?,
+            isSigningOut: null == isSigningOut
+                ? _value.isSigningOut
+                : isSigningOut // ignore: cast_nullable_to_non_nullable
+                      as bool,
+            signOutErrorMessage: freezed == signOutErrorMessage
+                ? _value.signOutErrorMessage
+                : signOutErrorMessage // ignore: cast_nullable_to_non_nullable
                       as String?,
             summary: freezed == summary
                 ? _value.summary
@@ -102,7 +120,13 @@ abstract class _$$ProfileStateImplCopyWith<$Res>
   ) = __$$ProfileStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({bool isLoading, String? errorMessage, ProfileSummary? summary});
+  $Res call({
+    bool isLoading,
+    String? errorMessage,
+    bool isSigningOut,
+    String? signOutErrorMessage,
+    ProfileSummary? summary,
+  });
 
   @override
   $ProfileSummaryCopyWith<$Res>? get summary;
@@ -124,6 +148,8 @@ class __$$ProfileStateImplCopyWithImpl<$Res>
   $Res call({
     Object? isLoading = null,
     Object? errorMessage = freezed,
+    Object? isSigningOut = null,
+    Object? signOutErrorMessage = freezed,
     Object? summary = freezed,
   }) {
     return _then(
@@ -135,6 +161,14 @@ class __$$ProfileStateImplCopyWithImpl<$Res>
         errorMessage: freezed == errorMessage
             ? _value.errorMessage
             : errorMessage // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        isSigningOut: null == isSigningOut
+            ? _value.isSigningOut
+            : isSigningOut // ignore: cast_nullable_to_non_nullable
+                  as bool,
+        signOutErrorMessage: freezed == signOutErrorMessage
+            ? _value.signOutErrorMessage
+            : signOutErrorMessage // ignore: cast_nullable_to_non_nullable
                   as String?,
         summary: freezed == summary
             ? _value.summary
@@ -151,6 +185,8 @@ class _$ProfileStateImpl implements _ProfileState {
   const _$ProfileStateImpl({
     this.isLoading = true,
     this.errorMessage,
+    this.isSigningOut = false,
+    this.signOutErrorMessage,
     this.summary,
   });
 
@@ -160,11 +196,16 @@ class _$ProfileStateImpl implements _ProfileState {
   @override
   final String? errorMessage;
   @override
+  @JsonKey()
+  final bool isSigningOut;
+  @override
+  final String? signOutErrorMessage;
+  @override
   final ProfileSummary? summary;
 
   @override
   String toString() {
-    return 'ProfileState(isLoading: $isLoading, errorMessage: $errorMessage, summary: $summary)';
+    return 'ProfileState(isLoading: $isLoading, errorMessage: $errorMessage, isSigningOut: $isSigningOut, signOutErrorMessage: $signOutErrorMessage, summary: $summary)';
   }
 
   @override
@@ -176,12 +217,22 @@ class _$ProfileStateImpl implements _ProfileState {
                 other.isLoading == isLoading) &&
             (identical(other.errorMessage, errorMessage) ||
                 other.errorMessage == errorMessage) &&
+            (identical(other.isSigningOut, isSigningOut) ||
+                other.isSigningOut == isSigningOut) &&
+            (identical(other.signOutErrorMessage, signOutErrorMessage) ||
+                other.signOutErrorMessage == signOutErrorMessage) &&
             (identical(other.summary, summary) || other.summary == summary));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, isLoading, errorMessage, summary);
+  int get hashCode => Object.hash(
+    runtimeType,
+    isLoading,
+    errorMessage,
+    isSigningOut,
+    signOutErrorMessage,
+    summary,
+  );
 
   /// Create a copy of ProfileState
   /// with the given fields replaced by the non-null parameter values.
@@ -196,6 +247,8 @@ abstract class _ProfileState implements ProfileState {
   const factory _ProfileState({
     final bool isLoading,
     final String? errorMessage,
+    final bool isSigningOut,
+    final String? signOutErrorMessage,
     final ProfileSummary? summary,
   }) = _$ProfileStateImpl;
 
@@ -203,6 +256,10 @@ abstract class _ProfileState implements ProfileState {
   bool get isLoading;
   @override
   String? get errorMessage;
+  @override
+  bool get isSigningOut;
+  @override
+  String? get signOutErrorMessage;
   @override
   ProfileSummary? get summary;
 

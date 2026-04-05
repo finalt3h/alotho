@@ -80,6 +80,45 @@ class AppLocalizationsEn extends AppLocalizations {
   String get registerDescription => 'Start connecting with the right workers';
 
   @override
+  String get verifyOtpTitle => 'Verify OTP';
+
+  @override
+  String get verifyOtpHeadline => 'Activate your account';
+
+  @override
+  String get verifyOtpDescriptionEmail =>
+      'Enter the OTP sent to your email to finish activating your account.';
+
+  @override
+  String get verifyOtpDescriptionPhone =>
+      'Enter the OTP sent to your phone to finish activating your account.';
+
+  @override
+  String get otpLabel => 'OTP code';
+
+  @override
+  String get otpHint => 'Enter the 6-digit code';
+
+  @override
+  String get verifyOtpButton => 'Verify OTP';
+
+  @override
+  String get resendOtpButton => 'Resend code';
+
+  @override
+  String get registerEmailLabel => 'Email';
+
+  @override
+  String get registerEmailHint =>
+      'Enter your email to receive the verification code';
+
+  @override
+  String get registerPhoneLabel => 'Phone number (optional)';
+
+  @override
+  String get registerPhoneHint => 'Enter your phone number if you want';
+
+  @override
   String get registerFullNameLabel => 'Full name';
 
   @override
@@ -112,10 +151,60 @@ class AppLocalizationsEn extends AppLocalizations {
       'Search workers by service and area, review recent conversations, manage your work posts, and update your worker profile.';
 
   @override
+  String get registerSuccessSignedIn => 'Account created successfully.';
+
+  @override
+  String get registerSuccessVerifyEmail =>
+      'Your account has been created. Please check your email to verify it before signing in.';
+
+  @override
+  String get registerSuccessVerifyPhone =>
+      'Your account has been created. Please check your messages to verify it before signing in.';
+
+  @override
   String get invalidLoginIdentifier => 'The phone number or email is invalid.';
 
   @override
+  String get invalidRegisterEmail => 'The email is invalid.';
+
+  @override
+  String get invalidRegisterPhone => 'The phone number is invalid.';
+
+  @override
+  String get invalidFullName => 'The full name is invalid.';
+
+  @override
   String get invalidPassword => 'The password is invalid.';
+
+  @override
+  String get confirmPasswordMismatch =>
+      'The confirmation password does not match.';
+
+  @override
+  String get activationOtpRequired =>
+      'This account is not activated yet. Enter the OTP to activate it.';
+
+  @override
+  String get invalidOtp => 'The OTP is expired or invalid.';
+
+  @override
+  String get failureSignOut => 'Unable to sign out right now.';
+
+  @override
+  String get failureOtpVerification => 'OTP verification failed.';
+
+  @override
+  String get failureResendOtp => 'Unable to resend the OTP right now.';
+
+  @override
+  String get resendOtpSuccess => 'A new OTP has been sent.';
+
+  @override
+  String get failureRegisterUnavailable =>
+      'Unable to create an account right now.';
+
+  @override
+  String get failureAccountAlreadyExists => 'An account already exists.';
 
   @override
   String get workerSearchNav => 'Search';

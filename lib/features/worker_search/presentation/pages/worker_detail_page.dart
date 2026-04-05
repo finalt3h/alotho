@@ -1,5 +1,6 @@
 import 'dart:math' as math;
 
+import 'package:alo_tho/core/constants/app_spacing.dart';
 import 'package:alo_tho/core/l10n/app_localizations.dart';
 import 'package:alo_tho/core/preview/app_preview.dart';
 import 'package:alo_tho/core/widgets/app_error_view.dart';
@@ -125,7 +126,7 @@ class _HeroHeader extends StatelessWidget {
       padding: const EdgeInsets.all(24),
       decoration: BoxDecoration(
         color: _cardBackground,
-        borderRadius: BorderRadius.circular(24),
+        borderRadius: BorderRadius.circular(AppRadius.xxxl),
         boxShadow: [
           BoxShadow(
             color: Colors.black.withValues(alpha: 0.04),
@@ -320,7 +321,7 @@ class _StatCard extends StatelessWidget {
       constraints: const BoxConstraints(minHeight: 84),
       decoration: BoxDecoration(
         color: _softCardBackground,
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(AppRadius.md),
       ),
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
       child: Column(
@@ -332,7 +333,7 @@ class _StatCard extends StatelessWidget {
             style: Theme.of(context).textTheme.titleMedium?.copyWith(
               color: _accent,
               fontWeight: FontWeight.w900,
-              fontSize: 20,
+              fontSize: AppTextSize.headline,
               height: 1.1,
             ),
           ),
@@ -342,7 +343,7 @@ class _StatCard extends StatelessWidget {
             style: Theme.of(context).textTheme.labelSmall?.copyWith(
               color: _secondaryText,
               fontWeight: FontWeight.w800,
-              fontSize: 10,
+              fontSize: AppTextSize.eyebrow,
               height: 1.1,
               letterSpacing: 1,
             ),
@@ -405,7 +406,7 @@ class _ServiceChip extends StatelessWidget {
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
       decoration: BoxDecoration(
         color: _accentSoft,
-        borderRadius: BorderRadius.circular(999),
+        borderRadius: BorderRadius.circular(AppRadius.pill),
         border: Border.all(color: _accentBorder),
       ),
       child: Text(
@@ -432,7 +433,7 @@ class _LocationSection extends StatelessWidget {
         _SectionHeading(title: context.l10n.workerDetailActivityArea),
         const SizedBox(height: 12),
         ClipRRect(
-          borderRadius: BorderRadius.circular(24),
+          borderRadius: BorderRadius.circular(AppRadius.xxxl),
           child: SizedBox(
             height: 128,
             width: double.infinity,
@@ -451,7 +452,7 @@ class _LocationSection extends StatelessWidget {
                     ),
                     decoration: BoxDecoration(
                       color: _mapOverlay,
-                      borderRadius: BorderRadius.circular(999),
+                      borderRadius: BorderRadius.circular(AppRadius.pill),
                       border: Border.all(color: const Color(0x33E2BFB0)),
                       boxShadow: [
                         BoxShadow(
@@ -553,7 +554,7 @@ class _PortfolioTile extends StatelessWidget {
     return AspectRatio(
       aspectRatio: 1,
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(16),
+        borderRadius: BorderRadius.circular(AppRadius.md),
         child: Stack(
           fit: StackFit.expand,
           children: [
@@ -609,7 +610,7 @@ class _ReviewCard extends StatelessWidget {
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
         color: _softCardBackground,
-        borderRadius: BorderRadius.circular(24),
+        borderRadius: BorderRadius.circular(AppRadius.xxxl),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

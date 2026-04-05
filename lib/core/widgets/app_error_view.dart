@@ -26,7 +26,7 @@ class AppErrorView extends StatelessWidget {
           padding: const EdgeInsets.all(AppSpacing.xl),
           decoration: BoxDecoration(
             color: theme.colorScheme.errorContainer.withValues(alpha: 0.35),
-            borderRadius: BorderRadius.circular(28),
+            borderRadius: BorderRadius.circular(AppRadius.surface),
             border: Border.all(
               color: theme.colorScheme.error.withValues(alpha: 0.2),
             ),
@@ -39,7 +39,7 @@ class AppErrorView extends StatelessWidget {
                 height: 72,
                 decoration: BoxDecoration(
                   color: theme.colorScheme.errorContainer,
-                  borderRadius: BorderRadius.circular(22),
+                  borderRadius: BorderRadius.circular(AppRadius.xxl),
                 ),
                 child: Icon(
                   Icons.error_outline_rounded,

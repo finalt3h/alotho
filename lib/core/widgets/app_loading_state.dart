@@ -22,7 +22,7 @@ class AppLoadingState extends StatelessWidget {
           padding: const EdgeInsets.all(AppSpacing.xl),
           decoration: BoxDecoration(
             color: theme.colorScheme.surfaceContainerLow,
-            borderRadius: BorderRadius.circular(28),
+            borderRadius: BorderRadius.circular(AppRadius.surface),
             border: Border.all(
               color: theme.colorScheme.outlineVariant.withValues(alpha: 0.5),
             ),

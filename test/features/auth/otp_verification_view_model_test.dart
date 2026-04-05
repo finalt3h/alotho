@@ -5,80 +5,76 @@ import 'package:alo_tho/features/auth/domain/entities/user.dart';
 import 'package:alo_tho/features/auth/domain/repositories/auth_repository.dart';
 import 'package:alo_tho/features/auth/presentation/viewmodels/auth_session_controller.dart';
 import 'package:alo_tho/features/auth/presentation/viewmodels/auth_session_state.dart';
-import 'package:alo_tho/features/auth/presentation/viewmodels/login_view_model.dart';
+import 'package:alo_tho/features/auth/presentation/viewmodels/otp_verification_view_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  group('LoginController', () {
-    test('rejects invalid identifier before calling repository', () async {
+  group('OtpVerificationController', () {
+    test('verifies otp and signs user in', () async {
       final fakeRepository = _FakeAuthRepository();
       final container = ProviderContainer(
         overrides: [authRepositoryProvider.overrideWithValue(fakeRepository)],
       );
       addTearDown(container.dispose);
 
-      final notifier = container.read(loginControllerProvider.notifier);
-      notifier.updateIdentifier('abc');
-      notifier.updatePassword('123456');
-
-      final result = await notifier.loginWithCredentials();
-      final state = container.read(loginControllerProvider);
-
-      expect(result, isFalse);
-      expect(state.errorMessage, 'So dien thoai hoac email chua hop le.');
-      expect(fakeRepository.credentialsLoginCallCount, 0);
-    });
-
-    test('signs in successfully with valid credentials', () async {
-      final fakeRepository = _FakeAuthRepository();
-      final container = ProviderContainer(
-        overrides: [authRepositoryProvider.overrideWithValue(fakeRepository)],
+      final notifier = container.read(
+        otpVerificationControllerProvider.notifier,
       );
-      addTearDown(container.dispose);
+      notifier.updateOtp('123456');
 
-      final notifier = container.read(loginControllerProvider.notifier);
-      notifier.updateIdentifier('0912345678');
-      notifier.updatePassword('123456');
-
-      final result = await notifier.loginWithCredentials();
+      final result = await notifier.verifyActivationOtp(
+        identifier: 'test@example.com',
+      );
       final authState = container.read(authSessionControllerProvider);
 
       expect(result, isTrue);
-      expect(fakeRepository.credentialsLoginCallCount, 1);
+      expect(fakeRepository.verifyOtpCallCount, 1);
       expect(authState.status, AuthStatus.authenticated);
-      expect(authState.user?.fullName, 'Test User');
     });
 
-    test('signs in successfully with Google', () async {
+    test('resends otp successfully', () async {
       final fakeRepository = _FakeAuthRepository();
       final container = ProviderContainer(
         overrides: [authRepositoryProvider.overrideWithValue(fakeRepository)],
       );
       addTearDown(container.dispose);
 
-      final notifier = container.read(loginControllerProvider.notifier);
-
-      final result = await notifier.loginWithGoogle();
-      final authState = container.read(authSessionControllerProvider);
+      final notifier = container.read(
+        otpVerificationControllerProvider.notifier,
+      );
+      final result = await notifier.resendActivationOtp(
+        identifier: 'test@example.com',
+      );
+      final state = container.read(otpVerificationControllerProvider);
 
       expect(result, isTrue);
-      expect(fakeRepository.googleLoginCallCount, 1);
-      expect(authState.status, AuthStatus.authenticated);
-      expect(authState.user?.fullName, 'Test User');
+      expect(fakeRepository.resendOtpCallCount, 1);
+      expect(state.infoMessage, 'Da gui lai ma OTP.');
     });
   });
 }
 
 class _FakeAuthRepository implements AuthRepository {
-  int credentialsLoginCallCount = 0;
-  int googleLoginCallCount = 0;
+  int verifyOtpCallCount = 0;
+  int resendOtpCallCount = 0;
 
   @override
   Stream<User?> authStateChanges() => const Stream.empty();
 
   @override
   Future<User?> getCurrentUser() async => null;
+
+  @override
+  Future<Result<User>> loginWithGoogle() async => Success(_testUser);
+
+  @override
+  Future<Result<User>> loginWithCredentials({
+    required String identifier,
+    required String password,
+  }) async {
+    return Success(_testUser);
+  }
 
   @override
   Future<Result<AuthRegistrationResult>> registerWithCredentials({
@@ -89,7 +85,7 @@ class _FakeAuthRepository implements AuthRepository {
   }) async {
     return Success(
       AuthRegistrationResult(
-        hasActiveSession: true,
+        hasActiveSession: false,
         user: _testUser.copyWith(
           fullName: fullName,
           phoneNumber: phoneNumber ?? _testUser.phoneNumber,
@@ -99,40 +95,27 @@ class _FakeAuthRepository implements AuthRepository {
   }
 
   @override
-  Future<Result<User>> verifyActivationOtp({
-    required String identifier,
-    required String token,
-  }) async {
-    return Success(_testUser.copyWith(phoneNumber: identifier));
-  }
-
-  @override
   Future<Result<bool>> resendActivationOtp({required String identifier}) async {
+    resendOtpCallCount += 1;
     return const Success(true);
   }
 
   @override
-  Future<Result<User>> loginWithGoogle() async {
-    googleLoginCallCount += 1;
-    return Success(_testUser);
-  }
+  Future<void> signOut() async {}
 
   @override
-  Future<Result<User>> loginWithCredentials({
+  Future<Result<User>> verifyActivationOtp({
     required String identifier,
-    required String password,
+    required String token,
   }) async {
-    credentialsLoginCallCount += 1;
+    verifyOtpCallCount += 1;
     return Success(_testUser.copyWith(phoneNumber: identifier));
   }
-
-  @override
-  Future<void> signOut() async {}
 }
 
 final _testUser = User(
-  id: 'test-user',
-  fullName: 'Test User',
+  id: 'otp-user',
+  fullName: 'OTP User',
   phoneNumber: '0912345678',
   city: 'Thu Duc',
   isWorker: false,

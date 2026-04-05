@@ -1,7 +1,9 @@
 import 'package:alo_tho/app/app_routes.dart';
+import 'package:alo_tho/core/constants/app_spacing.dart';
 import 'package:alo_tho/core/l10n/app_localizations.dart';
 import 'package:alo_tho/core/preview/app_preview.dart';
 import 'package:alo_tho/core/widgets/app_page_body.dart';
+import 'package:alo_tho/core/widgets/app_status_dialog.dart';
 import 'package:alo_tho/features/auth/presentation/viewmodels/login_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -34,12 +36,43 @@ class _LoginPageState extends ConsumerState<LoginPage> {
     final l10n = context.l10n;
 
     ref.listen(loginControllerProvider, (previous, next) {
-      if (next.errorMessage != null &&
-          next.errorMessage != previous?.errorMessage) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(l10n.localizeFailureMessage(next.errorMessage!)),
+      if (next.pendingActivationIdentifier != null &&
+          next.pendingActivationIdentifier !=
+              previous?.pendingActivationIdentifier) {
+        final identifier = next.pendingActivationIdentifier!;
+        final message = l10n.localizeFailureMessage(next.errorMessage ?? '');
+
+        ref.read(loginControllerProvider.notifier).clearPendingActivation();
+
+        showAppStatusDialog(
+          context: context,
+          state: AppStatusDialogState.alert,
+          title: appStatusDialogDefaultTitle(
+            context,
+            AppStatusDialogState.alert,
           ),
+          message: message,
+          onPositivePressed: () {
+            if (!context.mounted) {
+              return;
+            }
+            context.go(
+              '${AppRoutes.verifyOtpPath}?identifier=${Uri.encodeComponent(identifier)}',
+            );
+          },
+        );
+        return;
+      }
+
+      if (next.errorMessage != null) {
+        showAppStatusDialog(
+          context: context,
+          state: AppStatusDialogState.error,
+          title: appStatusDialogDefaultTitle(
+            context,
+            AppStatusDialogState.error,
+          ),
+          message: l10n.localizeFailureMessage(next.errorMessage!),
         );
       }
     });
@@ -276,15 +309,21 @@ class _LoginPageState extends ConsumerState<LoginPage> {
     BuildContext context,
     AppLocalizations l10n,
   ) {
-    ScaffoldMessenger.of(
-      context,
-    ).showSnackBar(SnackBar(content: Text(l10n.forgotPasswordPlaceholder)));
+    showAppStatusDialog(
+      context: context,
+      state: AppStatusDialogState.alert,
+      title: appStatusDialogDefaultTitle(context, AppStatusDialogState.alert),
+      message: l10n.forgotPasswordPlaceholder,
+    );
   }
 
   void _showPlaceholder(BuildContext context, AppLocalizations l10n) {
-    ScaffoldMessenger.of(
-      context,
-    ).showSnackBar(SnackBar(content: Text(l10n.authActionPlaceholder)));
+    showAppStatusDialog(
+      context: context,
+      state: AppStatusDialogState.alert,
+      title: appStatusDialogDefaultTitle(context, AppStatusDialogState.alert),
+      message: l10n.authActionPlaceholder,
+    );
   }
 }
 
@@ -306,7 +345,7 @@ class _LoginHeroCard extends StatelessWidget {
     return Container(
       height: 192,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(24),
+        borderRadius: BorderRadius.circular(AppRadius.xxxl),
         boxShadow: const [
           BoxShadow(
             color: Color(0x14000000),
@@ -316,7 +355,7 @@ class _LoginHeroCard extends StatelessWidget {
         ],
       ),
       child: ClipRRect(
-        borderRadius: BorderRadius.circular(24),
+        borderRadius: BorderRadius.circular(AppRadius.xxxl),
         child: Stack(
           fit: StackFit.expand,
           children: [
@@ -343,7 +382,7 @@ class _LoginHeroCard extends StatelessWidget {
                 title,
                 style: theme.textTheme.headlineMedium?.copyWith(
                   color: const Color(0xFF1B1C1C),
-                  fontSize: 30,
+                  fontSize: AppTextSize.heroMedium,
                   height: 1.2,
                   fontWeight: FontWeight.w800,
                   letterSpacing: -0.75,
@@ -358,7 +397,7 @@ class _LoginHeroCard extends StatelessWidget {
                 subtitle,
                 style: theme.textTheme.bodyLarge?.copyWith(
                   color: const Color(0xFF5A4136),
-                  fontSize: 16,
+                  fontSize: AppTextSize.body,
                   fontWeight: FontWeight.w500,
                 ),
               ),
@@ -428,15 +467,15 @@ class _LoginTextField extends StatelessWidget {
           vertical: 18,
         ),
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(AppRadius.xs),
           borderSide: BorderSide.none,
         ),
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(AppRadius.xs),
           borderSide: BorderSide.none,
         ),
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(AppRadius.xs),
           borderSide: const BorderSide(color: Color(0xFFFF6B00), width: 1.2),
         ),
       ),
@@ -458,7 +497,7 @@ class _PrimaryLoginButton extends StatelessWidget {
       color: Colors.transparent,
       child: Ink(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(AppRadius.xs),
           gradient: disabled
               ? null
               : const LinearGradient(
@@ -477,7 +516,7 @@ class _PrimaryLoginButton extends StatelessWidget {
         ),
         child: InkWell(
           onTap: onPressed,
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(AppRadius.xs),
           child: SizedBox(
             width: double.infinity,
             height: 58,
@@ -486,7 +525,7 @@ class _PrimaryLoginButton extends StatelessWidget {
                 label,
                 style: Theme.of(context).textTheme.titleMedium?.copyWith(
                   color: Colors.white,
-                  fontSize: 18,
+                  fontSize: AppTextSize.title,
                   fontWeight: FontWeight.w800,
                 ),
               ),
@@ -517,7 +556,9 @@ class _SocialLoginButton extends StatelessWidget {
         minimumSize: const Size.fromHeight(54),
         backgroundColor: Colors.white,
         side: const BorderSide(color: Color(0x4DE2BFB0)),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(AppRadius.xs),
+        ),
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
       ),
       child: Row(

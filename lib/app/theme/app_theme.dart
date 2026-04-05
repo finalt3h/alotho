@@ -1,3 +1,4 @@
+import 'package:alo_tho/core/constants/app_spacing.dart';
 import 'package:flutter/material.dart';
 
 class AppTheme {
@@ -81,7 +82,7 @@ class AppTheme {
         color: colorScheme.surface,
         surfaceTintColor: Colors.transparent,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(28),
+          borderRadius: BorderRadius.circular(AppRadius.surface),
           side: BorderSide(
             color: colorScheme.outlineVariant.withValues(alpha: 0.45),
           ),
@@ -92,7 +93,7 @@ class AppTheme {
           minimumSize: const Size.fromHeight(56),
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(18),
+            borderRadius: BorderRadius.circular(AppRadius.lg),
           ),
         ),
       ),
@@ -102,7 +103,7 @@ class AppTheme {
           padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
           side: BorderSide(color: colorScheme.outlineVariant),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(18),
+            borderRadius: BorderRadius.circular(AppRadius.lg),
           ),
         ),
       ),
@@ -112,7 +113,9 @@ class AppTheme {
         side: BorderSide(color: colorScheme.outlineVariant),
         labelStyle: textTheme.labelLarge,
         padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(18)),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(AppRadius.lg),
+        ),
       ),
       inputDecorationTheme: InputDecorationTheme(
         filled: true,
@@ -125,15 +128,15 @@ class AppTheme {
           color: colorScheme.onSurfaceVariant,
         ),
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(18),
+          borderRadius: BorderRadius.circular(AppRadius.lg),
           borderSide: BorderSide(color: colorScheme.outlineVariant),
         ),
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(18),
+          borderRadius: BorderRadius.circular(AppRadius.lg),
           borderSide: BorderSide(color: colorScheme.outlineVariant),
         ),
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(18),
+          borderRadius: BorderRadius.circular(AppRadius.lg),
           borderSide: BorderSide(color: colorScheme.primary, width: 1.4),
         ),
         prefixIconColor: colorScheme.primary,
@@ -151,7 +154,9 @@ class AppTheme {
       ),
       listTileTheme: ListTileThemeData(
         iconColor: colorScheme.primary,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(AppRadius.xl),
+        ),
       ),
       extensions: [AppThemeAccent(_accentColor)],
     );

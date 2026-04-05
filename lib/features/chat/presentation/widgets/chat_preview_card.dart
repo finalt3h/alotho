@@ -19,7 +19,7 @@ class ChatPreviewCard extends StatelessWidget {
     return Card(
       child: Container(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(28),
+          borderRadius: BorderRadius.circular(AppRadius.surface),
           gradient: preview.unreadCount > 0
               ? LinearGradient(
                   colors: [

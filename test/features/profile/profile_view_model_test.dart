@@ -5,74 +5,37 @@ import 'package:alo_tho/features/auth/domain/entities/user.dart';
 import 'package:alo_tho/features/auth/domain/repositories/auth_repository.dart';
 import 'package:alo_tho/features/auth/presentation/viewmodels/auth_session_controller.dart';
 import 'package:alo_tho/features/auth/presentation/viewmodels/auth_session_state.dart';
-import 'package:alo_tho/features/auth/presentation/viewmodels/login_view_model.dart';
+import 'package:alo_tho/features/profile/presentation/viewmodels/profile_view_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {
-  group('LoginController', () {
-    test('rejects invalid identifier before calling repository', () async {
+  group('ProfileController', () {
+    test('signs out successfully from profile', () async {
       final fakeRepository = _FakeAuthRepository();
       final container = ProviderContainer(
         overrides: [authRepositoryProvider.overrideWithValue(fakeRepository)],
       );
       addTearDown(container.dispose);
 
-      final notifier = container.read(loginControllerProvider.notifier);
-      notifier.updateIdentifier('abc');
-      notifier.updatePassword('123456');
+      container.read(authSessionControllerProvider.notifier).signIn(_testUser);
 
-      final result = await notifier.loginWithCredentials();
-      final state = container.read(loginControllerProvider);
+      final notifier = container.read(profileControllerProvider.notifier);
+      await notifier.signOut();
 
-      expect(result, isFalse);
-      expect(state.errorMessage, 'So dien thoai hoac email chua hop le.');
-      expect(fakeRepository.credentialsLoginCallCount, 0);
-    });
-
-    test('signs in successfully with valid credentials', () async {
-      final fakeRepository = _FakeAuthRepository();
-      final container = ProviderContainer(
-        overrides: [authRepositoryProvider.overrideWithValue(fakeRepository)],
-      );
-      addTearDown(container.dispose);
-
-      final notifier = container.read(loginControllerProvider.notifier);
-      notifier.updateIdentifier('0912345678');
-      notifier.updatePassword('123456');
-
-      final result = await notifier.loginWithCredentials();
       final authState = container.read(authSessionControllerProvider);
+      final profileState = container.read(profileControllerProvider);
 
-      expect(result, isTrue);
-      expect(fakeRepository.credentialsLoginCallCount, 1);
-      expect(authState.status, AuthStatus.authenticated);
-      expect(authState.user?.fullName, 'Test User');
-    });
-
-    test('signs in successfully with Google', () async {
-      final fakeRepository = _FakeAuthRepository();
-      final container = ProviderContainer(
-        overrides: [authRepositoryProvider.overrideWithValue(fakeRepository)],
-      );
-      addTearDown(container.dispose);
-
-      final notifier = container.read(loginControllerProvider.notifier);
-
-      final result = await notifier.loginWithGoogle();
-      final authState = container.read(authSessionControllerProvider);
-
-      expect(result, isTrue);
-      expect(fakeRepository.googleLoginCallCount, 1);
-      expect(authState.status, AuthStatus.authenticated);
-      expect(authState.user?.fullName, 'Test User');
+      expect(fakeRepository.signOutCallCount, 1);
+      expect(authState.status, AuthStatus.unauthenticated);
+      expect(profileState.isSigningOut, isFalse);
+      expect(profileState.signOutErrorMessage, isNull);
     });
   });
 }
 
 class _FakeAuthRepository implements AuthRepository {
-  int credentialsLoginCallCount = 0;
-  int googleLoginCallCount = 0;
+  int signOutCallCount = 0;
 
   @override
   Stream<User?> authStateChanges() => const Stream.empty();
@@ -113,7 +76,6 @@ class _FakeAuthRepository implements AuthRepository {
 
   @override
   Future<Result<User>> loginWithGoogle() async {
-    googleLoginCallCount += 1;
     return Success(_testUser);
   }
 
@@ -122,12 +84,13 @@ class _FakeAuthRepository implements AuthRepository {
     required String identifier,
     required String password,
   }) async {
-    credentialsLoginCallCount += 1;
     return Success(_testUser.copyWith(phoneNumber: identifier));
   }
 
   @override
-  Future<void> signOut() async {}
+  Future<void> signOut() async {
+    signOutCallCount += 1;
+  }
 }
 
 final _testUser = User(

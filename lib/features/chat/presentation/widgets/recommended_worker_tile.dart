@@ -82,7 +82,7 @@ class _MetaText extends StatelessWidget {
         color: theme.colorScheme.surfaceContainerHighest.withValues(
           alpha: 0.45,
         ),
-        borderRadius: BorderRadius.circular(999),
+        borderRadius: BorderRadius.circular(AppRadius.pill),
       ),
       child: Text(
         label,

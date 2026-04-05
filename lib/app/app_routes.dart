@@ -10,6 +10,9 @@ class AppRoutes {
   static const registerName = 'register';
   static const registerPath = '/register';
 
+  static const verifyOtpName = 'verify-otp';
+  static const verifyOtpPath = '/verify-otp';
+
   static const workersName = 'worker-search';
   static const workersPath = '/workers';
 
@@ -29,7 +32,8 @@ class AppRoutes {
   static bool isAuthPath(String location) {
     return location == splashPath ||
         location == loginPath ||
-        location == registerPath;
+        location == registerPath ||
+        location == verifyOtpPath;
   }
 
   static bool isProtectedPath(String location) {

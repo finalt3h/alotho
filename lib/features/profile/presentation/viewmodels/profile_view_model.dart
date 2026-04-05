@@ -32,7 +32,21 @@ class ProfileController extends Notifier<ProfileState> {
     );
   }
 
-  void signOut() {
-    ref.read(authSessionControllerProvider.notifier).signOut();
+  Future<void> signOut() async {
+    if (state.isSigningOut) {
+      return;
+    }
+
+    state = state.copyWith(isSigningOut: true, signOutErrorMessage: null);
+
+    try {
+      await ref.read(authSessionControllerProvider.notifier).signOut();
+      state = state.copyWith(isSigningOut: false);
+    } catch (_) {
+      state = state.copyWith(
+        isSigningOut: false,
+        signOutErrorMessage: 'Khong the dang xuat luc nay.',
+      );
+    }
   }
 }

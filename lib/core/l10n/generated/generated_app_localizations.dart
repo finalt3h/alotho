@@ -236,6 +236,78 @@ abstract class AppLocalizations {
   /// **'Bắt đầu kết nối với những người thợ phù hợp'**
   String get registerDescription;
 
+  /// No description provided for @verifyOtpTitle.
+  ///
+  /// In vi, this message translates to:
+  /// **'Xác thực OTP'**
+  String get verifyOtpTitle;
+
+  /// No description provided for @verifyOtpHeadline.
+  ///
+  /// In vi, this message translates to:
+  /// **'Kích hoạt tài khoản'**
+  String get verifyOtpHeadline;
+
+  /// No description provided for @verifyOtpDescriptionEmail.
+  ///
+  /// In vi, this message translates to:
+  /// **'Nhập mã OTP đã được gửi tới email của bạn để hoàn tất kích hoạt tài khoản.'**
+  String get verifyOtpDescriptionEmail;
+
+  /// No description provided for @verifyOtpDescriptionPhone.
+  ///
+  /// In vi, this message translates to:
+  /// **'Nhập mã OTP đã được gửi tới số điện thoại của bạn để hoàn tất kích hoạt tài khoản.'**
+  String get verifyOtpDescriptionPhone;
+
+  /// No description provided for @otpLabel.
+  ///
+  /// In vi, this message translates to:
+  /// **'Mã OTP'**
+  String get otpLabel;
+
+  /// No description provided for @otpHint.
+  ///
+  /// In vi, this message translates to:
+  /// **'Nhập mã gồm 6 số'**
+  String get otpHint;
+
+  /// No description provided for @verifyOtpButton.
+  ///
+  /// In vi, this message translates to:
+  /// **'Xác thực OTP'**
+  String get verifyOtpButton;
+
+  /// No description provided for @resendOtpButton.
+  ///
+  /// In vi, this message translates to:
+  /// **'Gửi lại mã'**
+  String get resendOtpButton;
+
+  /// No description provided for @registerEmailLabel.
+  ///
+  /// In vi, this message translates to:
+  /// **'Email'**
+  String get registerEmailLabel;
+
+  /// No description provided for @registerEmailHint.
+  ///
+  /// In vi, this message translates to:
+  /// **'Nhập email để nhận mã xác thực'**
+  String get registerEmailHint;
+
+  /// No description provided for @registerPhoneLabel.
+  ///
+  /// In vi, this message translates to:
+  /// **'Số điện thoại (tùy chọn)'**
+  String get registerPhoneLabel;
+
+  /// No description provided for @registerPhoneHint.
+  ///
+  /// In vi, this message translates to:
+  /// **'Nhập số điện thoại nếu muốn'**
+  String get registerPhoneHint;
+
   /// No description provided for @registerFullNameLabel.
   ///
   /// In vi, this message translates to:
@@ -296,17 +368,107 @@ abstract class AppLocalizations {
   /// **'Tìm thợ theo nghề và khu vực, xem hội thoại gần đây, quản lý bài đăng về công việc của bạn và cập nhật hồ sơ thợ.'**
   String get loginBenefitDescription;
 
+  /// No description provided for @registerSuccessSignedIn.
+  ///
+  /// In vi, this message translates to:
+  /// **'Tạo tài khoản thành công.'**
+  String get registerSuccessSignedIn;
+
+  /// No description provided for @registerSuccessVerifyEmail.
+  ///
+  /// In vi, this message translates to:
+  /// **'Tài khoản đã được tạo. Vui lòng kiểm tra email để xác minh trước khi đăng nhập.'**
+  String get registerSuccessVerifyEmail;
+
+  /// No description provided for @registerSuccessVerifyPhone.
+  ///
+  /// In vi, this message translates to:
+  /// **'Tài khoản đã được tạo. Vui lòng kiểm tra tin nhắn để xác minh trước khi đăng nhập.'**
+  String get registerSuccessVerifyPhone;
+
   /// No description provided for @invalidLoginIdentifier.
   ///
   /// In vi, this message translates to:
   /// **'Số điện thoại hoặc email chưa hợp lệ.'**
   String get invalidLoginIdentifier;
 
+  /// No description provided for @invalidRegisterEmail.
+  ///
+  /// In vi, this message translates to:
+  /// **'Email chưa hợp lệ.'**
+  String get invalidRegisterEmail;
+
+  /// No description provided for @invalidRegisterPhone.
+  ///
+  /// In vi, this message translates to:
+  /// **'Số điện thoại chưa hợp lệ.'**
+  String get invalidRegisterPhone;
+
+  /// No description provided for @invalidFullName.
+  ///
+  /// In vi, this message translates to:
+  /// **'Họ tên chưa hợp lệ.'**
+  String get invalidFullName;
+
   /// No description provided for @invalidPassword.
   ///
   /// In vi, this message translates to:
   /// **'Mật khẩu chưa hợp lệ.'**
   String get invalidPassword;
+
+  /// No description provided for @confirmPasswordMismatch.
+  ///
+  /// In vi, this message translates to:
+  /// **'Mật khẩu xác nhận không khớp.'**
+  String get confirmPasswordMismatch;
+
+  /// No description provided for @activationOtpRequired.
+  ///
+  /// In vi, this message translates to:
+  /// **'Tài khoản chưa kích hoạt. Vui lòng nhập OTP để kích hoạt.'**
+  String get activationOtpRequired;
+
+  /// No description provided for @invalidOtp.
+  ///
+  /// In vi, this message translates to:
+  /// **'Mã OTP đã hết hạn hoặc không hợp lệ.'**
+  String get invalidOtp;
+
+  /// No description provided for @failureSignOut.
+  ///
+  /// In vi, this message translates to:
+  /// **'Không thể đăng xuất lúc này.'**
+  String get failureSignOut;
+
+  /// No description provided for @failureOtpVerification.
+  ///
+  /// In vi, this message translates to:
+  /// **'Xác thực OTP không thành công.'**
+  String get failureOtpVerification;
+
+  /// No description provided for @failureResendOtp.
+  ///
+  /// In vi, this message translates to:
+  /// **'Không thể gửi lại mã OTP lúc này.'**
+  String get failureResendOtp;
+
+  /// No description provided for @resendOtpSuccess.
+  ///
+  /// In vi, this message translates to:
+  /// **'Đã gửi lại mã OTP.'**
+  String get resendOtpSuccess;
+
+  /// No description provided for @failureRegisterUnavailable.
+  ///
+  /// In vi, this message translates to:
+  /// **'Không thể tạo tài khoản lúc này.'**
+  String get failureRegisterUnavailable;
+
+  /// No description provided for @failureAccountAlreadyExists.
+  ///
+  /// In vi, this message translates to:
+  /// **'Tài khoản đã tồn tại.'**
+  String get failureAccountAlreadyExists;
 
   /// No description provided for @workerSearchNav.
   ///

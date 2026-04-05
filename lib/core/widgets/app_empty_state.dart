@@ -10,7 +10,11 @@ import '../preview/app_preview.dart';
   size: phonePreviewSize,
   wrapper: appPreviewWrapper,
 )
-Widget previewWWWW() => const AppEmptyState(title: 'tileee', description: 'dit', icon: Icons.one_x_mobiledata_rounded,);
+Widget previewWWWW() => const AppEmptyState(
+  title: 'tileee',
+  description: 'dit',
+  icon: Icons.one_x_mobiledata_rounded,
+);
 
 class AppEmptyState extends StatelessWidget {
   const AppEmptyState({
@@ -37,7 +41,7 @@ class AppEmptyState extends StatelessWidget {
           padding: const EdgeInsets.all(AppSpacing.xl),
           decoration: BoxDecoration(
             color: theme.colorScheme.surfaceContainerLow,
-            borderRadius: BorderRadius.circular(28),
+            borderRadius: BorderRadius.circular(AppRadius.surface),
             border: Border.all(
               color: theme.colorScheme.outlineVariant.withValues(alpha: 0.45),
             ),
@@ -50,7 +54,7 @@ class AppEmptyState extends StatelessWidget {
                 height: 72,
                 decoration: BoxDecoration(
                   color: theme.colorScheme.primaryContainer,
-                  borderRadius: BorderRadius.circular(22),
+                  borderRadius: BorderRadius.circular(AppRadius.xxl),
                 ),
                 child: Icon(icon, size: 34, color: theme.colorScheme.primary),
               ),
