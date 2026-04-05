@@ -2,51 +2,36 @@ import 'package:alo_tho/app/app_routes.dart';
 import 'package:alo_tho/core/l10n/app_localizations.dart';
 import 'package:alo_tho/core/preview/app_preview.dart';
 import 'package:alo_tho/core/widgets/app_page_body.dart';
-import 'package:alo_tho/features/auth/presentation/viewmodels/login_view_model.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/widget_previews.dart';
 import 'package:go_router/go_router.dart';
 
 @Preview(
   group: 'Screens',
-  name: 'Login Page',
+  name: 'Register Page',
   size: phonePreviewSize,
   wrapper: appPreviewWrapper,
 )
-Widget previewLoginPage() => const LoginPage();
+Widget previewRegisterPage() => const RegisterPage();
 
-class LoginPage extends ConsumerStatefulWidget {
-  const LoginPage({super.key});
+class RegisterPage extends StatefulWidget {
+  const RegisterPage({super.key});
 
   @override
-  ConsumerState<LoginPage> createState() => _LoginPageState();
+  State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _LoginPageState extends ConsumerState<LoginPage> {
+class _RegisterPageState extends State<RegisterPage> {
   static const _heroAsset = 'assets/login/login_hero.png';
   static const _googleAsset = 'assets/login/google.png';
 
   bool _obscurePassword = true;
+  bool _obscureConfirmPassword = true;
 
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
-
-    ref.listen(loginControllerProvider, (previous, next) {
-      if (next.errorMessage != null &&
-          next.errorMessage != previous?.errorMessage) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text(l10n.localizeFailureMessage(next.errorMessage!)),
-          ),
-        );
-      }
-    });
-
     final theme = Theme.of(context);
-    final state = ref.watch(loginControllerProvider);
-    final controller = ref.read(loginControllerProvider.notifier);
 
     return Scaffold(
       backgroundColor: const Color(0xFFFCF9F8),
@@ -59,7 +44,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
             crossAxisAlignment: WrapCrossAlignment.center,
             children: [
               Text(
-                l10n.noAccountPrompt,
+                l10n.alreadyHaveAccountPrompt,
                 style: theme.textTheme.bodyLarge?.copyWith(
                   color: const Color(0xFF5A4136),
                   fontWeight: FontWeight.w500,
@@ -67,7 +52,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
               ),
               const SizedBox(width: 6),
               TextButton(
-                onPressed: () => context.go(AppRoutes.registerPath),
+                onPressed: () => context.go(AppRoutes.loginPath),
                 style: TextButton.styleFrom(
                   foregroundColor: const Color(0xFFA04100),
                   padding: EdgeInsets.zero,
@@ -75,7 +60,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                   tapTargetSize: MaterialTapTargetSize.shrinkWrap,
                 ),
                 child: Text(
-                  l10n.registerNow,
+                  l10n.backToLogin,
                   style: theme.textTheme.bodyLarge?.copyWith(
                     fontWeight: FontWeight.w800,
                   ),
@@ -94,21 +79,38 @@ class _LoginPageState extends ConsumerState<LoginPage> {
               children: [
                 Row(
                   children: [
-                    Icon(
-                      Icons.handyman_rounded,
-                      color: const Color(0xFFFF6B00),
-                      size: 20,
-                    ),
-                    const SizedBox(width: 8),
-                    Text(
-                      'ALO THỢ',
-                      style: theme.textTheme.titleLarge?.copyWith(
-                        color: const Color(0xFFFF6B00),
-                        fontWeight: FontWeight.w900,
-                        letterSpacing: 1,
+                    IconButton(
+                      onPressed: () => context.go(AppRoutes.loginPath),
+                      icon: const Icon(
+                        Icons.arrow_back_rounded,
+                        color: Color(0xFF7B6B64),
                       ),
                     ),
-                    const Spacer(),
+                    Expanded(
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          const Icon(
+                            Icons.handyman_rounded,
+                            color: Color(0xFFFF6B00),
+                            size: 20,
+                          ),
+                          const SizedBox(width: 8),
+                          Flexible(
+                            child: Text(
+                              'ALO THỢ',
+                              overflow: TextOverflow.ellipsis,
+                              style: theme.textTheme.titleLarge?.copyWith(
+                                color: const Color(0xFFFF6B00),
+                                fontWeight: FontWeight.w900,
+                                letterSpacing: 1,
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
                     IconButton(
                       onPressed: () => _showPlaceholder(context, l10n),
                       tooltip: l10n.loginHelpTooltip,
@@ -120,52 +122,33 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                   ],
                 ),
                 const SizedBox(height: 12),
-                _LoginHeroCard(
-                  title: l10n.loginTitle,
-                  subtitle: l10n.loginDescription,
+                _RegisterHeroCard(
+                  title: l10n.registerTitle,
+                  subtitle: l10n.registerDescription,
                   imageAsset: _heroAsset,
                 ),
                 const SizedBox(height: 18),
-                _LoginFieldLabel(label: l10n.loginIdentifierLabel),
+                _RegisterFieldLabel(label: l10n.registerFullNameLabel),
                 const SizedBox(height: 8),
-                _LoginTextField(
+                _RegisterTextField(
+                  hintText: l10n.registerFullNameHint,
+                  prefixIcon: Icons.badge_outlined,
+                ),
+                const SizedBox(height: 16),
+                _RegisterFieldLabel(label: l10n.loginIdentifierLabel),
+                const SizedBox(height: 8),
+                _RegisterTextField(
                   hintText: l10n.loginIdentifierHint,
                   prefixIcon: Icons.person_outline_rounded,
                   keyboardType: TextInputType.emailAddress,
-                  onChanged: controller.updateIdentifier,
                 ),
                 const SizedBox(height: 16),
-                Row(
-                  children: [
-                    Expanded(
-                      child: _LoginFieldLabel(label: l10n.passwordLabel),
-                    ),
-                    TextButton(
-                      onPressed: state.isSubmitting
-                          ? null
-                          : () => _showForgotPasswordPlaceholder(context, l10n),
-                      style: TextButton.styleFrom(
-                        foregroundColor: const Color(0xFFA04100),
-                        padding: EdgeInsets.zero,
-                        minimumSize: Size.zero,
-                        tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                      ),
-                      child: Text(
-                        l10n.forgotPassword.toUpperCase(),
-                        style: theme.textTheme.labelMedium?.copyWith(
-                          fontWeight: FontWeight.w800,
-                          letterSpacing: 0.55,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+                _RegisterFieldLabel(label: l10n.passwordLabel),
                 const SizedBox(height: 8),
-                _LoginTextField(
+                _RegisterTextField(
                   hintText: l10n.passwordHint,
                   prefixIcon: Icons.lock_outline_rounded,
                   obscureText: _obscurePassword,
-                  onChanged: controller.updatePassword,
                   suffix: IconButton(
                     onPressed: () {
                       setState(() {
@@ -182,24 +165,37 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                   ),
                 ),
                 const SizedBox(height: 16),
-                _PrimaryLoginButton(
-                  label: state.isSubmitting
-                      ? l10n.processing
-                      : l10n.signInWithCredentials,
-                  onPressed: state.isSubmitting
-                      ? null
-                      : () async {
-                          await controller.loginWithCredentials();
-                        },
+                _RegisterFieldLabel(label: l10n.registerConfirmPasswordLabel),
+                const SizedBox(height: 8),
+                _RegisterTextField(
+                  hintText: l10n.registerConfirmPasswordHint,
+                  prefixIcon: Icons.verified_user_outlined,
+                  obscureText: _obscureConfirmPassword,
+                  suffix: IconButton(
+                    onPressed: () {
+                      setState(() {
+                        _obscureConfirmPassword = !_obscureConfirmPassword;
+                      });
+                    },
+                    icon: Icon(
+                      _obscureConfirmPassword
+                          ? Icons.visibility_outlined
+                          : Icons.visibility_off_outlined,
+                      size: 20,
+                      color: const Color(0xFF9A7A6D),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 16),
+                _RegisterPrimaryButton(
+                  label: l10n.createAccount,
+                  onPressed: () => _showPlaceholder(context, l10n),
                 ),
                 const SizedBox(height: 26),
                 Row(
                   children: [
-                    Expanded(
-                      child: Divider(
-                        color: const Color(0xFFE4E2E1),
-                        thickness: 1,
-                      ),
+                    const Expanded(
+                      child: Divider(color: Color(0xFFE4E2E1), thickness: 1),
                     ),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -212,11 +208,8 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                         ),
                       ),
                     ),
-                    Expanded(
-                      child: Divider(
-                        color: const Color(0xFFE4E2E1),
-                        thickness: 1,
-                      ),
+                    const Expanded(
+                      child: Divider(color: Color(0xFFE4E2E1), thickness: 1),
                     ),
                   ],
                 ),
@@ -224,27 +217,20 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                 Row(
                   children: [
                     Expanded(
-                      child: _SocialLoginButton(
+                      child: _RegisterSocialButton(
                         label: l10n.signInWithGoogle,
-                        onPressed: state.isSubmitting
-                            ? null
-                            : () async {
-                                await controller.loginWithGoogle();
-                              },
                         leading: Image.asset(
                           _googleAsset,
                           width: 20,
                           height: 20,
                         ),
+                        onPressed: () => _showPlaceholder(context, l10n),
                       ),
                     ),
                     const SizedBox(width: 16),
                     Expanded(
-                      child: _SocialLoginButton(
+                      child: _RegisterSocialButton(
                         label: l10n.continueWithFacebook,
-                        onPressed: state.isSubmitting
-                            ? null
-                            : () => _showPlaceholder(context, l10n),
                         leading: Container(
                           width: 20,
                           height: 20,
@@ -259,6 +245,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                             color: Colors.white,
                           ),
                         ),
+                        onPressed: () => _showPlaceholder(context, l10n),
                       ),
                     ),
                   ],
@@ -272,24 +259,15 @@ class _LoginPageState extends ConsumerState<LoginPage> {
     );
   }
 
-  void _showForgotPasswordPlaceholder(
-    BuildContext context,
-    AppLocalizations l10n,
-  ) {
-    ScaffoldMessenger.of(
-      context,
-    ).showSnackBar(SnackBar(content: Text(l10n.forgotPasswordPlaceholder)));
-  }
-
   void _showPlaceholder(BuildContext context, AppLocalizations l10n) {
     ScaffoldMessenger.of(
       context,
-    ).showSnackBar(SnackBar(content: Text(l10n.authActionPlaceholder)));
+    ).showSnackBar(SnackBar(content: Text(l10n.registerPlaceholder)));
   }
 }
 
-class _LoginHeroCard extends StatelessWidget {
-  const _LoginHeroCard({
+class _RegisterHeroCard extends StatelessWidget {
+  const _RegisterHeroCard({
     required this.title,
     required this.subtitle,
     required this.imageAsset,
@@ -304,7 +282,7 @@ class _LoginHeroCard extends StatelessWidget {
     final theme = Theme.of(context);
 
     return Container(
-      height: 192,
+      height: 204,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(24),
         boxShadow: const [
@@ -327,23 +305,23 @@ class _LoginHeroCard extends StatelessWidget {
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   colors: [
-                    Color(0x00FCF9F8),
+                    Color(0x08FCF9F8),
                     Color(0x66FCF9F8),
-                    Color(0xFFFCF9F8),
+                    Color(0xFFFDF9F8),
                   ],
-                  stops: [0.0, 0.58, 1.0],
+                  stops: [0.0, 0.56, 1.0],
                 ),
               ),
             ),
             Positioned(
               left: 16,
               right: 16,
-              bottom: 42,
+              bottom: 48,
               child: Text(
                 title,
                 style: theme.textTheme.headlineMedium?.copyWith(
                   color: const Color(0xFF1B1C1C),
-                  fontSize: 30,
+                  fontSize: 28,
                   height: 1.2,
                   fontWeight: FontWeight.w800,
                   letterSpacing: -0.75,
@@ -370,8 +348,8 @@ class _LoginHeroCard extends StatelessWidget {
   }
 }
 
-class _LoginFieldLabel extends StatelessWidget {
-  const _LoginFieldLabel({required this.label});
+class _RegisterFieldLabel extends StatelessWidget {
+  const _RegisterFieldLabel({required this.label});
 
   final String label;
 
@@ -388,21 +366,19 @@ class _LoginFieldLabel extends StatelessWidget {
   }
 }
 
-class _LoginTextField extends StatelessWidget {
-  const _LoginTextField({
+class _RegisterTextField extends StatelessWidget {
+  const _RegisterTextField({
     required this.hintText,
     required this.prefixIcon,
-    required this.onChanged,
-    this.obscureText = false,
     this.keyboardType,
+    this.obscureText = false,
     this.suffix,
   });
 
   final String hintText;
   final IconData prefixIcon;
-  final ValueChanged<String> onChanged;
-  final bool obscureText;
   final TextInputType? keyboardType;
+  final bool obscureText;
   final Widget? suffix;
 
   @override
@@ -410,7 +386,6 @@ class _LoginTextField extends StatelessWidget {
     return TextFormField(
       keyboardType: keyboardType,
       obscureText: obscureText,
-      onChanged: onChanged,
       style: Theme.of(
         context,
       ).textTheme.bodyLarge?.copyWith(color: const Color(0xFF3D2A21)),
@@ -444,29 +419,24 @@ class _LoginTextField extends StatelessWidget {
   }
 }
 
-class _PrimaryLoginButton extends StatelessWidget {
-  const _PrimaryLoginButton({required this.label, required this.onPressed});
+class _RegisterPrimaryButton extends StatelessWidget {
+  const _RegisterPrimaryButton({required this.label, required this.onPressed});
 
   final String label;
-  final VoidCallback? onPressed;
+  final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {
-    final disabled = onPressed == null;
-
     return Material(
       color: Colors.transparent,
       child: Ink(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8),
-          gradient: disabled
-              ? null
-              : const LinearGradient(
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                  colors: [Color(0xFFFF6B00), Color(0xFFA04100)],
-                ),
-          color: disabled ? const Color(0xFFFFB98A) : null,
+          gradient: const LinearGradient(
+            begin: Alignment.topLeft,
+            end: Alignment.bottomRight,
+            colors: [Color(0xFFFF6B00), Color(0xFFA04100)],
+          ),
           boxShadow: const [
             BoxShadow(
               color: Color(0x33A04100),
@@ -498,8 +468,8 @@ class _PrimaryLoginButton extends StatelessWidget {
   }
 }
 
-class _SocialLoginButton extends StatelessWidget {
-  const _SocialLoginButton({
+class _RegisterSocialButton extends StatelessWidget {
+  const _RegisterSocialButton({
     required this.label,
     required this.leading,
     required this.onPressed,
@@ -507,7 +477,7 @@ class _SocialLoginButton extends StatelessWidget {
 
   final String label;
   final Widget leading;
-  final VoidCallback? onPressed;
+  final VoidCallback onPressed;
 
   @override
   Widget build(BuildContext context) {

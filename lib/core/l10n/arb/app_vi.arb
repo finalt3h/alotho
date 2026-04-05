@@ -1,0 +1,339 @@
+{
+  "@@locale": "vi",
+  "appTitle": "Alo Tho",
+  "splashTagline": "Kết nối thợ nhanh chóng",
+  "splashLoadingLabel": "Đang khởi động...",
+  "splashFooterLabel": "Premium Service Marketplace",
+  "loginTitle": "Chào mừng trở lại",
+  "loginDescription": "Kết nối với những thợ giỏi nhất",
+  "loginIdentifierLabel": "Số điện thoại hoặc email",
+  "loginIdentifierHint": "Nhập thông tin của bạn",
+  "passwordLabel": "Mật khẩu",
+  "passwordHint": "••••••••",
+  "processing": "Đang xử lý...",
+  "signInWithCredentials": "Đăng nhập",
+  "orLabel": "Hoặc đăng nhập qua",
+  "signInWithGoogle": "Google",
+  "continueWithFacebook": "Facebook",
+  "forgotPassword": "Quên mật khẩu?",
+  "forgotPasswordPlaceholder": "Tạm thời đây là nút placeholder cho flow quên mật khẩu.",
+  "authActionPlaceholder": "Tính năng này sẽ được nối backend ở bước sau.",
+  "noAccountPrompt": "Bạn chưa có tài khoản?",
+  "registerNow": "Đăng ký ngay",
+  "loginHelpTooltip": "Trợ giúp",
+  "registerTitle": "Tạo tài khoản",
+  "registerDescription": "Bắt đầu kết nối với những người thợ phù hợp",
+  "registerFullNameLabel": "Họ và tên",
+  "registerFullNameHint": "Nhập họ tên của bạn",
+  "registerConfirmPasswordLabel": "Nhập lại mật khẩu",
+  "registerConfirmPasswordHint": "Nhập lại mật khẩu",
+  "createAccount": "Tạo tài khoản",
+  "alreadyHaveAccountPrompt": "Bạn đã có tài khoản?",
+  "backToLogin": "Đăng nhập",
+  "registerPlaceholder": "Đây là placeholder UI cho quy trình đăng ký.",
+  "loginBenefitTitle": "Bạn xem được gì sau khi đăng nhập?",
+  "loginBenefitDescription": "Tìm thợ theo nghề và khu vực, xem hội thoại gần đây, quản lý bài đăng về công việc của bạn và cập nhật hồ sơ thợ.",
+  "invalidLoginIdentifier": "Số điện thoại hoặc email chưa hợp lệ.",
+  "invalidPassword": "Mật khẩu chưa hợp lệ.",
+  "workerSearchNav": "Tìm thợ",
+  "messagesNav": "Tin nhắn",
+  "myWorkNav": "Công việc",
+  "profileNav": "Hồ sơ",
+  "workerSearchAppBar": "Tìm thợ gần đây",
+  "workerSearchHeadline": "Bạn cần sửa gì hôm nay?",
+  "workerSearchSubtitle": "Chọn nghề, khu vực và xem thợ đang sẵn sàng nhận việc.",
+  "workerSearchHint": "Tìm theo tên, nghề nghiệp, khu vực...",
+  "serviceCategoriesTitle": "Danh mục dịch vụ",
+  "suggestedAreasTitle": "Khu vực gợi ý",
+  "workerListTitle": "Danh sách thợ",
+  "matchingResults": "{count} kết quả phù hợp",
+  "@matchingResults": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "noMatchingWorkersTitle": "Chưa có kết quả phù hợp",
+  "noMatchingWorkersDescription": "Thử đổi từ khóa hoặc bộ lọc danh mục để xem thêm thợ.",
+  "details": "Chi tiết",
+  "ageAndProfession": "{age} tuổi • {profession}",
+  "@ageAndProfession": {
+    "placeholders": {
+      "age": {
+        "type": "int"
+      },
+      "profession": {
+        "type": "String"
+      }
+    }
+  },
+  "yearsExperienceShort": "{years} năm KN",
+  "@yearsExperienceShort": {
+    "placeholders": {
+      "years": {
+        "type": "int"
+      }
+    }
+  },
+  "yearsExperienceLong": "{years} năm kinh nghiệm",
+  "@yearsExperienceLong": {
+    "placeholders": {
+      "years": {
+        "type": "int"
+      }
+    }
+  },
+  "ratingLabel": "{rating} sao",
+  "@ratingLabel": {
+    "placeholders": {
+      "rating": {
+        "type": "double"
+      }
+    }
+  },
+  "completedJobsLabel": "{count} công việc",
+  "@completedJobsLabel": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "completedRepairsLabel": "{count} lượt sửa",
+  "@completedRepairsLabel": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "distanceLabel": "{distanceKm} km",
+  "@distanceLabel": {
+    "placeholders": {
+      "distanceKm": {
+        "type": "double"
+      }
+    }
+  },
+  "workerDetailTitle": "Chi tiết thợ",
+  "contactNowWithPrice": "Liên hệ ngay • {price}",
+  "@contactNowWithPrice": {
+    "placeholders": {
+      "price": {
+        "type": "String"
+      }
+    }
+  },
+  "workerContactPlaceholder": "Bạn có thể gắn màn chat hoặc tạo yêu cầu sửa chữa ở bước sau.",
+  "messagesAppBar": "Tin nhắn",
+  "recentConversationsTitle": "Hội thoại gần đây",
+  "recentConversationsSubtitle": "Tìm nhanh cuộc trò chuyện và lọc theo trạng thái đọc.",
+  "messageSearchHint": "Tìm theo tên thợ, nghề, nội dung...",
+  "unreadOnly": "Chưa đọc",
+  "latestFirst": "Mới nhất",
+  "oldestFirst": "Cũ nhất",
+  "conversationListTitle": "Danh sách trò chuyện",
+  "conversationsCount": "{count} cuộc trò chuyện",
+  "@conversationsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "noMatchingConversationsTitle": "Không có cuộc trò chuyện phù hợp",
+  "noMatchingConversationsDescription": "Thử đổi bộ lọc hoặc tìm bằng từ khóa khác.",
+  "readyWorkersTitle": "Thợ đang sẵn sàng nhận việc",
+  "readyWorkersSubtitle": "Gợi ý thêm để bạn mở rộng liên hệ nhanh.",
+  "myWorkAppBar": "Việc của tôi",
+  "myWorkHeadline": "Bài đăng đang hiển thị",
+  "myWorkSubtitle": "Theo dõi các bài viết về mình đang xuất hiện trong từng danh mục.",
+  "viewsCount": "{count} lượt xem",
+  "@viewsCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "contactCount": "{count} liên hệ",
+  "@contactCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "updatedAtLabel": "Cập nhật lần cuối: {value}",
+  "@updatedAtLabel": {
+    "placeholders": {
+      "value": {
+        "type": "String"
+      }
+    }
+  },
+  "profileAppBar": "Hồ sơ",
+  "profileHeadline": "Tài khoản và hồ sơ thợ",
+  "profileSubtitle": "Quản lý thông tin cá nhân, năng lực và trạng thái xác thực.",
+  "accountInfoTitle": "Thông tin tài khoản",
+  "workerProfileTitle": "Hồ sơ thợ",
+  "noWorkerProfile": "Bạn chưa tạo hồ sơ thợ.",
+  "kycTitle": "KYC",
+  "kycApproved": "Hồ sơ KYC đã được duyệt.",
+  "kycPending": "Hồ sơ KYC đang chờ duyệt.",
+  "kycNotSubmitted": "Bạn chưa gửi hồ sơ KYC.",
+  "viewKyc": "Xem KYC",
+  "kycPlaceholder": "Đây là placeholder UI cho quy trình KYC.",
+  "preferencesTitle": "Tùy chọn",
+  "themeModeLabel": "Đổi theme sáng/tối",
+  "languageLabel": "Ngôn ngữ",
+  "languageDescription": "Ứng dụng hỗ trợ tiếng Việt và tiếng Anh.",
+  "vietnameseLabel": "Tiếng Việt",
+  "englishLabel": "English",
+  "signOut": "Đăng xuất",
+  "retry": "Thử lại",
+  "categoryElectrical": "Điện",
+  "categoryPlumbing": "Nước",
+  "categoryCoolingHvac": "Điện lạnh",
+  "categoryHomeAppliances": "Đồ gia dụng",
+  "categoryPaintingRepair": "Sơn sửa",
+  "professionResidentialElectrician": "Thợ điện dân dụng",
+  "professionFastResponsePlumber": "Thợ nước nhanh gọn",
+  "professionHvacTechnician": "Thợ điện lạnh",
+  "professionHomeApplianceTechnician": "Thợ đồ gia dụng",
+  "professionFinishingPainter": "Thợ sơn hoàn thiện",
+  "professionConcealedPipePlumber": "Thợ ống nước âm tường",
+  "professionInverterAcCleaner": "Thợ vệ sinh máy lạnh inverter",
+  "professionMultiSkilledTechnician": "Thợ đa năng",
+  "workerBioElectrical": "Chuyên chạm chích, aptomat, dây nguồn và thiết bị điện trong nhà.",
+  "workerBioPlumbing": "Xử lý rò rỉ, thông bồn rửa, lắp đặt thiết bị vệ sinh.",
+  "workerBioHvac": "Vệ sinh máy lạnh, bơm ga, sửa tủ lạnh và máy giặt inverter.",
+  "workerBioAppliance": "Sửa bếp từ, máy nước nóng, lò vi sóng và máy hút mùi.",
+  "workerBioPainting": "Sơn tường nội thất, xử lý bong tróc và thấm ẩm nhanh sạch.",
+  "workerBioConcealedPipe": "Chuyên tìm điểm rò ngầm, thay ống âm tường và chống thấm WC.",
+  "workerBioAcCleaning": "Vệ sinh định kỳ, kiểm tra yếu lạnh và cân chỉnh bộ nóng lạnh.",
+  "workerBioGeneralAppliance": "Nhận các công việc sửa đồ gia dụng và hỗ trợ lắp đặt cơ bản.",
+  "priceFrom150": "Từ 150.000đ",
+  "priceFrom180": "Từ 180.000đ",
+  "priceFrom200": "Từ 200.000đ",
+  "priceFrom220": "Từ 220.000đ",
+  "priceFrom250": "Từ 250.000đ",
+  "priceFrom280": "Từ 280.000đ",
+  "priceQuotedAfterInspection": "Báo giá theo hiện trạng",
+  "priceQuotedPerService": "Báo giá theo dịch vụ",
+  "workListingTitleHvacDistrict7": "Thợ điện lạnh có mặt nhanh tại Quận 7",
+  "workListingTitleSameDayPlumbing": "Nhận sửa rò rỉ nước, thông bồn rửa trong ngày",
+  "workListingTitleApplianceRepair": "Sửa bếp từ, máy nước nóng tận nơi",
+  "workListingTitlePainting": "Nhận sơn lại căn hộ, xử lý tường ẩm mốc",
+  "visiblePlacementTopSuggestions": "Top gợi ý theo khu vực",
+  "visiblePlacementPlumbingCategory": "Danh mục Nước",
+  "visiblePlacementApplianceCategory": "Danh mục Gia dụng",
+  "listingStatusPerformingWell": "Đang hiển thị tốt",
+  "listingStatusStable": "Ổn định",
+  "listingStatusNeedsEngagement": "Cần tăng tương tác",
+  "chatMessageInspectOutlet": "Em có thể qua kiểm tra ổ cắm cho mình lúc 19:00.",
+  "chatMessageSentQuote": "Anh đã gửi báo giá và thời gian qua nhà ngày mai.",
+  "chatMessageNeedMorePipePhotos": "Mình chụp thêm hiện trạng đường ống giúp em nhé.",
+  "chatMessageNeedPressureCheck": "Phần rò ngầm này em cần ghé đo áp lực nước trước khi báo giá.",
+  "chatMessageSlot1630": "Chiều nay em có slot 16:30, mình xác nhận để em mang đúng linh kiện.",
+  "failureGoogleUnavailable": "Không thể đăng nhập với Google lúc này.",
+  "failureCredentialsUnavailable": "Không thể đăng nhập bằng số điện thoại hoặc email.",
+  "failureLoadCategories": "Không tải được danh mục dịch vụ.",
+  "failureLoadWorkers": "Không tải được danh sách thợ.",
+  "failureLoadWorkerDetails": "Không tìm thấy thông tin thợ.",
+  "failureLoadConversations": "Không tải được danh sách trò chuyện.",
+  "failureLoadRecentConversations": "Không tải được hội thoại.",
+  "failureLoadWorkListings": "Không tải được danh sách bài đăng công việc.",
+  "failureLoadProfile": "Không tải được thông tin hồ sơ.",
+  "workerNameLeVanKhoa": "Lê Văn Khoa",
+  "workerNamePhamQuocBao": "Phạm Quốc Bảo",
+  "workerNameDoDucHai": "Đỗ Đức Hải",
+  "workerNameNguyenAnhTuan": "Nguyễn Anh Tuấn",
+  "workerNameVoMinhTri": "Võ Minh Trí",
+  "workerNameTranHuuDat": "Trần Hữu Đạt",
+  "workerNameNguyenQuocViet": "Nguyễn Quốc Việt",
+  "workerShortNameLeVanKhoa": "Văn Khoa",
+  "workerShortNamePhamQuocBao": "Quốc Bảo",
+  "workerShortNameDoDucHai": "Đức Hải",
+  "workerShortNameNguyenAnhTuan": "Anh Tuấn",
+  "workerShortNameVoMinhTri": "Minh Trí",
+  "workerShortNameTranHuuDat": "Hữu Đạt",
+  "workerShortNameNguyenQuocViet": "Quốc Việt",
+  "areaDistrict7": "Quận 7",
+  "areaNhaBe": "Nhà Bè",
+  "areaThuDuc": "Thủ Đức",
+  "areaBinhThanh": "Bình Thạnh",
+  "areaDistrict4": "Quận 4",
+  "areaGoVap": "Gò Vấp",
+  "areaTanBinh": "Tân Bình",
+  "workerDetailServicesAndPricing": "Dịch vụ & chi phí",
+  "workerDetailActivityArea": "Khu vực hoạt động",
+  "workerDetailPortfolio": "Hình ảnh thi công",
+  "workerDetailSeeAll": "Xem tất cả",
+  "workerDetailReviewsTitle": "Đánh giá từ khách hàng",
+  "workerDetailReviewCount": "({count} đánh giá)",
+  "@workerDetailReviewCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "workerDetailExperienceLabel": "Kinh nghiệm",
+  "workerDetailExperienceValue": "{years} năm",
+  "@workerDetailExperienceValue": {
+    "placeholders": {
+      "years": {
+        "type": "int"
+      }
+    }
+  },
+  "workerDetailJobsLabel": "Công việc",
+  "workerDetailLocationLabel": "{area}, TP. HCM",
+  "@workerDetailLocationLabel": {
+    "placeholders": {
+      "area": {
+        "type": "String"
+      }
+    }
+  },
+  "workerDetailExtraPortfolio": "+{count}",
+  "@workerDetailExtraPortfolio": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "workerDetailUnavailableMessage": "Không thể hiển thị chi tiết thợ lúc này.",
+  "workerDetailServiceElectricalRepair": "Sửa điện",
+  "workerDetailServiceBreaker": "Aptomat",
+  "workerDetailServiceOutlet": "Ổ cắm",
+  "workerDetailServiceCeilingLight": "Đèn trần",
+  "workerDetailServicePipeRepair": "Ống nước",
+  "workerDetailServiceSink": "Bồn rửa",
+  "workerDetailServicePump": "Máy bơm",
+  "workerDetailServiceLeakFix": "Chống rò rỉ",
+  "workerDetailServiceWashingMachine": "Sửa máy giặt",
+  "workerDetailServiceRefrigerator": "Tủ lạnh",
+  "workerDetailServiceAirConditioner": "Điều hòa",
+  "workerDetailServiceMicrowave": "Lò vi sóng",
+  "workerDetailServiceInductionCooker": "Bếp từ",
+  "workerDetailServiceWaterHeater": "Máy nước nóng",
+  "workerDetailServiceRangeHood": "Máy hút mùi",
+  "workerDetailServiceWallPainting": "Sơn tường",
+  "workerDetailServiceCrackFilling": "Trám nứt",
+  "workerDetailServiceWaterproofing": "Chống thấm",
+  "workerDetailServiceFinishing": "Hoàn thiện",
+  "workerDetailServiceHomeRepair": "Sửa chữa tại nhà",
+  "workerDetailServiceInspection": "Khảo sát",
+  "workerDetailServiceQuotation": "Báo giá",
+  "workerDetailServiceFastSupport": "Hỗ trợ nhanh",
+  "reviewAuthorMinhHoang": "Minh Hoàng",
+  "reviewAuthorThanhHuong": "Thanh Hương",
+  "reviewTimeTwoDaysAgo": "2 ngày trước",
+  "reviewTimeOneWeekAgo": "1 tuần trước",
+  "reviewContentOne": "Anh Tuấn làm việc rất chuyên nghiệp, đúng giờ và giải thích kỹ vấn đề của máy giặt. Giá cả minh bạch. Rất hài lòng!",
+  "reviewContentTwo": "Sửa điều hòa rất nhanh, dọn dẹp sạch sẽ sau khi làm xong. Sẽ tiếp tục ủng hộ anh."
+}

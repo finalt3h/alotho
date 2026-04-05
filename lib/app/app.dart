@@ -16,7 +16,7 @@ class AloThoApp extends ConsumerWidget {
     final locale = ref.watch(appLocaleProvider);
 
     return MaterialApp.router(
-      title: 'Alo Tho',
+      onGenerateTitle: (context) => context.l10n.appTitle,
       debugShowCheckedModeBanner: false,
       locale: locale,
       supportedLocales: AppLocalizations.supportedLocales,

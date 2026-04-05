@@ -1,5 +1,6 @@
 import 'package:alo_tho/app/app_routes.dart';
 import 'package:alo_tho/features/auth/presentation/pages/login_page.dart';
+import 'package:alo_tho/features/auth/presentation/pages/register_page.dart';
 import 'package:alo_tho/features/auth/presentation/pages/splash_page.dart';
 import 'package:alo_tho/features/auth/presentation/viewmodels/auth_session_controller.dart';
 import 'package:alo_tho/features/auth/presentation/viewmodels/auth_session_state.dart';
@@ -34,6 +35,11 @@ final routerProvider = Provider<GoRouter>((ref) {
         path: AppRoutes.loginPath,
         name: AppRoutes.loginName,
         builder: (context, state) => const LoginPage(),
+      ),
+      GoRoute(
+        path: AppRoutes.registerPath,
+        name: AppRoutes.registerName,
+        builder: (context, state) => const RegisterPage(),
       ),
       StatefulShellRoute.indexedStack(
         builder: (context, state, navigationShell) {

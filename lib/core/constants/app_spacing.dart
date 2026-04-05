@@ -15,3 +15,9 @@ class AppSpacing {
   static const EdgeInsets screenPadding = EdgeInsets.all(lg);
   static const EdgeInsets cardPadding = EdgeInsets.all(md);
 }
+class AppRadius {
+  static const double sm = 8;
+  static const double md = 12;
+  static const double lg = 16;
+  static const double xl = 24;
+}

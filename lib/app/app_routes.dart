@@ -7,6 +7,9 @@ class AppRoutes {
   static const loginName = 'login';
   static const loginPath = '/login';
 
+  static const registerName = 'register';
+  static const registerPath = '/register';
+
   static const workersName = 'worker-search';
   static const workersPath = '/workers';
 
@@ -24,7 +27,9 @@ class AppRoutes {
   static String workerDetailPath(String workerId) => '$workersPath/$workerId';
 
   static bool isAuthPath(String location) {
-    return location == splashPath || location == loginPath;
+    return location == splashPath ||
+        location == loginPath ||
+        location == registerPath;
   }
 
   static bool isProtectedPath(String location) {
