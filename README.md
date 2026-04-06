@@ -47,3 +47,15 @@ Ban can cau hinh them tren Supabase Dashboard:
 
 - Dang nhap Google tren Android se mo trinh duyet ngoai va quay lai app sau khi xac thuc thanh cong.
 - Du lieu ho so trong app duoc map tu `auth.users` metadata nhu `full_name`, `name`, `phone_number`, `city`, `is_worker`, `avatar_url` neu co.
+
+## Global config
+
+App da co them luong tai `global config` tu bang Supabase `public.global_configs` de:
+
+- Kiem tra app co can `force update` hay khong
+- Goi y cap nhat neu da co phien ban moi
+- Hien thong bao quan trong khi app mo len
+
+Mau schema va seed data nam o:
+
+- `supabase/global_configs.sql`

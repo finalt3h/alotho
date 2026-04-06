@@ -2,6 +2,7 @@ import 'package:alo_tho/app/router.dart';
 import 'package:alo_tho/app/providers/app_settings_controller.dart';
 import 'package:alo_tho/app/theme/app_theme.dart';
 import 'package:alo_tho/core/l10n/app_localizations.dart';
+import 'package:alo_tho/features/global_config/presentation/widgets/global_config_gate.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -24,6 +25,13 @@ class AloThoApp extends ConsumerWidget {
       themeMode: themeMode,
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
+      builder: (context, child) {
+        if (child == null) {
+          return const SizedBox.shrink();
+        }
+
+        return GlobalConfigGate(child: child);
+      },
       routerConfig: router,
     );
   }
