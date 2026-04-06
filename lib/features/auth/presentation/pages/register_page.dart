@@ -4,6 +4,7 @@ import 'package:alo_tho/core/l10n/app_localizations.dart';
 import 'package:alo_tho/core/preview/app_preview.dart';
 import 'package:alo_tho/core/widgets/app_page_body.dart';
 import 'package:alo_tho/core/widgets/app_status_dialog.dart';
+import 'package:alo_tho/features/auth/presentation/pages/verify_otp_page.dart';
 import 'package:alo_tho/features/auth/presentation/viewmodels/register_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -255,8 +256,9 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                           }
 
                           if (!result.hasActiveSession) {
-                            context.go(
-                              '${AppRoutes.verifyOtpPath}?identifier=${Uri.encodeComponent(submittedEmail)}',
+                            await showVerifyOtpBottomSheet(
+                              context,
+                              identifier: submittedEmail,
                             );
                           }
                         },

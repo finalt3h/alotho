@@ -4,6 +4,9 @@ import 'package:alo_tho/core/l10n/app_localizations.dart';
 import 'package:alo_tho/core/preview/app_preview.dart';
 import 'package:alo_tho/core/widgets/app_page_body.dart';
 import 'package:alo_tho/core/widgets/app_status_dialog.dart';
+import 'package:alo_tho/features/auth/presentation/viewmodels/auth_session_controller.dart';
+import 'package:alo_tho/features/auth/presentation/viewmodels/auth_session_state.dart';
+import 'package:alo_tho/features/auth/presentation/viewmodels/otp_verification_state.dart';
 import 'package:alo_tho/features/auth/presentation/viewmodels/otp_verification_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -16,13 +19,37 @@ import 'package:go_router/go_router.dart';
   size: phonePreviewSize,
   wrapper: appPreviewWrapper,
 )
-Widget previewVerifyOtpPage() =>
-    const VerifyOtpPage(identifier: 'worker@example.com');
+Widget previewVerifyOtpPage() => const VerifyOtpPage(
+  identifier: 'worker@example.com',
+  presentation: VerifyOtpPresentation.bottomSheet,
+);
+
+Future<T?> showVerifyOtpBottomSheet<T>(
+  BuildContext context, {
+  required String identifier,
+}) {
+  return showModalBottomSheet<T>(
+    context: context,
+    isScrollControlled: true,
+    backgroundColor: Colors.transparent,
+    builder: (context) => VerifyOtpPage(
+      identifier: identifier,
+      presentation: VerifyOtpPresentation.bottomSheet,
+    ),
+  );
+}
+
+enum VerifyOtpPresentation { page, bottomSheet }
 
 class VerifyOtpPage extends ConsumerStatefulWidget {
-  const VerifyOtpPage({required this.identifier, super.key});
+  const VerifyOtpPage({
+    required this.identifier,
+    this.presentation = VerifyOtpPresentation.page,
+    super.key,
+  });
 
   final String identifier;
+  final VerifyOtpPresentation presentation;
 
   @override
   ConsumerState<VerifyOtpPage> createState() => _VerifyOtpPageState();
@@ -61,10 +88,56 @@ class _VerifyOtpPageState extends ConsumerState<VerifyOtpPage> {
       }
     });
 
+    ref.listen(authSessionControllerProvider.select((state) => state.status), (
+      previous,
+      next,
+    ) {
+      if (widget.presentation == VerifyOtpPresentation.bottomSheet &&
+          next == AuthStatus.authenticated &&
+          previous != next &&
+          Navigator.of(context).canPop()) {
+        Navigator.of(context).pop();
+      }
+    });
+
     final theme = Theme.of(context);
     final state = ref.watch(otpVerificationControllerProvider);
     final controller = ref.read(otpVerificationControllerProvider.notifier);
     final isEmail = widget.identifier.contains('@');
+    final content = _VerifyOtpContent(
+      identifier: widget.identifier,
+      isEmail: isEmail,
+      theme: theme,
+      l10n: l10n,
+      state: state,
+      onOtpChanged: controller.updateOtp,
+      onVerifyPressed: state.isSubmitting
+          ? null
+          : () async {
+              await controller.verifyActivationOtp(
+                identifier: widget.identifier,
+              );
+            },
+      onResendPressed: state.isResending
+          ? null
+          : () async {
+              await controller.resendActivationOtp(
+                identifier: widget.identifier,
+              );
+            },
+      onBackToLoginPressed: () {
+        final router = GoRouter.of(context);
+        if (widget.presentation == VerifyOtpPresentation.bottomSheet &&
+            Navigator.of(context).canPop()) {
+          Navigator.of(context).pop();
+        }
+        router.go(AppRoutes.loginPath);
+      },
+    );
+
+    if (widget.presentation == VerifyOtpPresentation.bottomSheet) {
+      return _VerifyOtpBottomSheet(title: l10n.verifyOtpTitle, child: content);
+    }
 
     return Scaffold(
       backgroundColor: const Color(0xFFFCF9F8),
@@ -73,124 +146,212 @@ class _VerifyOtpPageState extends ConsumerState<VerifyOtpPage> {
         elevation: 0,
         title: Text(l10n.verifyOtpTitle),
       ),
-      body: SafeArea(
-        child: AppPageBody(
-          child: SingleChildScrollView(
-            padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  padding: const EdgeInsets.all(20),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(AppRadius.xxxl),
-                    boxShadow: const [
-                      BoxShadow(
-                        color: Color(0x14000000),
-                        blurRadius: 18,
-                        offset: Offset(0, 8),
-                      ),
-                    ],
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Container(
-                        width: 56,
-                        height: 56,
-                        decoration: const BoxDecoration(
-                          color: Color(0x14FF6B00),
-                          shape: BoxShape.circle,
-                        ),
-                        child: const Icon(
-                          Icons.mark_email_unread_outlined,
-                          color: Color(0xFFA04100),
-                        ),
-                      ),
-                      const SizedBox(height: 16),
-                      Text(
-                        l10n.verifyOtpHeadline,
-                        style: theme.textTheme.headlineSmall?.copyWith(
-                          color: const Color(0xFF1B1C1C),
-                          fontWeight: FontWeight.w800,
-                        ),
-                      ),
-                      const SizedBox(height: 8),
-                      Text(
-                        isEmail
-                            ? l10n.verifyOtpDescriptionEmail
-                            : l10n.verifyOtpDescriptionPhone,
-                        style: theme.textTheme.bodyLarge?.copyWith(
-                          color: const Color(0xFF5A4136),
-                        ),
-                      ),
-                      const SizedBox(height: 16),
-                      Container(
-                        width: double.infinity,
-                        padding: const EdgeInsets.all(14),
-                        decoration: BoxDecoration(
-                          color: const Color(0xFFF6F3F2),
-                          borderRadius: BorderRadius.circular(AppRadius.sm),
-                        ),
-                        child: Text(
-                          widget.identifier,
-                          style: theme.textTheme.titleMedium?.copyWith(
-                            color: const Color(0xFF3D2A21),
-                            fontWeight: FontWeight.w700,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                const SizedBox(height: 24),
-                _OtpFieldLabel(label: l10n.otpLabel),
-                const SizedBox(height: 8),
-                _OtpTextField(
-                  hintText: l10n.otpHint,
-                  onChanged: controller.updateOtp,
-                ),
-                const SizedBox(height: 16),
-                _OtpPrimaryButton(
-                  label: state.isSubmitting
-                      ? l10n.processing
-                      : l10n.verifyOtpButton,
-                  onPressed: state.isSubmitting
-                      ? null
-                      : () async {
-                          await controller.verifyActivationOtp(
-                            identifier: widget.identifier,
-                          );
-                        },
-                ),
-                const SizedBox(height: 16),
-                Center(
-                  child: TextButton(
-                    onPressed: state.isResending
-                        ? null
-                        : () async {
-                            await controller.resendActivationOtp(
-                              identifier: widget.identifier,
-                            );
-                          },
-                    child: Text(
-                      state.isResending
-                          ? l10n.processing
-                          : l10n.resendOtpButton,
+      body: SafeArea(child: content),
+    );
+  }
+}
+
+class _VerifyOtpBottomSheet extends StatelessWidget {
+  const _VerifyOtpBottomSheet({required this.title, required this.child});
+
+  final String title;
+  final Widget child;
+
+  @override
+  Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
+    return Padding(
+      padding: EdgeInsets.only(bottom: MediaQuery.viewInsetsOf(context).bottom),
+      child: SafeArea(
+        top: false,
+        child: Align(
+          alignment: Alignment.bottomCenter,
+          child: Material(
+            color: const Color(0xFFFCF9F8),
+            borderRadius: const BorderRadius.vertical(
+              top: Radius.circular(AppRadius.xxxl),
+            ),
+            clipBehavior: Clip.antiAlias,
+            child: ConstrainedBox(
+              constraints: BoxConstraints(
+                maxHeight: MediaQuery.sizeOf(context).height * 0.9,
+              ),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const SizedBox(height: 12),
+                  Container(
+                    width: 44,
+                    height: 5,
+                    decoration: BoxDecoration(
+                      color: const Color(0xFFD5C7C0),
+                      borderRadius: BorderRadius.circular(AppRadius.sm),
                     ),
                   ),
-                ),
-                const SizedBox(height: 12),
-                Center(
-                  child: TextButton(
-                    onPressed: () => context.go(AppRoutes.loginPath),
-                    child: Text(l10n.backToLogin),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(8, 6, 8, 0),
+                    child: Row(
+                      children: [
+                        const SizedBox(width: 48),
+                        Expanded(
+                          child: Text(
+                            title,
+                            textAlign: TextAlign.center,
+                            style: theme.textTheme.titleMedium?.copyWith(
+                              color: const Color(0xFF1B1C1C),
+                              fontWeight: FontWeight.w800,
+                            ),
+                          ),
+                        ),
+                        IconButton(
+                          onPressed: () => Navigator.of(context).maybePop(),
+                          icon: const Icon(
+                            Icons.close_rounded,
+                            color: Color(0xFF7B6B64),
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-              ],
+                  Flexible(child: child),
+                ],
+              ),
             ),
           ),
+        ),
+      ),
+    );
+  }
+}
+
+class _VerifyOtpContent extends StatelessWidget {
+  const _VerifyOtpContent({
+    required this.identifier,
+    required this.isEmail,
+    required this.theme,
+    required this.l10n,
+    required this.state,
+    required this.onOtpChanged,
+    required this.onVerifyPressed,
+    required this.onResendPressed,
+    required this.onBackToLoginPressed,
+  });
+
+  final String identifier;
+  final bool isEmail;
+  final ThemeData theme;
+  final AppLocalizations l10n;
+  final OtpVerificationState state;
+  final ValueChanged<String> onOtpChanged;
+  final Future<void> Function()? onVerifyPressed;
+  final Future<void> Function()? onResendPressed;
+  final VoidCallback onBackToLoginPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    return AppPageBody(
+      child: SingleChildScrollView(
+        padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              padding: const EdgeInsets.all(20),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(AppRadius.xxxl),
+                boxShadow: const [
+                  BoxShadow(
+                    color: Color(0x14000000),
+                    blurRadius: 18,
+                    offset: Offset(0, 8),
+                  ),
+                ],
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Container(
+                    width: 56,
+                    height: 56,
+                    decoration: const BoxDecoration(
+                      color: Color(0x14FF6B00),
+                      shape: BoxShape.circle,
+                    ),
+                    child: const Icon(
+                      Icons.mark_email_unread_outlined,
+                      color: Color(0xFFA04100),
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  Text(
+                    l10n.verifyOtpHeadline,
+                    style: theme.textTheme.headlineSmall?.copyWith(
+                      color: const Color(0xFF1B1C1C),
+                      fontWeight: FontWeight.w800,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    isEmail
+                        ? l10n.verifyOtpDescriptionEmail
+                        : l10n.verifyOtpDescriptionPhone,
+                    style: theme.textTheme.bodyLarge?.copyWith(
+                      color: const Color(0xFF5A4136),
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  Container(
+                    width: double.infinity,
+                    padding: const EdgeInsets.all(14),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFFF6F3F2),
+                      borderRadius: BorderRadius.circular(AppRadius.sm),
+                    ),
+                    child: Text(
+                      identifier,
+                      style: theme.textTheme.titleMedium?.copyWith(
+                        color: const Color(0xFF3D2A21),
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            const SizedBox(height: 24),
+            _OtpFieldLabel(label: l10n.otpLabel),
+            const SizedBox(height: 8),
+            _OtpTextField(hintText: l10n.otpHint, onChanged: onOtpChanged),
+            const SizedBox(height: 16),
+            _OtpPrimaryButton(
+              label: state.isSubmitting
+                  ? l10n.processing
+                  : l10n.verifyOtpButton,
+              onPressed: onVerifyPressed == null
+                  ? null
+                  : () => onVerifyPressed!.call(),
+            ),
+            const SizedBox(height: 16),
+            Center(
+              child: TextButton(
+                onPressed: onResendPressed == null
+                    ? null
+                    : () => onResendPressed!.call(),
+                child: Text(
+                  state.isResending ? l10n.processing : l10n.resendOtpButton,
+                ),
+              ),
+            ),
+            const SizedBox(height: 12),
+            Center(
+              child: TextButton(
+                onPressed: onBackToLoginPressed,
+                child: Text(l10n.backToLogin),
+              ),
+            ),
+          ],
         ),
       ),
     );
