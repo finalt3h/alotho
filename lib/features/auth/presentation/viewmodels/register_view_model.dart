@@ -33,12 +33,17 @@ class RegisterController extends Notifier<RegisterState> {
     state = state.copyWith(confirmPassword: value, errorMessage: null);
   }
 
+  void updateAccountType({required bool isWorker}) {
+    state = state.copyWith(isWorker: isWorker, errorMessage: null);
+  }
+
   Future<AuthRegistrationResult?> registerWithCredentials() async {
     final fullName = state.fullName.trim();
     final email = state.email.trim();
     final phoneNumber = state.phoneNumber.trim();
     final password = state.password.trim();
     final confirmPassword = state.confirmPassword.trim();
+    final isWorker = state.isWorker;
 
     if (fullName.isEmpty) {
       state = state.copyWith(errorMessage: 'Ho ten chua hop le.');
@@ -74,6 +79,7 @@ class RegisterController extends Notifier<RegisterState> {
           email: email,
           phoneNumber: phoneNumber.isEmpty ? null : phoneNumber,
           password: password,
+          isWorker: isWorker,
         );
 
     state = state.copyWith(isSubmitting: false);

@@ -74,11 +74,38 @@ class AppLocalizationsVi extends AppLocalizations {
   String get loginHelpTooltip => 'Trợ giúp';
 
   @override
-  String get registerTitle => 'Tạo tài khoản';
+  String get registerTitle => 'Tạo tài khoản mới';
 
   @override
   String get registerDescription =>
-      'Bắt đầu kết nối với những người thợ phù hợp';
+      'Gia nhập cộng đồng thợ tay nghề cao hoặc tìm kiếm dịch vụ chất lượng ngay.';
+
+  @override
+  String get registerRoleLabel => 'Bạn là ai?';
+
+  @override
+  String get registerRoleDescription =>
+      'Chọn vai trò để Alo Thợ cá nhân hóa trải nghiệm đăng ký cho bạn.';
+
+  @override
+  String get registerRoleCustomerTitle => 'Khách hàng';
+
+  @override
+  String get registerRoleCustomerDescription =>
+      'Tìm thợ uy tín gần bạn để xử lý việc sửa chữa nhanh hơn.';
+
+  @override
+  String get registerRoleCustomerBadge => 'Đặt dịch vụ';
+
+  @override
+  String get registerRoleWorkerTitle => 'Thợ';
+
+  @override
+  String get registerRoleWorkerDescription =>
+      'Nhận yêu cầu mới, xây dựng uy tín và phát triển công việc của bạn.';
+
+  @override
+  String get registerRoleWorkerBadge => 'Nhận việc';
 
   @override
   String get verifyOtpTitle => 'Xác thực OTP';
@@ -110,28 +137,44 @@ class AppLocalizationsVi extends AppLocalizations {
   String get registerEmailLabel => 'Email';
 
   @override
-  String get registerEmailHint => 'Nhập email để nhận mã xác thực';
+  String get registerEmailHint => 'example@gmail.com';
 
   @override
-  String get registerPhoneLabel => 'Số điện thoại (tùy chọn)';
+  String get registerPhoneLabel => 'Số điện thoại';
 
   @override
-  String get registerPhoneHint => 'Nhập số điện thoại nếu muốn';
+  String get registerPhoneHint => '090 123 4567';
 
   @override
   String get registerFullNameLabel => 'Họ và tên';
 
   @override
-  String get registerFullNameHint => 'Nhập họ tên của bạn';
+  String get registerFullNameHint => 'Nguyễn Văn A';
 
   @override
   String get registerConfirmPasswordLabel => 'Nhập lại mật khẩu';
 
   @override
-  String get registerConfirmPasswordHint => 'Nhập lại mật khẩu';
+  String get registerConfirmPasswordHint => '••••••••';
 
   @override
-  String get createAccount => 'Tạo tài khoản';
+  String get createAccount => 'Đăng ký';
+
+  @override
+  String get registerAgreementPrefix =>
+      'Bằng cách nhấn Đăng ký, bạn đồng ý với ';
+
+  @override
+  String get registerAgreementHighlight => 'Điều khoản & Chính sách bảo mật';
+
+  @override
+  String get registerAgreementSuffix => ' của Alo Thợ.';
+
+  @override
+  String get registerExistingAccountPrompt => 'Đã có tài khoản?';
+
+  @override
+  String get registerBackToLoginCta => 'Đăng nhập ngay';
 
   @override
   String get alreadyHaveAccountPrompt => 'Bạn đã có tài khoản?';

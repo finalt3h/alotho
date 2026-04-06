@@ -35,6 +35,7 @@ class SupabaseAuthRemoteDataSource {
     required String email,
     String? phoneNumber,
     required String password,
+    required bool isWorker,
   }) async {
     final trimmedEmail = email.trim();
     final trimmedPhoneNumber = phoneNumber?.trim();
@@ -43,6 +44,7 @@ class SupabaseAuthRemoteDataSource {
       password: password,
       data: {
         'full_name': fullName.trim(),
+        'is_worker': isWorker,
         if (trimmedPhoneNumber != null && trimmedPhoneNumber.isNotEmpty)
           'phone_number': trimmedPhoneNumber,
       },

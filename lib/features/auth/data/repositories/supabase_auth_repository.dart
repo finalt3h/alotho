@@ -23,6 +23,7 @@ class SupabaseAuthRepository implements AuthRepository {
     required String email,
     String? phoneNumber,
     required String password,
+    required bool isWorker,
   }) async {
     try {
       final result = await _remoteDataSource.registerWithCredentials(
@@ -30,6 +31,7 @@ class SupabaseAuthRepository implements AuthRepository {
         email: email,
         phoneNumber: phoneNumber,
         password: password,
+        isWorker: isWorker,
       );
       return Success(
         AuthRegistrationResult(

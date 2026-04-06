@@ -28,6 +28,7 @@ class MockAuthRepository implements AuthRepository {
     required String email,
     String? phoneNumber,
     required String password,
+    required bool isWorker,
   }) async {
     try {
       final user = await _remoteDataSource.registerWithCredentials(
@@ -35,6 +36,7 @@ class MockAuthRepository implements AuthRepository {
         email: email,
         phoneNumber: phoneNumber,
         password: password,
+        isWorker: isWorker,
       );
       return Success(
         AuthRegistrationResult(hasActiveSession: true, user: user.toEntity()),

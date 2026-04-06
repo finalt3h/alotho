@@ -8,6 +8,7 @@ abstract interface class AuthRepository {
     required String email,
     String? phoneNumber,
     required String password,
+    required bool isWorker,
   });
   Future<Result<User>> verifyActivationOtp({
     required String identifier,

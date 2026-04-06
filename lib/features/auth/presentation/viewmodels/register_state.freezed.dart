@@ -22,6 +22,7 @@ mixin _$RegisterState {
   String get phoneNumber => throw _privateConstructorUsedError;
   String get password => throw _privateConstructorUsedError;
   String get confirmPassword => throw _privateConstructorUsedError;
+  bool get isWorker => throw _privateConstructorUsedError;
   bool get isSubmitting => throw _privateConstructorUsedError;
   String? get errorMessage => throw _privateConstructorUsedError;
 
@@ -45,6 +46,7 @@ abstract class $RegisterStateCopyWith<$Res> {
     String phoneNumber,
     String password,
     String confirmPassword,
+    bool isWorker,
     bool isSubmitting,
     String? errorMessage,
   });
@@ -70,6 +72,7 @@ class _$RegisterStateCopyWithImpl<$Res, $Val extends RegisterState>
     Object? phoneNumber = null,
     Object? password = null,
     Object? confirmPassword = null,
+    Object? isWorker = null,
     Object? isSubmitting = null,
     Object? errorMessage = freezed,
   }) {
@@ -95,6 +98,10 @@ class _$RegisterStateCopyWithImpl<$Res, $Val extends RegisterState>
                 ? _value.confirmPassword
                 : confirmPassword // ignore: cast_nullable_to_non_nullable
                       as String,
+            isWorker: null == isWorker
+                ? _value.isWorker
+                : isWorker // ignore: cast_nullable_to_non_nullable
+                      as bool,
             isSubmitting: null == isSubmitting
                 ? _value.isSubmitting
                 : isSubmitting // ignore: cast_nullable_to_non_nullable
@@ -124,6 +131,7 @@ abstract class _$$RegisterStateImplCopyWith<$Res>
     String phoneNumber,
     String password,
     String confirmPassword,
+    bool isWorker,
     bool isSubmitting,
     String? errorMessage,
   });
@@ -148,6 +156,7 @@ class __$$RegisterStateImplCopyWithImpl<$Res>
     Object? phoneNumber = null,
     Object? password = null,
     Object? confirmPassword = null,
+    Object? isWorker = null,
     Object? isSubmitting = null,
     Object? errorMessage = freezed,
   }) {
@@ -173,6 +182,10 @@ class __$$RegisterStateImplCopyWithImpl<$Res>
             ? _value.confirmPassword
             : confirmPassword // ignore: cast_nullable_to_non_nullable
                   as String,
+        isWorker: null == isWorker
+            ? _value.isWorker
+            : isWorker // ignore: cast_nullable_to_non_nullable
+                  as bool,
         isSubmitting: null == isSubmitting
             ? _value.isSubmitting
             : isSubmitting // ignore: cast_nullable_to_non_nullable
@@ -195,6 +208,7 @@ class _$RegisterStateImpl implements _RegisterState {
     this.phoneNumber = '',
     this.password = '',
     this.confirmPassword = '',
+    this.isWorker = false,
     this.isSubmitting = false,
     this.errorMessage,
   });
@@ -216,13 +230,16 @@ class _$RegisterStateImpl implements _RegisterState {
   final String confirmPassword;
   @override
   @JsonKey()
+  final bool isWorker;
+  @override
+  @JsonKey()
   final bool isSubmitting;
   @override
   final String? errorMessage;
 
   @override
   String toString() {
-    return 'RegisterState(fullName: $fullName, email: $email, phoneNumber: $phoneNumber, password: $password, confirmPassword: $confirmPassword, isSubmitting: $isSubmitting, errorMessage: $errorMessage)';
+    return 'RegisterState(fullName: $fullName, email: $email, phoneNumber: $phoneNumber, password: $password, confirmPassword: $confirmPassword, isWorker: $isWorker, isSubmitting: $isSubmitting, errorMessage: $errorMessage)';
   }
 
   @override
@@ -239,6 +256,8 @@ class _$RegisterStateImpl implements _RegisterState {
                 other.password == password) &&
             (identical(other.confirmPassword, confirmPassword) ||
                 other.confirmPassword == confirmPassword) &&
+            (identical(other.isWorker, isWorker) ||
+                other.isWorker == isWorker) &&
             (identical(other.isSubmitting, isSubmitting) ||
                 other.isSubmitting == isSubmitting) &&
             (identical(other.errorMessage, errorMessage) ||
@@ -253,6 +272,7 @@ class _$RegisterStateImpl implements _RegisterState {
     phoneNumber,
     password,
     confirmPassword,
+    isWorker,
     isSubmitting,
     errorMessage,
   );
@@ -273,6 +293,7 @@ abstract class _RegisterState implements RegisterState {
     final String phoneNumber,
     final String password,
     final String confirmPassword,
+    final bool isWorker,
     final bool isSubmitting,
     final String? errorMessage,
   }) = _$RegisterStateImpl;
@@ -287,6 +308,8 @@ abstract class _RegisterState implements RegisterState {
   String get password;
   @override
   String get confirmPassword;
+  @override
+  bool get isWorker;
   @override
   bool get isSubmitting;
   @override

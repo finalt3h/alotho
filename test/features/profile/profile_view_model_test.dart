@@ -49,12 +49,14 @@ class _FakeAuthRepository implements AuthRepository {
     required String email,
     String? phoneNumber,
     required String password,
+    required bool isWorker,
   }) async {
     return Success(
       AuthRegistrationResult(
         hasActiveSession: true,
         user: _testUser.copyWith(
           fullName: fullName,
+          isWorker: isWorker,
           phoneNumber: phoneNumber ?? _testUser.phoneNumber,
         ),
       ),

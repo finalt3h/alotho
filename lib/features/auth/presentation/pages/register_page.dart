@@ -1,8 +1,9 @@
+import 'dart:ui';
+
 import 'package:alo_tho/app/app_routes.dart';
 import 'package:alo_tho/core/constants/app_spacing.dart';
 import 'package:alo_tho/core/l10n/app_localizations.dart';
 import 'package:alo_tho/core/preview/app_preview.dart';
-import 'package:alo_tho/core/widgets/app_page_body.dart';
 import 'package:alo_tho/core/widgets/app_status_dialog.dart';
 import 'package:alo_tho/features/auth/presentation/pages/verify_otp_page.dart';
 import 'package:alo_tho/features/auth/presentation/viewmodels/register_view_model.dart';
@@ -10,17 +11,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/widget_previews.dart';
 import 'package:go_router/go_router.dart';
-
-@Preview( group: 'Screens',
-    name: 'RTes',
-    size: phonePreviewSize,
-    wrapper: appPreviewWrapper
-)
-Widget testA() => const _RegisterHeroCard(
-  title: 'Tìm thợ sửa chữa nhanh chóng',
-  subtitle: 'Đăng ký ngay để kết nối với hàng ngàn thợ sửa chữa chuyên nghiệp.',
-  imageAsset: 'assets/login/login_hero.png',
-);
 
 @Preview(
   group: 'Screens',
@@ -38,9 +28,6 @@ class RegisterPage extends ConsumerStatefulWidget {
 }
 
 class _RegisterPageState extends ConsumerState<RegisterPage> {
-  static const _heroAsset = 'assets/login/login_hero.png';
-  static const _googleAsset = 'assets/login/google.png';
-
   bool _obscurePassword = true;
   bool _obscureConfirmPassword = true;
 
@@ -68,105 +55,67 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
     final controller = ref.read(registerControllerProvider.notifier);
 
     return Scaffold(
-      backgroundColor: const Color(0xFFFCF9F8),
+      backgroundColor: const Color(0xFFF4EFEC),
       appBar: AppBar(
-        toolbarHeight: 56,
         automaticallyImplyLeading: false,
-        backgroundColor: const Color(0xFFFCF9F8),
+        backgroundColor: const Color(0xFFF4EFEC),
         surfaceTintColor: Colors.transparent,
         elevation: 0,
-        titleSpacing: 0,
-        title: Row(
-          children: [
-            IconButton(
-              onPressed: () => context.go(AppRoutes.loginPath),
-              icon: const Icon(
-                Icons.arrow_back_rounded,
-                color: Color(0xFF7B6B64),
-              ),
+        centerTitle: true,
+        leadingWidth: 52,
+        leading: Padding(
+          padding: const EdgeInsets.only(left: 8),
+          child: IconButton(
+            onPressed: () => context.go(AppRoutes.loginPath),
+            icon: const Icon(
+              Icons.arrow_back_rounded,
+              size: 22,
+              color: Color(0xFF5D4B43),
             ),
-            Expanded(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  const Icon(
-                    Icons.handyman_rounded,
-                    color: Color(0xFFFF6B00),
-                    size: 20,
-                  ),
-                  const SizedBox(width: 8),
-                  Flexible(
-                    child: Text(
-                      'ALO THỢ',
-                      overflow: TextOverflow.ellipsis,
-                      style: theme.textTheme.titleLarge?.copyWith(
-                        color: const Color(0xFFFF6B00),
-                        fontWeight: FontWeight.w900,
-                        letterSpacing: 1,
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            IconButton(
-              onPressed: () => _showPlaceholder(context, l10n),
-              tooltip: l10n.loginHelpTooltip,
-              icon: const Icon(
-                Icons.help_outline_rounded,
-                color: Color(0xFF7B6B64),
-              ),
-            ),
-          ],
+          ),
         ),
-      ),
-      bottomNavigationBar: SafeArea(
-        top: false,
-        child: Padding(
-          padding: const EdgeInsets.fromLTRB(16, 8, 16, 16),
-          child: Wrap(
-            alignment: WrapAlignment.center,
-            crossAxisAlignment: WrapCrossAlignment.center,
-            children: [
-              Text(
-                l10n.alreadyHaveAccountPrompt,
-                style: theme.textTheme.bodyLarge?.copyWith(
-                  color: const Color(0xFF5A4136),
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-              const SizedBox(width: 6),
-              TextButton(
-                onPressed: () => context.go(AppRoutes.loginPath),
-                style: TextButton.styleFrom(
-                  foregroundColor: const Color(0xFFA04100),
-                  padding: EdgeInsets.zero,
-                  minimumSize: Size.zero,
-                  tapTargetSize: MaterialTapTargetSize.shrinkWrap,
-                ),
-                child: Text(
-                  l10n.backToLogin,
-                  style: theme.textTheme.bodyLarge?.copyWith(
-                    fontWeight: FontWeight.w800,
-                  ),
-                ),
-              ),
-            ],
+        title: Text(
+          'ALO THỢ',
+          style: theme.textTheme.titleMedium?.copyWith(
+            color: const Color(0xFFFF6B00),
+            fontWeight: FontWeight.w900,
+            letterSpacing: 0.6,
           ),
         ),
       ),
-      body: SafeArea(
-        child: AppPageBody(
-          child: SingleChildScrollView(
-            padding: const EdgeInsets.fromLTRB(16, 8, 16, 24),
+      body: Stack(
+        children: [
+          SingleChildScrollView(
+            padding: const EdgeInsets.fromLTRB(20, 12, 20, 24),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                _RegisterHeroCard(
-                  title: l10n.registerTitle,
-                  subtitle: l10n.registerDescription,
-                  imageAsset: _heroAsset,
+                Text(
+                  l10n.registerTitle,
+                  style: theme.textTheme.headlineMedium?.copyWith(
+                    color: const Color(0xFF28211E),
+                    fontWeight: FontWeight.w900,
+                    letterSpacing: -0.6,
+                  ),
+                ),
+                const SizedBox(height: 6),
+                Text(
+                  l10n.registerDescription,
+                  style: theme.textTheme.bodyMedium?.copyWith(
+                    color: const Color(0xFF786860),
+                    height: 1.45,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                const SizedBox(height: 18),
+                _RegisterFieldLabel(label: l10n.registerRoleLabel),
+                const SizedBox(height: 8),
+                _RegisterRoleSelector(
+                  isWorkerSelected: state.isWorker,
+                  onSelectCustomer: () =>
+                      controller.updateAccountType(isWorker: false),
+                  onSelectWorker: () =>
+                      controller.updateAccountType(isWorker: true),
                 ),
                 const SizedBox(height: 18),
                 _RegisterFieldLabel(label: l10n.registerFullNameLabel),
@@ -176,16 +125,7 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                   prefixIcon: Icons.badge_outlined,
                   onChanged: controller.updateFullName,
                 ),
-                const SizedBox(height: 16),
-                _RegisterFieldLabel(label: l10n.registerEmailLabel),
-                const SizedBox(height: 8),
-                _RegisterTextField(
-                  hintText: l10n.registerEmailHint,
-                  prefixIcon: Icons.mail_outline_rounded,
-                  keyboardType: TextInputType.emailAddress,
-                  onChanged: controller.updateEmail,
-                ),
-                const SizedBox(height: 16),
+                const SizedBox(height: 14),
                 _RegisterFieldLabel(label: l10n.registerPhoneLabel),
                 const SizedBox(height: 8),
                 _RegisterTextField(
@@ -194,7 +134,16 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                   keyboardType: TextInputType.phone,
                   onChanged: controller.updatePhoneNumber,
                 ),
-                const SizedBox(height: 16),
+                const SizedBox(height: 14),
+                _RegisterFieldLabel(label: l10n.registerEmailLabel),
+                const SizedBox(height: 8),
+                _RegisterTextField(
+                  hintText: l10n.registerEmailHint,
+                  prefixIcon: Icons.mail_outline_rounded,
+                  keyboardType: TextInputType.emailAddress,
+                  onChanged: controller.updateEmail,
+                ),
+                const SizedBox(height: 14),
                 _RegisterFieldLabel(label: l10n.passwordLabel),
                 const SizedBox(height: 8),
                 _RegisterTextField(
@@ -213,11 +162,11 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                           ? Icons.visibility_outlined
                           : Icons.visibility_off_outlined,
                       size: 20,
-                      color: const Color(0xFF9A7A6D),
+                      color: const Color(0xFFAC978D),
                     ),
                   ),
                 ),
-                const SizedBox(height: 16),
+                const SizedBox(height: 14),
                 _RegisterFieldLabel(label: l10n.registerConfirmPasswordLabel),
                 const SizedBox(height: 8),
                 _RegisterTextField(
@@ -236,11 +185,11 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                           ? Icons.visibility_outlined
                           : Icons.visibility_off_outlined,
                       size: 20,
-                      color: const Color(0xFF9A7A6D),
+                      color: const Color(0xFFAC978D),
                     ),
                   ),
                 ),
-                const SizedBox(height: 16),
+                const SizedBox(height: 20),
                 _RegisterPrimaryButton(
                   label: state.isSubmitting
                       ? l10n.processing
@@ -281,175 +230,216 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                           }
                         },
                 ),
-                const SizedBox(height: 26),
-                Row(
-                  children: [
-                    const Expanded(
-                      child: Divider(color: Color(0xFFE4E2E1), thickness: 1),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16),
-                      child: Text(
-                        l10n.orLabel.toUpperCase(),
-                        style: theme.textTheme.labelMedium?.copyWith(
-                          color: const Color(0xFF8E7164),
-                          fontWeight: FontWeight.w700,
-                          letterSpacing: 1.2,
+                const SizedBox(height: 14),
+                Center(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8),
+                    child: RichText(
+                      textAlign: TextAlign.center,
+                      text: TextSpan(
+                        style: theme.textTheme.bodySmall?.copyWith(
+                          color: const Color(0xFF8B7970),
+                          height: 1.5,
+                          fontWeight: FontWeight.w500,
                         ),
-                      ),
-                    ),
-                    const Expanded(
-                      child: Divider(color: Color(0xFFE4E2E1), thickness: 1),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 26),
-                Row(
-                  children: [
-                    Expanded(
-                      child: _RegisterSocialButton(
-                        label: l10n.signInWithGoogle,
-                        leading: Image.asset(
-                          _googleAsset,
-                          width: 20,
-                          height: 20,
-                        ),
-                        onPressed: state.isSubmitting
-                            ? null
-                            : () async {
-                                await controller.loginWithGoogle();
-                              },
-                      ),
-                    ),
-                    const SizedBox(width: 16),
-                    Expanded(
-                      child: _RegisterSocialButton(
-                        label: l10n.continueWithFacebook,
-                        leading: Container(
-                          width: 20,
-                          height: 20,
-                          decoration: const BoxDecoration(
-                            color: Color(0xFF2563EB),
-                            shape: BoxShape.circle,
+                        children: [
+                          TextSpan(text: l10n.registerAgreementPrefix),
+                          TextSpan(
+                            text: l10n.registerAgreementHighlight,
+                            style: theme.textTheme.bodySmall?.copyWith(
+                              color: const Color(0xFFB24E0D),
+                              fontWeight: FontWeight.w800,
+                            ),
                           ),
-                          alignment: Alignment.center,
-                          child: const Icon(
-                            Icons.facebook_rounded,
-                            size: 14,
-                            color: Colors.white,
-                          ),
-                        ),
-                        onPressed: state.isSubmitting
-                            ? null
-                            : () => _showPlaceholder(context, l10n),
+                          TextSpan(text: l10n.registerAgreementSuffix),
+                        ],
                       ),
                     ),
-                  ],
+                  ),
                 ),
-                const SizedBox(height: 48),
+                const SizedBox(height: 16),
+                const Divider(
+                  height: 1,
+                  color: Color(0xFFF0E6E1),
+                  thickness: 1,
+                ),
+                const SizedBox(height: 14),
+                Center(
+                  child: Wrap(
+                    alignment: WrapAlignment.center,
+                    crossAxisAlignment: WrapCrossAlignment.center,
+                    children: [
+                      Text(
+                        l10n.registerExistingAccountPrompt,
+                        style: theme.textTheme.bodyMedium?.copyWith(
+                          color: const Color(0xFF786860),
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                      const SizedBox(width: 4),
+                      TextButton(
+                        onPressed: () => context.go(AppRoutes.loginPath),
+                        style: TextButton.styleFrom(
+                          foregroundColor: const Color(0xFFDB6500),
+                          padding: EdgeInsets.zero,
+                          minimumSize: Size.zero,
+                          tapTargetSize: MaterialTapTargetSize.shrinkWrap,
+                        ),
+                        child: Text(
+                          l10n.registerBackToLoginCta,
+                          style: theme.textTheme.bodyMedium?.copyWith(
+                            fontWeight: FontWeight.w800,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
               ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _DecorativeOrb extends StatelessWidget {
+  const _DecorativeOrb({required this.size, required this.colors});
+
+  final double size;
+  final List<Color> colors;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: size,
+      height: size,
+      decoration: BoxDecoration(
+        shape: BoxShape.circle,
+        gradient: RadialGradient(
+          colors: [
+            colors.first,
+            colors.first.withValues(alpha: 0.78),
+            colors.last,
+            Colors.white.withValues(alpha: 0),
+          ],
+          stops: const [0.0, 0.36, 0.7, 1.0],
+        ),
+      ),
+      child: BackdropFilter(
+        filter: ImageFilter.blur(sigmaX: 1.5, sigmaY: 1.5),
+        child: DecoratedBox(
+          decoration: BoxDecoration(
+            shape: BoxShape.circle,
+            border: Border.all(
+              color: Colors.white.withValues(alpha: 0.55),
+              width: 18,
             ),
           ),
         ),
       ),
     );
   }
+}
 
-  void _showPlaceholder(BuildContext context, AppLocalizations l10n) {
-    showAppStatusDialog(
-      context: context,
-      state: AppStatusDialogState.alert,
-      title: appStatusDialogDefaultTitle(context, AppStatusDialogState.alert),
-      message: l10n.registerPlaceholder,
+class _RegisterRoleSelector extends StatelessWidget {
+  const _RegisterRoleSelector({
+    required this.isWorkerSelected,
+    required this.onSelectCustomer,
+    required this.onSelectWorker,
+  });
+
+  final bool isWorkerSelected;
+  final VoidCallback onSelectCustomer;
+  final VoidCallback onSelectWorker;
+
+  @override
+  Widget build(BuildContext context) {
+    final l10n = context.l10n;
+
+    return Row(
+      children: [
+        Expanded(
+          child: _RegisterRoleChip(
+            label: l10n.registerRoleCustomerTitle,
+            icon: Icons.person_outline_rounded,
+            isSelected: !isWorkerSelected,
+            onTap: onSelectCustomer,
+          ),
+        ),
+        const SizedBox(width: 10),
+        Expanded(
+          child: _RegisterRoleChip(
+            label: l10n.registerRoleWorkerTitle,
+            icon: Icons.handyman_outlined,
+            isSelected: isWorkerSelected,
+            onTap: onSelectWorker,
+          ),
+        ),
+      ],
     );
   }
 }
 
-
-class _RegisterHeroCard extends StatelessWidget {
-  const _RegisterHeroCard({
-    required this.title,
-    required this.subtitle,
-    required this.imageAsset,
+class _RegisterRoleChip extends StatelessWidget {
+  const _RegisterRoleChip({
+    required this.label,
+    required this.icon,
+    required this.isSelected,
+    required this.onTap,
   });
 
-  final String title;
-  final String subtitle;
-  final String imageAsset;
-
-
+  final String label;
+  final IconData icon;
+  final bool isSelected;
+  final VoidCallback onTap;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
-    return Container(
-      height: 204,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(AppRadius.xxxl),
-        boxShadow: const [
-          BoxShadow(
-            color: Color(0x14000000),
-            blurRadius: 20,
-            offset: Offset(0, 8),
+    return Material(
+      color: Colors.transparent,
+      child: InkWell(
+        onTap: onTap,
+        borderRadius: BorderRadius.circular(AppRadius.sm),
+        child: AnimatedContainer(
+          duration: const Duration(milliseconds: 180),
+          height: 54,
+          decoration: BoxDecoration(
+            color: isSelected
+                ? const Color(0xFFFF6B00)
+                : const Color(0xFFF1EDEC),
+            borderRadius: BorderRadius.circular(AppRadius.sm),
+            boxShadow: isSelected
+                ? const [
+                    BoxShadow(
+                      color: Color(0x29FF6B00),
+                      blurRadius: 18,
+                      offset: Offset(0, 8),
+                    ),
+                  ]
+                : const [],
           ),
-        ],
-      ),
-      child: ClipRRect(
-        borderRadius: BorderRadius.circular(AppRadius.xxxl),
-        child: Stack(
-          fit: StackFit.expand,
-          children: [
-            Image.asset(imageAsset, fit: BoxFit.cover),
-            const DecoratedBox(
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  begin: Alignment.topCenter,
-                  end: Alignment.bottomCenter,
-                  colors: [
-                    Color(0x08FCF9F8),
-                    Color(0x66FCF9F8),
-                    Color(0xFFFDF9F8),
-                  ],
-                  stops: [0.0, 0.56, 1.0],
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(
+                icon,
+                size: 17,
+                color: isSelected ? Colors.white : const Color(0xFF7A6A62),
+              ),
+              const SizedBox(height: 3),
+              Text(
+                label,
+                style: theme.textTheme.labelLarge?.copyWith(
+                  color: isSelected ? Colors.white : const Color(0xFF6E5C54),
+                  fontWeight: FontWeight.w800,
                 ),
               ),
-            ),
-            Positioned(
-              left: 16,
-              right: 16,
-              bottom: 16,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    title,
-                    maxLines: 1,
-                    overflow: TextOverflow.ellipsis,
-                    style: theme.textTheme.headlineMedium?.copyWith(
-                      color: const Color(0xFF1B1C1C),
-                      fontSize: AppTextSize.heroMedium,
-                      height: 1.2,
-                      fontWeight: FontWeight.w800,
-                      letterSpacing: -0.75,
-                    ),
-                  ),
-                  const SizedBox(height: 4),
-                  Text(
-                    subtitle,
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                    style: theme.textTheme.bodyLarge?.copyWith(
-                      color: const Color(0xFF5A4136),
-                      fontSize: AppTextSize.body,
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
@@ -465,10 +455,10 @@ class _RegisterFieldLabel extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       label.toUpperCase(),
-      style: Theme.of(context).textTheme.labelMedium?.copyWith(
-        color: const Color(0xFF5A4136),
-        fontWeight: FontWeight.w800,
-        letterSpacing: 0.55,
+      style: Theme.of(context).textTheme.labelSmall?.copyWith(
+        color: const Color(0xFF7A655B),
+        fontWeight: FontWeight.w900,
+        letterSpacing: 0.8,
       ),
     );
   }
@@ -493,37 +483,41 @@ class _RegisterTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+
     return TextFormField(
       onChanged: onChanged,
       keyboardType: keyboardType,
       obscureText: obscureText,
-      style: Theme.of(
-        context,
-      ).textTheme.bodyLarge?.copyWith(color: const Color(0xFF3D2A21)),
+      style: theme.textTheme.bodyLarge?.copyWith(
+        color: const Color(0xFF40322D),
+        fontWeight: FontWeight.w600,
+      ),
       decoration: InputDecoration(
         hintText: hintText,
-        hintStyle: Theme.of(
-          context,
-        ).textTheme.bodyLarge?.copyWith(color: const Color(0x998E7164)),
-        prefixIcon: Icon(prefixIcon, size: 18, color: const Color(0xFF9A7A6D)),
+        hintStyle: theme.textTheme.bodyLarge?.copyWith(
+          color: const Color(0xFFB7A7A0),
+          fontWeight: FontWeight.w500,
+        ),
+        prefixIcon: Icon(prefixIcon, size: 18, color: const Color(0xFFC2B4AE)),
         suffixIcon: suffix,
         filled: true,
-        fillColor: const Color(0xFFF6F3F2),
+        fillColor: const Color(0xFFF3EFED),
         contentPadding: const EdgeInsets.symmetric(
-          horizontal: 16,
-          vertical: 18,
+          horizontal: 14,
+          vertical: 14,
         ),
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(AppRadius.xs),
+          borderRadius: BorderRadius.circular(AppRadius.sm),
           borderSide: BorderSide.none,
         ),
         enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(AppRadius.xs),
+          borderRadius: BorderRadius.circular(AppRadius.sm),
           borderSide: BorderSide.none,
         ),
         focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(AppRadius.xs),
-          borderSide: const BorderSide(color: Color(0xFFFF6B00), width: 1.2),
+          borderRadius: BorderRadius.circular(AppRadius.sm),
+          borderSide: const BorderSide(color: Color(0xFFFF6B00), width: 1.3),
         ),
       ),
     );
@@ -538,87 +532,58 @@ class _RegisterPrimaryButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final enabled = onPressed != null;
+
     return Material(
       color: Colors.transparent,
       child: Ink(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(AppRadius.xs),
-          gradient: const LinearGradient(
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-            colors: [Color(0xFFFF6B00), Color(0xFFA04100)],
+          borderRadius: BorderRadius.circular(AppRadius.sm),
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: enabled
+                ? const [Color(0xFFFF7400), Color(0xFFE15C00)]
+                : const [Color(0xFFFFC8A4), Color(0xFFF3A979)],
           ),
-          boxShadow: const [
-            BoxShadow(
-              color: Color(0x33A04100),
-              blurRadius: 15,
-              offset: Offset(0, 8),
-            ),
-          ],
+          boxShadow: enabled
+              ? const [
+                  BoxShadow(
+                    color: Color(0x30E15C00),
+                    blurRadius: 18,
+                    offset: Offset(0, 10),
+                  ),
+                ]
+              : const [],
         ),
         child: InkWell(
           onTap: onPressed,
-          borderRadius: BorderRadius.circular(AppRadius.xs),
+          borderRadius: BorderRadius.circular(AppRadius.sm),
           child: SizedBox(
             width: double.infinity,
-            height: 58,
+            height: 54,
             child: Center(
-              child: Text(
-                label,
-                style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                  color: Colors.white,
-                  fontSize: AppTextSize.title,
-                  fontWeight: FontWeight.w800,
-                ),
+              child: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    label,
+                    style: Theme.of(context).textTheme.titleSmall?.copyWith(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w900,
+                    ),
+                  ),
+                  const SizedBox(width: 6),
+                  const Icon(
+                    Icons.arrow_forward_rounded,
+                    size: 18,
+                    color: Colors.white,
+                  ),
+                ],
               ),
             ),
           ),
         ),
-      ),
-    );
-  }
-}
-
-class _RegisterSocialButton extends StatelessWidget {
-  const _RegisterSocialButton({
-    required this.label,
-    required this.leading,
-    required this.onPressed,
-  });
-
-  final String label;
-  final Widget leading;
-  final VoidCallback? onPressed;
-
-  @override
-  Widget build(BuildContext context) {
-    return OutlinedButton(
-      onPressed: onPressed,
-      style: OutlinedButton.styleFrom(
-        minimumSize: const Size.fromHeight(54),
-        backgroundColor: Colors.white,
-        side: const BorderSide(color: Color(0x4DE2BFB0)),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(AppRadius.xs),
-        ),
-        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          leading,
-          const SizedBox(width: 8),
-          Flexible(
-            child: Text(
-              label,
-              overflow: TextOverflow.ellipsis,
-              style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                color: const Color(0xFF1B1C1C),
-                fontWeight: FontWeight.w700,
-              ),
-            ),
-          ),
-        ],
       ),
     );
   }

@@ -74,10 +74,38 @@ class AppLocalizationsEn extends AppLocalizations {
   String get loginHelpTooltip => 'Help';
 
   @override
-  String get registerTitle => 'Create account';
+  String get registerTitle => 'Create a new account';
 
   @override
-  String get registerDescription => 'Start connecting with the right workers';
+  String get registerDescription =>
+      'Join the skilled worker community or find quality services right away.';
+
+  @override
+  String get registerRoleLabel => 'Who are you?';
+
+  @override
+  String get registerRoleDescription =>
+      'Choose a role so Alo Tho can personalize the sign-up experience for you.';
+
+  @override
+  String get registerRoleCustomerTitle => 'Customer';
+
+  @override
+  String get registerRoleCustomerDescription =>
+      'Find trusted workers nearby and get repairs done faster.';
+
+  @override
+  String get registerRoleCustomerBadge => 'Book service';
+
+  @override
+  String get registerRoleWorkerTitle => 'Worker';
+
+  @override
+  String get registerRoleWorkerDescription =>
+      'Receive new requests, build credibility, and grow your business.';
+
+  @override
+  String get registerRoleWorkerBadge => 'Get jobs';
 
   @override
   String get verifyOtpTitle => 'Verify OTP';
@@ -109,29 +137,44 @@ class AppLocalizationsEn extends AppLocalizations {
   String get registerEmailLabel => 'Email';
 
   @override
-  String get registerEmailHint =>
-      'Enter your email to receive the verification code';
+  String get registerEmailHint => 'example@gmail.com';
 
   @override
-  String get registerPhoneLabel => 'Phone number (optional)';
+  String get registerPhoneLabel => 'Phone number';
 
   @override
-  String get registerPhoneHint => 'Enter your phone number if you want';
+  String get registerPhoneHint => '090 123 4567';
 
   @override
   String get registerFullNameLabel => 'Full name';
 
   @override
-  String get registerFullNameHint => 'Enter your full name';
+  String get registerFullNameHint => 'Nguyen Van A';
 
   @override
   String get registerConfirmPasswordLabel => 'Confirm password';
 
   @override
-  String get registerConfirmPasswordHint => 'Re-enter your password';
+  String get registerConfirmPasswordHint => '••••••••';
 
   @override
-  String get createAccount => 'Create account';
+  String get createAccount => 'Sign up';
+
+  @override
+  String get registerAgreementPrefix =>
+      'By tapping Sign up, you agree to Alo Tho\'s ';
+
+  @override
+  String get registerAgreementHighlight => 'Terms & Privacy Policy';
+
+  @override
+  String get registerAgreementSuffix => '.';
+
+  @override
+  String get registerExistingAccountPrompt => 'Already have an account?';
+
+  @override
+  String get registerBackToLoginCta => 'Sign in now';
 
   @override
   String get alreadyHaveAccountPrompt => 'Already have an account?';

@@ -14,6 +14,7 @@ class MockAuthRemoteDataSource {
     required String email,
     String? phoneNumber,
     required String password,
+    required bool isWorker,
   }) async {
     await Future<void>.delayed(const Duration(milliseconds: 900));
 
@@ -22,7 +23,7 @@ class MockAuthRemoteDataSource {
       fullName: fullName,
       phoneNumber: phoneNumber?.trim() ?? '',
       city: 'Thu Duc, TP. Ho Chi Minh',
-      isWorker: false,
+      isWorker: isWorker,
       avatarUrl: 'https://i.pravatar.cc/160?img=18',
       joinedAt: DateTime(2026, 1, 10),
     );

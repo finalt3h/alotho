@@ -227,14 +227,62 @@ abstract class AppLocalizations {
   /// No description provided for @registerTitle.
   ///
   /// In vi, this message translates to:
-  /// **'Tạo tài khoản'**
+  /// **'Tạo tài khoản mới'**
   String get registerTitle;
 
   /// No description provided for @registerDescription.
   ///
   /// In vi, this message translates to:
-  /// **'Bắt đầu kết nối với những người thợ phù hợp'**
+  /// **'Gia nhập cộng đồng thợ tay nghề cao hoặc tìm kiếm dịch vụ chất lượng ngay.'**
   String get registerDescription;
+
+  /// No description provided for @registerRoleLabel.
+  ///
+  /// In vi, this message translates to:
+  /// **'Bạn là ai?'**
+  String get registerRoleLabel;
+
+  /// No description provided for @registerRoleDescription.
+  ///
+  /// In vi, this message translates to:
+  /// **'Chọn vai trò để Alo Thợ cá nhân hóa trải nghiệm đăng ký cho bạn.'**
+  String get registerRoleDescription;
+
+  /// No description provided for @registerRoleCustomerTitle.
+  ///
+  /// In vi, this message translates to:
+  /// **'Khách hàng'**
+  String get registerRoleCustomerTitle;
+
+  /// No description provided for @registerRoleCustomerDescription.
+  ///
+  /// In vi, this message translates to:
+  /// **'Tìm thợ uy tín gần bạn để xử lý việc sửa chữa nhanh hơn.'**
+  String get registerRoleCustomerDescription;
+
+  /// No description provided for @registerRoleCustomerBadge.
+  ///
+  /// In vi, this message translates to:
+  /// **'Đặt dịch vụ'**
+  String get registerRoleCustomerBadge;
+
+  /// No description provided for @registerRoleWorkerTitle.
+  ///
+  /// In vi, this message translates to:
+  /// **'Thợ'**
+  String get registerRoleWorkerTitle;
+
+  /// No description provided for @registerRoleWorkerDescription.
+  ///
+  /// In vi, this message translates to:
+  /// **'Nhận yêu cầu mới, xây dựng uy tín và phát triển công việc của bạn.'**
+  String get registerRoleWorkerDescription;
+
+  /// No description provided for @registerRoleWorkerBadge.
+  ///
+  /// In vi, this message translates to:
+  /// **'Nhận việc'**
+  String get registerRoleWorkerBadge;
 
   /// No description provided for @verifyOtpTitle.
   ///
@@ -293,19 +341,19 @@ abstract class AppLocalizations {
   /// No description provided for @registerEmailHint.
   ///
   /// In vi, this message translates to:
-  /// **'Nhập email để nhận mã xác thực'**
+  /// **'example@gmail.com'**
   String get registerEmailHint;
 
   /// No description provided for @registerPhoneLabel.
   ///
   /// In vi, this message translates to:
-  /// **'Số điện thoại (tùy chọn)'**
+  /// **'Số điện thoại'**
   String get registerPhoneLabel;
 
   /// No description provided for @registerPhoneHint.
   ///
   /// In vi, this message translates to:
-  /// **'Nhập số điện thoại nếu muốn'**
+  /// **'090 123 4567'**
   String get registerPhoneHint;
 
   /// No description provided for @registerFullNameLabel.
@@ -317,7 +365,7 @@ abstract class AppLocalizations {
   /// No description provided for @registerFullNameHint.
   ///
   /// In vi, this message translates to:
-  /// **'Nhập họ tên của bạn'**
+  /// **'Nguyễn Văn A'**
   String get registerFullNameHint;
 
   /// No description provided for @registerConfirmPasswordLabel.
@@ -329,14 +377,44 @@ abstract class AppLocalizations {
   /// No description provided for @registerConfirmPasswordHint.
   ///
   /// In vi, this message translates to:
-  /// **'Nhập lại mật khẩu'**
+  /// **'••••••••'**
   String get registerConfirmPasswordHint;
 
   /// No description provided for @createAccount.
   ///
   /// In vi, this message translates to:
-  /// **'Tạo tài khoản'**
+  /// **'Đăng ký'**
   String get createAccount;
+
+  /// No description provided for @registerAgreementPrefix.
+  ///
+  /// In vi, this message translates to:
+  /// **'Bằng cách nhấn Đăng ký, bạn đồng ý với '**
+  String get registerAgreementPrefix;
+
+  /// No description provided for @registerAgreementHighlight.
+  ///
+  /// In vi, this message translates to:
+  /// **'Điều khoản & Chính sách bảo mật'**
+  String get registerAgreementHighlight;
+
+  /// No description provided for @registerAgreementSuffix.
+  ///
+  /// In vi, this message translates to:
+  /// **' của Alo Thợ.'**
+  String get registerAgreementSuffix;
+
+  /// No description provided for @registerExistingAccountPrompt.
+  ///
+  /// In vi, this message translates to:
+  /// **'Đã có tài khoản?'**
+  String get registerExistingAccountPrompt;
+
+  /// No description provided for @registerBackToLoginCta.
+  ///
+  /// In vi, this message translates to:
+  /// **'Đăng nhập ngay'**
+  String get registerBackToLoginCta;
 
   /// No description provided for @alreadyHaveAccountPrompt.
   ///
