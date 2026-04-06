@@ -1,0 +1,4 @@
+interface:
+  display_name: "Alo Tho Flutter"
+  short_description: "Generate Flutter code for Alo Tho base"
+  default_prompt: "Use $alo-tho-flutter-base to add or update Flutter code in this repo following its existing architecture, UI patterns, localization, and tests."

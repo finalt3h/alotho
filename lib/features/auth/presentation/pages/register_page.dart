@@ -11,6 +11,17 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/widget_previews.dart';
 import 'package:go_router/go_router.dart';
 
+@Preview( group: 'Screens',
+    name: 'RTes',
+    size: phonePreviewSize,
+    wrapper: appPreviewWrapper
+)
+Widget testA() => const _RegisterHeroCard(
+  title: 'Tìm thợ sửa chữa nhanh chóng',
+  subtitle: 'Đăng ký ngay để kết nối với hàng ngàn thợ sửa chữa chuyên nghiệp.',
+  imageAsset: 'assets/login/login_hero.png',
+);
+
 @Preview(
   group: 'Screens',
   name: 'Register Page',
@@ -58,6 +69,58 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
 
     return Scaffold(
       backgroundColor: const Color(0xFFFCF9F8),
+      appBar: AppBar(
+        toolbarHeight: 56,
+        automaticallyImplyLeading: false,
+        backgroundColor: const Color(0xFFFCF9F8),
+        surfaceTintColor: Colors.transparent,
+        elevation: 0,
+        titleSpacing: 0,
+        title: Row(
+          children: [
+            IconButton(
+              onPressed: () => context.go(AppRoutes.loginPath),
+              icon: const Icon(
+                Icons.arrow_back_rounded,
+                color: Color(0xFF7B6B64),
+              ),
+            ),
+            Expanded(
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Icon(
+                    Icons.handyman_rounded,
+                    color: Color(0xFFFF6B00),
+                    size: 20,
+                  ),
+                  const SizedBox(width: 8),
+                  Flexible(
+                    child: Text(
+                      'ALO THỢ',
+                      overflow: TextOverflow.ellipsis,
+                      style: theme.textTheme.titleLarge?.copyWith(
+                        color: const Color(0xFFFF6B00),
+                        fontWeight: FontWeight.w900,
+                        letterSpacing: 1,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+            IconButton(
+              onPressed: () => _showPlaceholder(context, l10n),
+              tooltip: l10n.loginHelpTooltip,
+              icon: const Icon(
+                Icons.help_outline_rounded,
+                color: Color(0xFF7B6B64),
+              ),
+            ),
+          ],
+        ),
+      ),
       bottomNavigationBar: SafeArea(
         top: false,
         child: Padding(
@@ -100,51 +163,6 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  children: [
-                    IconButton(
-                      onPressed: () => context.go(AppRoutes.loginPath),
-                      icon: const Icon(
-                        Icons.arrow_back_rounded,
-                        color: Color(0xFF7B6B64),
-                      ),
-                    ),
-                    Expanded(
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          const Icon(
-                            Icons.handyman_rounded,
-                            color: Color(0xFFFF6B00),
-                            size: 20,
-                          ),
-                          const SizedBox(width: 8),
-                          Flexible(
-                            child: Text(
-                              'ALO THỢ',
-                              overflow: TextOverflow.ellipsis,
-                              style: theme.textTheme.titleLarge?.copyWith(
-                                color: const Color(0xFFFF6B00),
-                                fontWeight: FontWeight.w900,
-                                letterSpacing: 1,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    IconButton(
-                      onPressed: () => _showPlaceholder(context, l10n),
-                      tooltip: l10n.loginHelpTooltip,
-                      icon: const Icon(
-                        Icons.help_outline_rounded,
-                        color: Color(0xFF7B6B64),
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 12),
                 _RegisterHeroCard(
                   title: l10n.registerTitle,
                   subtitle: l10n.registerDescription,
@@ -347,6 +365,7 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
   }
 }
 
+
 class _RegisterHeroCard extends StatelessWidget {
   const _RegisterHeroCard({
     required this.title,
@@ -357,6 +376,8 @@ class _RegisterHeroCard extends StatelessWidget {
   final String title;
   final String subtitle;
   final String imageAsset;
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -397,29 +418,35 @@ class _RegisterHeroCard extends StatelessWidget {
             Positioned(
               left: 16,
               right: 16,
-              bottom: 48,
-              child: Text(
-                title,
-                style: theme.textTheme.headlineMedium?.copyWith(
-                  color: const Color(0xFF1B1C1C),
-                  fontSize: AppTextSize.heroSmall,
-                  height: 1.2,
-                  fontWeight: FontWeight.w800,
-                  letterSpacing: -0.75,
-                ),
-              ),
-            ),
-            Positioned(
-              left: 16,
-              right: 16,
               bottom: 16,
-              child: Text(
-                subtitle,
-                style: theme.textTheme.bodyLarge?.copyWith(
-                  color: const Color(0xFF5A4136),
-                  fontSize: AppTextSize.body,
-                  fontWeight: FontWeight.w500,
-                ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    title,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: theme.textTheme.headlineMedium?.copyWith(
+                      color: const Color(0xFF1B1C1C),
+                      fontSize: AppTextSize.heroMedium,
+                      height: 1.2,
+                      fontWeight: FontWeight.w800,
+                      letterSpacing: -0.75,
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    subtitle,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: theme.textTheme.bodyLarge?.copyWith(
+                      color: const Color(0xFF5A4136),
+                      fontSize: AppTextSize.body,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ],
               ),
             ),
           ],

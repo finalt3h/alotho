@@ -377,29 +377,31 @@ class _LoginHeroCard extends StatelessWidget {
             Positioned(
               left: 16,
               right: 16,
-              bottom: 42,
-              child: Text(
-                title,
-                style: theme.textTheme.headlineMedium?.copyWith(
-                  color: const Color(0xFF1B1C1C),
-                  fontSize: AppTextSize.heroMedium,
-                  height: 1.2,
-                  fontWeight: FontWeight.w800,
-                  letterSpacing: -0.75,
-                ),
-              ),
-            ),
-            Positioned(
-              left: 16,
-              right: 16,
               bottom: 16,
-              child: Text(
-                subtitle,
-                style: theme.textTheme.bodyLarge?.copyWith(
-                  color: const Color(0xFF5A4136),
-                  fontSize: AppTextSize.body,
-                  fontWeight: FontWeight.w500,
-                ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    title,
+                    style: theme.textTheme.headlineMedium?.copyWith(
+                      color: const Color(0xFF1B1C1C),
+                      fontSize: AppTextSize.heroMedium,
+                      height: 1.2,
+                      fontWeight: FontWeight.w800,
+                      letterSpacing: -0.75,
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    subtitle,
+                    style: theme.textTheme.bodyLarge?.copyWith(
+                      color: const Color(0xFF5A4136),
+                      fontSize: AppTextSize.body,
+                      fontWeight: FontWeight.w500,
+                    ),
+                  ),
+                ],
               ),
             ),
           ],
