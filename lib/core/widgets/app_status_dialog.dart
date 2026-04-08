@@ -1,5 +1,6 @@
 import 'package:alo_tho/app/theme/app_theme.dart';
 import 'package:alo_tho/core/constants/app_spacing.dart';
+import 'package:alo_tho/core/l10n/app_localizations.dart';
 import 'package:alo_tho/core/preview/app_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widget_previews.dart';
@@ -14,14 +15,13 @@ String appStatusDialogDefaultTitle(
   BuildContext context,
   AppStatusDialogState state,
 ) {
-  final languageCode = Localizations.localeOf(context).languageCode;
-  final isVietnamese = languageCode == 'vi';
+  final l10n = context.l10n;
 
   return switch (state) {
-    AppStatusDialogState.success => isVietnamese ? 'Thành công' : 'Success',
-    AppStatusDialogState.error => isVietnamese ? 'Lỗi' : 'Error',
-    AppStatusDialogState.confirm => isVietnamese ? 'Xác nhận' : 'Confirm',
-    AppStatusDialogState.alert => isVietnamese ? 'Thông báo' : 'Notice',
+    AppStatusDialogState.success => l10n.dialogTitleSuccess,
+    AppStatusDialogState.error => l10n.dialogTitleError,
+    AppStatusDialogState.confirm => l10n.dialogTitleConfirm,
+    AppStatusDialogState.alert => l10n.dialogTitleNotice,
   };
 }
 
@@ -235,16 +235,23 @@ class _DialogIconStyle {
   wrapper: appPreviewWrapper,
 )
 Widget previewAppStatusDialog() {
-  return const Scaffold(
-    backgroundColor: Color(0x14000000),
-    body: Center(
-      child: AppStatusDialog(
-        state: AppStatusDialogState.confirm,
-        title: 'Xác nhận thao tác',
-        message: 'Bạn có chắc muốn tiếp tục hành động này không?',
-        positiveText: 'Đồng ý',
-        negativeText: 'Hủy',
-      ),
-    ),
+  return Builder(
+    builder: (context) {
+      final l10n = context.l10n;
+      final materialLocalizations = MaterialLocalizations.of(context);
+
+      return Scaffold(
+        backgroundColor: const Color(0x14000000),
+        body: Center(
+          child: AppStatusDialog(
+            state: AppStatusDialogState.confirm,
+            title: l10n.dialogPreviewTitle,
+            message: l10n.dialogPreviewMessage,
+            positiveText: materialLocalizations.okButtonLabel,
+            negativeText: materialLocalizations.cancelButtonLabel,
+          ),
+        ),
+      );
+    },
   );
 }

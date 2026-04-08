@@ -100,6 +100,8 @@ class _BrandLockup extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = context.l10n;
+
     return FittedBox(
       fit: BoxFit.scaleDown,
       child: DecoratedBox(
@@ -120,7 +122,7 @@ class _BrandLockup extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,
             children: [
               Text(
-                'ALO THỢ',
+                l10n.appWordmark,
                 style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                   color: const Color(0xFFA04100),
                   fontSize: AppTextSize.heroLarge,

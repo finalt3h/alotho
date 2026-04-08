@@ -1,4 +1,5 @@
 import 'package:alo_tho/core/constants/app_spacing.dart';
+import 'package:alo_tho/core/l10n/app_localizations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widget_previews.dart';
 
@@ -6,15 +7,23 @@ import '../preview/app_preview.dart';
 
 @Preview(
   group: 'View',
-  name: 'Testtt',
+  name: 'App Empty State',
   size: phonePreviewSize,
   wrapper: appPreviewWrapper,
 )
-Widget previewWWWW() => const AppEmptyState(
-  title: 'tileee',
-  description: 'dit',
-  icon: Icons.one_x_mobiledata_rounded,
-);
+Widget previewAppEmptyState() {
+  return Builder(
+    builder: (context) {
+      final l10n = context.l10n;
+
+      return AppEmptyState(
+        title: l10n.emptyStatePreviewTitle,
+        description: l10n.emptyStatePreviewDescription,
+        icon: Icons.inbox_outlined,
+      );
+    },
+  );
+}
 
 class AppEmptyState extends StatelessWidget {
   const AppEmptyState({

@@ -13,6 +13,7 @@ class WorkerDetailSummaryCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
+    final displayName = l10n.workerDisplayName(worker.fullName);
 
     return AppSectionCard(
       child: Column(
@@ -21,7 +22,7 @@ class WorkerDetailSummaryCard extends StatelessWidget {
           Row(
             children: [
               AvatarView(
-                name: worker.fullName,
+                name: displayName,
                 avatarUrl: worker.avatarUrl,
                 radius: 34,
               ),
@@ -31,14 +32,14 @@ class WorkerDetailSummaryCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      worker.fullName,
+                      displayName,
                       style: Theme.of(context).textTheme.headlineSmall,
                     ),
                     const SizedBox(height: 4),
                     Text(l10n.workerProfession(worker.professionTitle)),
                     const SizedBox(height: 4),
                     Text(
-                      '${worker.area} • ${l10n.distanceLabel(worker.distanceInKm)}',
+                      '${l10n.areaName(worker.area)} • ${l10n.distanceLabel(worker.distanceInKm)}',
                     ),
                   ],
                 ),

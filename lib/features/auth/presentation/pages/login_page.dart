@@ -134,7 +134,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                     ),
                     const SizedBox(width: 8),
                     Text(
-                      'ALO THỢ',
+                      l10n.appWordmark,
                       style: theme.textTheme.titleLarge?.copyWith(
                         color: const Color(0xFFFF6B00),
                         fontWeight: FontWeight.w900,

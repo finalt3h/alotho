@@ -104,6 +104,12 @@ abstract class AppLocalizations {
   /// **'Alo Tho'**
   String get appTitle;
 
+  /// No description provided for @appWordmark.
+  ///
+  /// In vi, this message translates to:
+  /// **'ALO THỢ'**
+  String get appWordmark;
+
   /// No description provided for @splashTagline.
   ///
   /// In vi, this message translates to:
@@ -121,6 +127,42 @@ abstract class AppLocalizations {
   /// In vi, this message translates to:
   /// **'Premium Service Marketplace'**
   String get splashFooterLabel;
+
+  /// No description provided for @dialogTitleSuccess.
+  ///
+  /// In vi, this message translates to:
+  /// **'Thành công'**
+  String get dialogTitleSuccess;
+
+  /// No description provided for @dialogTitleError.
+  ///
+  /// In vi, this message translates to:
+  /// **'Lỗi'**
+  String get dialogTitleError;
+
+  /// No description provided for @dialogTitleConfirm.
+  ///
+  /// In vi, this message translates to:
+  /// **'Xác nhận'**
+  String get dialogTitleConfirm;
+
+  /// No description provided for @dialogTitleNotice.
+  ///
+  /// In vi, this message translates to:
+  /// **'Thông báo'**
+  String get dialogTitleNotice;
+
+  /// No description provided for @dialogPreviewTitle.
+  ///
+  /// In vi, this message translates to:
+  /// **'Xác nhận thao tác'**
+  String get dialogPreviewTitle;
+
+  /// No description provided for @dialogPreviewMessage.
+  ///
+  /// In vi, this message translates to:
+  /// **'Bạn có chắc muốn tiếp tục hành động này không?'**
+  String get dialogPreviewMessage;
 
   /// No description provided for @loginTitle.
   ///
@@ -932,6 +974,78 @@ abstract class AppLocalizations {
   /// **'Thử lại'**
   String get retry;
 
+  /// No description provided for @updateAction.
+  ///
+  /// In vi, this message translates to:
+  /// **'Cập nhật'**
+  String get updateAction;
+
+  /// No description provided for @understoodAction.
+  ///
+  /// In vi, this message translates to:
+  /// **'Đã hiểu'**
+  String get understoodAction;
+
+  /// No description provided for @updateUnavailableTitle.
+  ///
+  /// In vi, this message translates to:
+  /// **'Không thể cập nhật'**
+  String get updateUnavailableTitle;
+
+  /// No description provided for @updateLinkMissingMessage.
+  ///
+  /// In vi, this message translates to:
+  /// **'Chưa cấu hình đường dẫn cập nhật cho ứng dụng.'**
+  String get updateLinkMissingMessage;
+
+  /// No description provided for @updateLinkOpenFailedMessage.
+  ///
+  /// In vi, this message translates to:
+  /// **'Không thể mở liên kết cập nhật. Vui lòng thử lại sau.'**
+  String get updateLinkOpenFailedMessage;
+
+  /// No description provided for @mainShellPreviewTitle.
+  ///
+  /// In vi, this message translates to:
+  /// **'Tìm thợ gần đây'**
+  String get mainShellPreviewTitle;
+
+  /// No description provided for @mainShellPreviewDescription.
+  ///
+  /// In vi, this message translates to:
+  /// **'Bản xem trước này dùng để kiểm tra nhanh khung điều hướng chính và thanh điều hướng dưới.'**
+  String get mainShellPreviewDescription;
+
+  /// No description provided for @mainShellPreviewBody.
+  ///
+  /// In vi, this message translates to:
+  /// **'Nội dung từng tab sẽ hiển thị tại đây khi ứng dụng chạy qua GoRouter.'**
+  String get mainShellPreviewBody;
+
+  /// No description provided for @emptyStatePreviewTitle.
+  ///
+  /// In vi, this message translates to:
+  /// **'Chưa có dữ liệu'**
+  String get emptyStatePreviewTitle;
+
+  /// No description provided for @emptyStatePreviewDescription.
+  ///
+  /// In vi, this message translates to:
+  /// **'Nội dung sẽ hiển thị ở đây khi chưa có kết quả phù hợp.'**
+  String get emptyStatePreviewDescription;
+
+  /// No description provided for @simplePreviewText.
+  ///
+  /// In vi, this message translates to:
+  /// **'Bản xem trước đơn giản'**
+  String get simplePreviewText;
+
+  /// No description provided for @commonViewPreviewTitle.
+  ///
+  /// In vi, this message translates to:
+  /// **'Nội dung mẫu'**
+  String get commonViewPreviewTitle;
+
   /// No description provided for @categoryElectrical.
   ///
   /// In vi, this message translates to:
@@ -1196,6 +1310,42 @@ abstract class AppLocalizations {
   /// **'Chiều nay em có slot 16:30, mình xác nhận để em mang đúng linh kiện.'**
   String get chatMessageSlot1630;
 
+  /// No description provided for @failureLoadGlobalConfig.
+  ///
+  /// In vi, this message translates to:
+  /// **'Không thể tải cấu hình ứng dụng lúc này.'**
+  String get failureLoadGlobalConfig;
+
+  /// No description provided for @failureLoginUnavailable.
+  ///
+  /// In vi, this message translates to:
+  /// **'Đăng nhập không thành công. Vui lòng thử lại.'**
+  String get failureLoginUnavailable;
+
+  /// No description provided for @failureInvalidLoginCredentials.
+  ///
+  /// In vi, this message translates to:
+  /// **'Thông tin đăng nhập không chính xác.'**
+  String get failureInvalidLoginCredentials;
+
+  /// No description provided for @failureGoogleNotImplemented.
+  ///
+  /// In vi, this message translates to:
+  /// **'Đăng nhập Google chưa khả dụng.'**
+  String get failureGoogleNotImplemented;
+
+  /// No description provided for @failureGoogleLoginTimeout.
+  ///
+  /// In vi, this message translates to:
+  /// **'Đăng nhập Google đã hết thời gian. Vui lòng thử lại.'**
+  String get failureGoogleLoginTimeout;
+
+  /// No description provided for @failureGoogleLoginScreenUnavailable.
+  ///
+  /// In vi, this message translates to:
+  /// **'Không mở được màn hình đăng nhập Google.'**
+  String get failureGoogleLoginScreenUnavailable;
+
   /// No description provided for @failureGoogleUnavailable.
   ///
   /// In vi, this message translates to:
@@ -1447,6 +1597,36 @@ abstract class AppLocalizations {
   /// In vi, this message translates to:
   /// **'Không thể hiển thị chi tiết thợ lúc này.'**
   String get workerDetailUnavailableMessage;
+
+  /// No description provided for @globalConfigForceUpdateTitle.
+  ///
+  /// In vi, this message translates to:
+  /// **'Cần cập nhật ứng dụng'**
+  String get globalConfigForceUpdateTitle;
+
+  /// No description provided for @globalConfigRecommendedUpdateTitle.
+  ///
+  /// In vi, this message translates to:
+  /// **'Đã có phiên bản mới'**
+  String get globalConfigRecommendedUpdateTitle;
+
+  /// No description provided for @globalConfigForceUpdateMessage.
+  ///
+  /// In vi, this message translates to:
+  /// **'Phiên bản hiện tại đã quá cũ. Vui lòng cập nhật ứng dụng để tiếp tục sử dụng.'**
+  String get globalConfigForceUpdateMessage;
+
+  /// No description provided for @globalConfigRecommendedUpdateMessage.
+  ///
+  /// In vi, this message translates to:
+  /// **'Đã có phiên bản mới của ứng dụng. Bạn nên cập nhật để có trải nghiệm tốt hơn.'**
+  String get globalConfigRecommendedUpdateMessage;
+
+  /// No description provided for @globalConfigImportantNoticeTitle.
+  ///
+  /// In vi, this message translates to:
+  /// **'Thông báo quan trọng'**
+  String get globalConfigImportantNoticeTitle;
 
   /// No description provided for @workerDetailServiceElectricalRepair.
   ///

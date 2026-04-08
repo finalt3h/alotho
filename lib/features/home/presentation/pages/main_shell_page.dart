@@ -22,15 +22,19 @@ class _MainShellPreviewBody extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final l10n = context.l10n;
 
     return SafeArea(
       child: ListView(
         padding: const EdgeInsets.all(24),
         children: [
-          Text('Tim tho gan day', style: theme.textTheme.headlineSmall),
+          Text(
+            l10n.mainShellPreviewTitle,
+            style: theme.textTheme.headlineSmall,
+          ),
           const SizedBox(height: 12),
           Text(
-            'Preview nay dung de xem nhanh khung dieu huong chinh va thanh bottom navigation.',
+            l10n.mainShellPreviewDescription,
             style: theme.textTheme.bodyLarge,
           ),
           const SizedBox(height: 24),
@@ -38,7 +42,7 @@ class _MainShellPreviewBody extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.all(20),
               child: Text(
-                'Noi dung tab se duoc render tai day khi app chay qua GoRouter.',
+                l10n.mainShellPreviewBody,
                 style: theme.textTheme.bodyMedium,
               ),
             ),
@@ -48,6 +52,7 @@ class _MainShellPreviewBody extends StatelessWidget {
     );
   }
 }
+
 class MainShellPage extends StatelessWidget {
   const MainShellPage({required this.navigationShell, super.key});
 
@@ -112,4 +117,3 @@ class MainShellScaffold extends StatelessWidget {
     );
   }
 }
-

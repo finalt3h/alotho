@@ -15,6 +15,7 @@ class ChatPreviewCard extends StatelessWidget {
     final timeLabel = DateFormat('HH:mm • dd/MM').format(preview.updatedAt);
     final theme = Theme.of(context);
     final l10n = context.l10n;
+    final displayName = l10n.workerDisplayName(preview.workerName);
 
     return Card(
       child: Container(
@@ -34,11 +35,11 @@ class ChatPreviewCard extends StatelessWidget {
         child: ListTile(
           contentPadding: const EdgeInsets.all(AppSpacing.md),
           leading: AvatarView(
-            name: preview.workerName,
+            name: displayName,
             avatarUrl: preview.workerAvatarUrl,
           ),
           title: Text(
-            preview.workerName,
+            displayName,
             style: theme.textTheme.titleMedium?.copyWith(
               fontWeight: FontWeight.w700,
             ),

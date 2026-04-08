@@ -12,6 +12,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get appTitle => 'Alo Tho';
 
   @override
+  String get appWordmark => 'ALO THO';
+
+  @override
   String get splashTagline => 'Fast worker connection';
 
   @override
@@ -19,6 +22,25 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get splashFooterLabel => 'Premium Service Marketplace';
+
+  @override
+  String get dialogTitleSuccess => 'Success';
+
+  @override
+  String get dialogTitleError => 'Error';
+
+  @override
+  String get dialogTitleConfirm => 'Confirm';
+
+  @override
+  String get dialogTitleNotice => 'Notice';
+
+  @override
+  String get dialogPreviewTitle => 'Confirm action';
+
+  @override
+  String get dialogPreviewMessage =>
+      'Are you sure you want to continue with this action?';
 
   @override
   String get loginTitle => 'Welcome back';
@@ -476,6 +498,47 @@ class AppLocalizationsEn extends AppLocalizations {
   String get retry => 'Retry';
 
   @override
+  String get updateAction => 'Update';
+
+  @override
+  String get understoodAction => 'Understood';
+
+  @override
+  String get updateUnavailableTitle => 'Unable to update';
+
+  @override
+  String get updateLinkMissingMessage =>
+      'No update link is configured for this app.';
+
+  @override
+  String get updateLinkOpenFailedMessage =>
+      'Unable to open the update link. Please try again later.';
+
+  @override
+  String get mainShellPreviewTitle => 'Nearby workers';
+
+  @override
+  String get mainShellPreviewDescription =>
+      'This preview is used to quickly inspect the main navigation shell and bottom navigation bar.';
+
+  @override
+  String get mainShellPreviewBody =>
+      'Each tab\'s content will render here when the app runs through GoRouter.';
+
+  @override
+  String get emptyStatePreviewTitle => 'No data yet';
+
+  @override
+  String get emptyStatePreviewDescription =>
+      'Content will appear here when there are no matching results.';
+
+  @override
+  String get simplePreviewText => 'Simple preview';
+
+  @override
+  String get commonViewPreviewTitle => 'Sample content';
+
+  @override
   String get categoryElectrical => 'Electrical';
 
   @override
@@ -626,6 +689,29 @@ class AppLocalizationsEn extends AppLocalizations {
       'I have a 4:30 PM slot this afternoon. Please confirm so I can bring the right parts.';
 
   @override
+  String get failureLoadGlobalConfig =>
+      'Unable to load app configuration right now.';
+
+  @override
+  String get failureLoginUnavailable => 'Sign-in failed. Please try again.';
+
+  @override
+  String get failureInvalidLoginCredentials =>
+      'The login details are incorrect.';
+
+  @override
+  String get failureGoogleNotImplemented =>
+      'Google sign-in is not available yet.';
+
+  @override
+  String get failureGoogleLoginTimeout =>
+      'Google sign-in timed out. Please try again.';
+
+  @override
+  String get failureGoogleLoginScreenUnavailable =>
+      'Unable to open the Google sign-in screen.';
+
+  @override
   String get failureGoogleUnavailable =>
       'Google sign-in is unavailable right now.';
 
@@ -762,6 +848,23 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get workerDetailUnavailableMessage =>
       'Unable to show worker details right now.';
+
+  @override
+  String get globalConfigForceUpdateTitle => 'App update required';
+
+  @override
+  String get globalConfigRecommendedUpdateTitle => 'A new version is available';
+
+  @override
+  String get globalConfigForceUpdateMessage =>
+      'Your current version is too old. Please update the app to continue using it.';
+
+  @override
+  String get globalConfigRecommendedUpdateMessage =>
+      'A new version of the app is available. Updating is recommended for a better experience.';
+
+  @override
+  String get globalConfigImportantNoticeTitle => 'Important notice';
 
   @override
   String get workerDetailServiceElectricalRepair => 'Electrical repair';

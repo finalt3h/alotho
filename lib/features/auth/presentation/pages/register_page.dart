@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:alo_tho/app/app_routes.dart';
 import 'package:alo_tho/core/constants/app_spacing.dart';
 import 'package:alo_tho/core/l10n/app_localizations.dart';
@@ -75,7 +73,7 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
           ),
         ),
         title: Text(
-          'ALO THỢ',
+          l10n.appWordmark,
           style: theme.textTheme.titleMedium?.copyWith(
             color: const Color(0xFFFF6B00),
             fontWeight: FontWeight.w900,
@@ -299,45 +297,6 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
             ),
           ),
         ],
-      ),
-    );
-  }
-}
-
-class _DecorativeOrb extends StatelessWidget {
-  const _DecorativeOrb({required this.size, required this.colors});
-
-  final double size;
-  final List<Color> colors;
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: size,
-      height: size,
-      decoration: BoxDecoration(
-        shape: BoxShape.circle,
-        gradient: RadialGradient(
-          colors: [
-            colors.first,
-            colors.first.withValues(alpha: 0.78),
-            colors.last,
-            Colors.white.withValues(alpha: 0),
-          ],
-          stops: const [0.0, 0.36, 0.7, 1.0],
-        ),
-      ),
-      child: BackdropFilter(
-        filter: ImageFilter.blur(sigmaX: 1.5, sigmaY: 1.5),
-        child: DecoratedBox(
-          decoration: BoxDecoration(
-            shape: BoxShape.circle,
-            border: Border.all(
-              color: Colors.white.withValues(alpha: 0.55),
-              width: 18,
-            ),
-          ),
-        ),
       ),
     );
   }

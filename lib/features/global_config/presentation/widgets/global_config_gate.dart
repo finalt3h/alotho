@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:alo_tho/core/l10n/app_localizations.dart';
 import 'package:alo_tho/core/widgets/app_status_dialog.dart';
 import 'package:alo_tho/features/global_config/domain/entities/global_config.dart';
 import 'package:alo_tho/features/global_config/presentation/viewmodels/global_config_controller.dart';
@@ -94,6 +95,7 @@ class _GlobalConfigGateState extends ConsumerState<GlobalConfigGate>
       return;
     }
 
+    final l10n = context.l10n;
     _isShowingBlockingDialog = true;
 
     await showDialog<void>(
@@ -104,9 +106,9 @@ class _GlobalConfigGateState extends ConsumerState<GlobalConfigGate>
           canPop: false,
           child: AppStatusDialog(
             state: AppStatusDialogState.alert,
-            title: config.resolvedUpdateTitle,
-            message: config.resolvedUpdateMessage,
-            positiveText: 'Cap nhat',
+            title: _resolvedUpdateTitle(l10n, config),
+            message: _resolvedUpdateMessage(l10n, config),
+            positiveText: l10n.updateAction,
             onPositivePressed: () {
               unawaited(
                 _openUpdateLink(
@@ -129,15 +131,16 @@ class _GlobalConfigGateState extends ConsumerState<GlobalConfigGate>
       return;
     }
 
+    final l10n = context.l10n;
     _isShowingDialog = true;
 
     await showAppStatusDialog(
       context: context,
       state: AppStatusDialogState.alert,
-      title: config.resolvedNoticeTitle,
+      title: _resolvedNoticeTitle(l10n, config),
       message: config.noticeMessage!.trim(),
       barrierDismissible: !config.isNoticeBlocking,
-      positiveText: 'Da hieu',
+      positiveText: l10n.understoodAction,
     );
 
     _isShowingDialog = false;
@@ -148,15 +151,16 @@ class _GlobalConfigGateState extends ConsumerState<GlobalConfigGate>
       return;
     }
 
+    final l10n = context.l10n;
     _isShowingDialog = true;
 
     await showAppStatusDialog(
       context: context,
       state: AppStatusDialogState.alert,
-      title: config.resolvedUpdateTitle,
-      message: config.resolvedUpdateMessage,
+      title: _resolvedUpdateTitle(l10n, config),
+      message: _resolvedUpdateMessage(l10n, config),
       barrierDismissible: true,
-      positiveText: 'Cap nhat',
+      positiveText: l10n.updateAction,
       onPositivePressed: () {
         unawaited(_openUpdateLink(config.storeUrl, context));
       },
@@ -171,6 +175,8 @@ class _GlobalConfigGateState extends ConsumerState<GlobalConfigGate>
     bool shouldCloseCurrentDialog = false,
   }) async {
     final trimmedUrl = url?.trim();
+    final l10n = context.l10n;
+
     if (trimmedUrl == null || trimmedUrl.isEmpty) {
       if (!mounted) {
         return;
@@ -182,8 +188,8 @@ class _GlobalConfigGateState extends ConsumerState<GlobalConfigGate>
       await showAppStatusDialog(
         context: context,
         state: AppStatusDialogState.error,
-        title: 'Khong the cap nhat',
-        message: 'Chua cau hinh duong dan cap nhat cho ung dung.',
+        title: l10n.updateUnavailableTitle,
+        message: l10n.updateLinkMissingMessage,
       );
       return;
     }
@@ -201,9 +207,40 @@ class _GlobalConfigGateState extends ConsumerState<GlobalConfigGate>
       await showAppStatusDialog(
         context: context,
         state: AppStatusDialogState.error,
-        title: 'Khong the cap nhat',
-        message: 'Khong the mo lien ket cap nhat. Vui long thu lai sau.',
+        title: l10n.updateUnavailableTitle,
+        message: l10n.updateLinkOpenFailedMessage,
       );
     }
+  }
+
+  String _resolvedUpdateTitle(AppLocalizations l10n, GlobalConfig config) {
+    final title = config.updateTitle?.trim();
+    if (title != null && title.isNotEmpty) {
+      return title;
+    }
+
+    return config.requiresForceUpdate
+        ? l10n.globalConfigForceUpdateTitle
+        : l10n.globalConfigRecommendedUpdateTitle;
+  }
+
+  String _resolvedUpdateMessage(AppLocalizations l10n, GlobalConfig config) {
+    final message = config.updateMessage?.trim();
+    if (message != null && message.isNotEmpty) {
+      return message;
+    }
+
+    return config.requiresForceUpdate
+        ? l10n.globalConfigForceUpdateMessage
+        : l10n.globalConfigRecommendedUpdateMessage;
+  }
+
+  String _resolvedNoticeTitle(AppLocalizations l10n, GlobalConfig config) {
+    final title = config.noticeTitle?.trim();
+    if (title != null && title.isNotEmpty) {
+      return title;
+    }
+
+    return l10n.globalConfigImportantNoticeTitle;
   }
 }

@@ -15,6 +15,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/widget_previews.dart';
 import 'package:go_router/go_router.dart';
+
 @Preview(
   group: 'Screens',
   name: 'Worker Search Page',
@@ -22,6 +23,7 @@ import 'package:go_router/go_router.dart';
   wrapper: appPreviewWrapper,
 )
 Widget previewWorkerSearchPage() => const WorkerSearchPage();
+
 class WorkerSearchPage extends ConsumerWidget {
   const WorkerSearchPage({super.key});
 
@@ -78,7 +80,7 @@ class WorkerSearchPage extends ConsumerWidget {
                 children: [
                   for (final area in state.suggestedAreas)
                     Chip(
-                      label: Text(area),
+                      label: Text(l10n.areaName(area)),
                       avatar: const Icon(Icons.location_on_outlined, size: 18),
                     ),
                 ],
@@ -129,5 +131,3 @@ class WorkerSearchPage extends ConsumerWidget {
     );
   }
 }
-
-

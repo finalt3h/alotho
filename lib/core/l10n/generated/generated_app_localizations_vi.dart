@@ -12,6 +12,9 @@ class AppLocalizationsVi extends AppLocalizations {
   String get appTitle => 'Alo Tho';
 
   @override
+  String get appWordmark => 'ALO THỢ';
+
+  @override
   String get splashTagline => 'Kết nối thợ nhanh chóng';
 
   @override
@@ -19,6 +22,25 @@ class AppLocalizationsVi extends AppLocalizations {
 
   @override
   String get splashFooterLabel => 'Premium Service Marketplace';
+
+  @override
+  String get dialogTitleSuccess => 'Thành công';
+
+  @override
+  String get dialogTitleError => 'Lỗi';
+
+  @override
+  String get dialogTitleConfirm => 'Xác nhận';
+
+  @override
+  String get dialogTitleNotice => 'Thông báo';
+
+  @override
+  String get dialogPreviewTitle => 'Xác nhận thao tác';
+
+  @override
+  String get dialogPreviewMessage =>
+      'Bạn có chắc muốn tiếp tục hành động này không?';
 
   @override
   String get loginTitle => 'Chào mừng trở lại';
@@ -473,6 +495,47 @@ class AppLocalizationsVi extends AppLocalizations {
   String get retry => 'Thử lại';
 
   @override
+  String get updateAction => 'Cập nhật';
+
+  @override
+  String get understoodAction => 'Đã hiểu';
+
+  @override
+  String get updateUnavailableTitle => 'Không thể cập nhật';
+
+  @override
+  String get updateLinkMissingMessage =>
+      'Chưa cấu hình đường dẫn cập nhật cho ứng dụng.';
+
+  @override
+  String get updateLinkOpenFailedMessage =>
+      'Không thể mở liên kết cập nhật. Vui lòng thử lại sau.';
+
+  @override
+  String get mainShellPreviewTitle => 'Tìm thợ gần đây';
+
+  @override
+  String get mainShellPreviewDescription =>
+      'Bản xem trước này dùng để kiểm tra nhanh khung điều hướng chính và thanh điều hướng dưới.';
+
+  @override
+  String get mainShellPreviewBody =>
+      'Nội dung từng tab sẽ hiển thị tại đây khi ứng dụng chạy qua GoRouter.';
+
+  @override
+  String get emptyStatePreviewTitle => 'Chưa có dữ liệu';
+
+  @override
+  String get emptyStatePreviewDescription =>
+      'Nội dung sẽ hiển thị ở đây khi chưa có kết quả phù hợp.';
+
+  @override
+  String get simplePreviewText => 'Bản xem trước đơn giản';
+
+  @override
+  String get commonViewPreviewTitle => 'Nội dung mẫu';
+
+  @override
   String get categoryElectrical => 'Điện';
 
   @override
@@ -622,6 +685,29 @@ class AppLocalizationsVi extends AppLocalizations {
       'Chiều nay em có slot 16:30, mình xác nhận để em mang đúng linh kiện.';
 
   @override
+  String get failureLoadGlobalConfig =>
+      'Không thể tải cấu hình ứng dụng lúc này.';
+
+  @override
+  String get failureLoginUnavailable =>
+      'Đăng nhập không thành công. Vui lòng thử lại.';
+
+  @override
+  String get failureInvalidLoginCredentials =>
+      'Thông tin đăng nhập không chính xác.';
+
+  @override
+  String get failureGoogleNotImplemented => 'Đăng nhập Google chưa khả dụng.';
+
+  @override
+  String get failureGoogleLoginTimeout =>
+      'Đăng nhập Google đã hết thời gian. Vui lòng thử lại.';
+
+  @override
+  String get failureGoogleLoginScreenUnavailable =>
+      'Không mở được màn hình đăng nhập Google.';
+
+  @override
   String get failureGoogleUnavailable =>
       'Không thể đăng nhập với Google lúc này.';
 
@@ -758,6 +844,23 @@ class AppLocalizationsVi extends AppLocalizations {
   @override
   String get workerDetailUnavailableMessage =>
       'Không thể hiển thị chi tiết thợ lúc này.';
+
+  @override
+  String get globalConfigForceUpdateTitle => 'Cần cập nhật ứng dụng';
+
+  @override
+  String get globalConfigRecommendedUpdateTitle => 'Đã có phiên bản mới';
+
+  @override
+  String get globalConfigForceUpdateMessage =>
+      'Phiên bản hiện tại đã quá cũ. Vui lòng cập nhật ứng dụng để tiếp tục sử dụng.';
+
+  @override
+  String get globalConfigRecommendedUpdateMessage =>
+      'Đã có phiên bản mới của ứng dụng. Bạn nên cập nhật để có trải nghiệm tốt hơn.';
+
+  @override
+  String get globalConfigImportantNoticeTitle => 'Thông báo quan trọng';
 
   @override
   String get workerDetailServiceElectricalRepair => 'Sửa điện';

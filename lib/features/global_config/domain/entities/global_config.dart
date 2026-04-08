@@ -56,39 +56,6 @@ class GlobalConfig {
     return isNoticeEnabled && (noticeMessage?.trim().isNotEmpty ?? false);
   }
 
-  String get resolvedUpdateTitle {
-    final title = updateTitle?.trim();
-    if (title != null && title.isNotEmpty) {
-      return title;
-    }
-
-    return requiresForceUpdate
-        ? 'Can cap nhat ung dung'
-        : 'Da co phien ban moi';
-  }
-
-  String get resolvedUpdateMessage {
-    final message = updateMessage?.trim();
-    if (message != null && message.isNotEmpty) {
-      return message;
-    }
-
-    if (requiresForceUpdate) {
-      return 'Phien ban hien tai da qua cu. Vui long cap nhat ung dung de tiep tuc su dung.';
-    }
-
-    return 'Da co phien ban moi cua ung dung. Ban nen cap nhat de co trai nghiem tot hon.';
-  }
-
-  String get resolvedNoticeTitle {
-    final title = noticeTitle?.trim();
-    if (title != null && title.isNotEmpty) {
-      return title;
-    }
-
-    return 'Thong bao quan trong';
-  }
-
   String get updatePresentationKey {
     return [
       appVersionInfo.fullVersion,

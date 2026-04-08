@@ -1,4 +1,6 @@
 import 'package:alo_tho/core/constants/app_spacing.dart';
+import 'package:alo_tho/core/l10n/app_localizations.dart';
+import 'package:alo_tho/core/preview/app_preview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widget_previews.dart';
 
@@ -20,12 +22,14 @@ class CommonView extends StatelessWidget {
   }
 }
 
-@Preview(name: 'CommonView Default')
+@Preview(name: 'CommonView Default', wrapper: appPreviewWrapper)
 Widget previewCommonView() {
-  return MaterialApp(
-    home: Scaffold(
+  return Builder(
+    builder: (context) => Scaffold(
       backgroundColor: Colors.grey.shade200,
-      body: const Center(child: CommonView(title: 'Demo common view')),
+      body: Center(
+        child: CommonView(title: context.l10n.commonViewPreviewTitle),
+      ),
     ),
   );
 }

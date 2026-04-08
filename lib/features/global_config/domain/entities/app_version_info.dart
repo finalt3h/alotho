@@ -1,3 +1,5 @@
+import '../../../../core/l10n/app_localizations.dart';
+
 class AppVersionInfo {
   const AppVersionInfo({required this.version, required this.buildNumber});
 
@@ -8,7 +10,6 @@ class AppVersionInfo {
     if (buildNumber.trim().isEmpty) {
       return version;
     }
-
     return '$version+$buildNumber';
   }
 }

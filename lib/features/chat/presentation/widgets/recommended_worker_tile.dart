@@ -18,6 +18,7 @@ class RecommendedWorkerTile extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final l10n = context.l10n;
+    final displayName = l10n.workerDisplayName(worker.fullName);
 
     return Card(
       child: Padding(
@@ -25,14 +26,14 @@ class RecommendedWorkerTile extends StatelessWidget {
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            AvatarView(name: worker.fullName, avatarUrl: worker.avatarUrl),
+            AvatarView(name: displayName, avatarUrl: worker.avatarUrl),
             const SizedBox(width: AppSpacing.md),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    worker.fullName,
+                    displayName,
                     style: theme.textTheme.titleMedium?.copyWith(
                       fontWeight: FontWeight.w700,
                     ),

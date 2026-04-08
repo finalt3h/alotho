@@ -18,6 +18,7 @@ class WorkerCard extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final l10n = context.l10n;
+    final displayName = l10n.workerDisplayName(worker.fullName);
 
     return Card(
       child: Padding(
@@ -28,14 +29,14 @@ class WorkerCard extends StatelessWidget {
             Row(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                AvatarView(name: worker.fullName, avatarUrl: worker.avatarUrl),
+                AvatarView(name: displayName, avatarUrl: worker.avatarUrl),
                 const SizedBox(width: AppSpacing.md),
                 Expanded(
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        worker.fullName,
+                        displayName,
                         style: theme.textTheme.titleMedium?.copyWith(
                           fontWeight: FontWeight.w700,
                         ),
@@ -44,7 +45,7 @@ class WorkerCard extends StatelessWidget {
                       Text(
                         l10n.ageAndProfession(
                           worker.age,
-                          worker.professionTitle,
+                          l10n.workerProfession(worker.professionTitle),
                         ),
                         style: theme.textTheme.bodyMedium?.copyWith(
                           color: theme.colorScheme.onSurfaceVariant,
@@ -73,7 +74,10 @@ class WorkerCard extends StatelessWidget {
               spacing: AppSpacing.sm,
               runSpacing: AppSpacing.sm,
               children: [
-                _InfoChip(label: worker.area, icon: Icons.place_outlined),
+                _InfoChip(
+                  label: l10n.areaName(worker.area),
+                  icon: Icons.place_outlined,
+                ),
                 _InfoChip(
                   label: l10n.yearsExperienceShort(worker.yearsOfExperience),
                   icon: Icons.workspace_premium_outlined,

@@ -123,6 +123,7 @@ extension AppLocalizationsHelpers on AppLocalizations {
       'Ho ten chua hop le.' => invalidFullName,
       'Mat khau chua hop le.' => invalidPassword,
       'Mat khau xac nhan khong khop.' => confirmPasswordMismatch,
+      'Tao tai khoan khong thanh cong.' => failureRegisterUnavailable,
       'Tai khoan chua kich hoat. Vui long nhap OTP de kich hoat.' =>
         activationOtpRequired,
       'Ma OTP chua hop le.' => invalidOtp,
@@ -132,9 +133,19 @@ extension AppLocalizationsHelpers on AppLocalizations {
       'Da gui lai ma OTP.' => resendOtpSuccess,
       'Khong the tao tai khoan luc nay.' => failureRegisterUnavailable,
       'Tai khoan da ton tai.' => failureAccountAlreadyExists,
+      'Dang nhap khong thanh cong.' => failureLoginUnavailable,
+      'Dang nhap khong thanh cong. Vui long thu lai.' =>
+        failureLoginUnavailable,
+      'Thong tin dang nhap khong chinh xac.' => failureInvalidLoginCredentials,
+      'Dang nhap Google chua kha dung.' => failureGoogleNotImplemented,
+      'Dang nhap Google het thoi gian. Vui long thu lai.' =>
+        failureGoogleLoginTimeout,
+      'Khong mo duoc man hinh dang nhap Google.' =>
+        failureGoogleLoginScreenUnavailable,
       'Khong the dang nhap voi Google luc nay.' => failureGoogleUnavailable,
       'Khong the dang nhap bang so dien thoai hoac email.' =>
         failureCredentialsUnavailable,
+      'Khong the tai cau hinh ung dung luc nay.' => failureLoadGlobalConfig,
       'Khong tai duoc danh muc dich vu.' => failureLoadCategories,
       'Khong tai duoc danh sach tho.' => failureLoadWorkers,
       'Khong tim thay thong tin tho.' => failureLoadWorkerDetails,

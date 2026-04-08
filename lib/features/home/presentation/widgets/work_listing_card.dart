@@ -49,7 +49,7 @@ class WorkListingCard extends StatelessWidget {
             ),
             const SizedBox(height: AppSpacing.sm),
             Text(
-              '${l10n.categoryName(listing.categoryName)} • ${listing.area}',
+              '${l10n.categoryName(listing.categoryName)} • ${l10n.areaName(listing.area)}',
               style: theme.textTheme.bodyMedium?.copyWith(
                 color: theme.colorScheme.onSurfaceVariant,
               ),
