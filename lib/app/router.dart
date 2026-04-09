@@ -77,21 +77,22 @@ final routerProvider = Provider<GoRouter>((ref) {
           StatefulShellBranch(
             routes: [
               GoRoute(
-                path: AppRoutes.messagesPath,
-                name: AppRoutes.messagesName,
-                builder: (context, state) => const MessageListPage(),
-              ),
-            ],
-          ),
-          StatefulShellBranch(
-            routes: [
-              GoRoute(
                 path: AppRoutes.myWorkPath,
                 name: AppRoutes.myWorkName,
                 builder: (context, state) => const MyWorkPage(),
               ),
             ],
           ),
+          StatefulShellBranch(
+            routes: [
+              GoRoute(
+                path: AppRoutes.messagesPath,
+                name: AppRoutes.messagesName,
+                builder: (context, state) => const MessageListPage(),
+              ),
+            ],
+          ),
+
           StatefulShellBranch(
             routes: [
               GoRoute(

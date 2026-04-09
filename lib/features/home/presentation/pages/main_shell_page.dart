@@ -101,12 +101,12 @@ class MainShellScaffold extends StatelessWidget {
             label: l10n.workerSearchNav,
           ),
           NavigationDestination(
-            icon: const Icon(Icons.forum_outlined),
-            label: l10n.messagesNav,
-          ),
-          NavigationDestination(
             icon: const Icon(Icons.work_history_outlined),
             label: l10n.myWorkNav,
+          ),
+          NavigationDestination(
+            icon: const Icon(Icons.forum_outlined),
+            label: l10n.messagesNav,
           ),
           NavigationDestination(
             icon: const Icon(Icons.person_outline_rounded),

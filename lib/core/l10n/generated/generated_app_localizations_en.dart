@@ -306,6 +306,63 @@ class AppLocalizationsEn extends AppLocalizations {
   String get workerListTitle => 'Available workers';
 
   @override
+  String get workerSearchGreetingMorning => 'Good morning,';
+
+  @override
+  String get workerSearchGreetingGuestName => 'there';
+
+  @override
+  String get workerSearchCurrentCity => 'Ha Noi';
+
+  @override
+  String get workerSearchPromoEyebrow => 'QUALITY ASSURED';
+
+  @override
+  String get workerSearchPromoTitleLineOne => 'Trusted workers,';
+
+  @override
+  String get workerSearchPromoTitleLineTwo => 'Transparent pricing';
+
+  @override
+  String get workerSearchPromoButton => 'Book now';
+
+  @override
+  String get workerSearchPopularServicesTitle => 'Popular services';
+
+  @override
+  String get workerSearchUrgentTitle => 'Need help urgently?';
+
+  @override
+  String get workerSearchUrgentSubtitle =>
+      'A worker can arrive within 30 minutes';
+
+  @override
+  String get workerSearchUrgentAction => 'Call now';
+
+  @override
+  String get workerSearchNearbyTitle => 'Workers near you';
+
+  @override
+  String get workerSearchEstimateFrom => 'Estimated from';
+
+  @override
+  String get workerSearchAvailableNow => 'Available';
+
+  @override
+  String get workerSearchBusyNow => 'Busy';
+
+  @override
+  String get workerSearchActionContact => 'Contact';
+
+  @override
+  String get workerSearchActionBookAhead => 'Book ahead';
+
+  @override
+  String workerSearchSpecialty(Object specialty) {
+    return 'Specialty: $specialty';
+  }
+
+  @override
   String matchingResults(int count) {
     return '$count matching results';
   }

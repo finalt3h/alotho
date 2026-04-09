@@ -93,6 +93,29 @@
   "serviceCategoriesTitle": "Danh mục dịch vụ",
   "suggestedAreasTitle": "Khu vực gợi ý",
   "workerListTitle": "Danh sách thợ",
+  "workerSearchGreetingMorning": "Chào buổi sáng,",
+  "workerSearchGreetingGuestName": "Bạn",
+  "workerSearchCurrentCity": "Hà Nội",
+  "workerSearchPromoEyebrow": "Cam kết chất lượng",
+  "workerSearchPromoTitleLineOne": "Thợ uy tín,",
+  "workerSearchPromoTitleLineTwo": "Giá minh bạch",
+  "workerSearchPromoButton": "Đặt lịch ngay",
+  "workerSearchPopularServicesTitle": "Dịch vụ phổ biến",
+  "workerSearchUrgentTitle": "Cần thợ gấp?",
+  "workerSearchUrgentSubtitle": "Thợ sẽ có mặt trong vòng 30 phút",
+  "workerSearchUrgentAction": "Gọi ngay",
+  "workerSearchNearbyTitle": "Thợ gần bạn",
+  "workerSearchEstimateFrom": "Ước tính từ",
+  "workerSearchAvailableNow": "Đang rảnh",
+  "workerSearchBusyNow": "Đang bận",
+  "workerSearchActionContact": "Liên hệ",
+  "workerSearchActionBookAhead": "Đặt trước",
+  "workerSearchSpecialty": "Chuyên: {specialty}",
+  "@workerSearchSpecialty": {
+    "placeholders": {
+      "specialty": {}
+    }
+  },
   "matchingResults": "{count} kết quả phù hợp",
   "@matchingResults": {
     "placeholders": {

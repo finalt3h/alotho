@@ -304,6 +304,62 @@ class AppLocalizationsVi extends AppLocalizations {
   String get workerListTitle => 'Danh sách thợ';
 
   @override
+  String get workerSearchGreetingMorning => 'Chào buổi sáng,';
+
+  @override
+  String get workerSearchGreetingGuestName => 'Bạn';
+
+  @override
+  String get workerSearchCurrentCity => 'Hà Nội';
+
+  @override
+  String get workerSearchPromoEyebrow => 'Cam kết chất lượng';
+
+  @override
+  String get workerSearchPromoTitleLineOne => 'Thợ uy tín,';
+
+  @override
+  String get workerSearchPromoTitleLineTwo => 'Giá minh bạch';
+
+  @override
+  String get workerSearchPromoButton => 'Đặt lịch ngay';
+
+  @override
+  String get workerSearchPopularServicesTitle => 'Dịch vụ phổ biến';
+
+  @override
+  String get workerSearchUrgentTitle => 'Cần thợ gấp?';
+
+  @override
+  String get workerSearchUrgentSubtitle => 'Thợ sẽ có mặt trong vòng 30 phút';
+
+  @override
+  String get workerSearchUrgentAction => 'Gọi ngay';
+
+  @override
+  String get workerSearchNearbyTitle => 'Thợ gần bạn';
+
+  @override
+  String get workerSearchEstimateFrom => 'Ước tính từ';
+
+  @override
+  String get workerSearchAvailableNow => 'Đang rảnh';
+
+  @override
+  String get workerSearchBusyNow => 'Đang bận';
+
+  @override
+  String get workerSearchActionContact => 'Liên hệ';
+
+  @override
+  String get workerSearchActionBookAhead => 'Đặt trước';
+
+  @override
+  String workerSearchSpecialty(Object specialty) {
+    return 'Chuyên: $specialty';
+  }
+
+  @override
   String matchingResults(int count) {
     return '$count kết quả phù hợp';
   }

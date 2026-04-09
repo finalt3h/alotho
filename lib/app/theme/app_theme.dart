@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 class AppTheme {
   AppTheme._();
 
-  static const _seedColor = Color(0xFF0F766E);
+  static const _seedColor = Color(0xFFFF6B00);
   static const _accentColor = Color(0xFFF59E0B);
 
   static ThemeData get lightTheme {
@@ -78,7 +78,7 @@ class AppTheme {
         titleTextStyle: textTheme.titleLarge,
       ),
       cardTheme: CardThemeData(
-        elevation: 0,
+        elevation: 10,
         color: colorScheme.surface,
         surfaceTintColor: Colors.transparent,
         shape: RoundedRectangleBorder(

@@ -93,6 +93,29 @@
   "serviceCategoriesTitle": "Service categories",
   "suggestedAreasTitle": "Suggested areas",
   "workerListTitle": "Available workers",
+  "workerSearchGreetingMorning": "Good morning,",
+  "workerSearchGreetingGuestName": "there",
+  "workerSearchCurrentCity": "Ha Noi",
+  "workerSearchPromoEyebrow": "QUALITY ASSURED",
+  "workerSearchPromoTitleLineOne": "Trusted workers,",
+  "workerSearchPromoTitleLineTwo": "Transparent pricing",
+  "workerSearchPromoButton": "Book now",
+  "workerSearchPopularServicesTitle": "Popular services",
+  "workerSearchUrgentTitle": "Need help urgently?",
+  "workerSearchUrgentSubtitle": "A worker can arrive within 30 minutes",
+  "workerSearchUrgentAction": "Call now",
+  "workerSearchNearbyTitle": "Workers near you",
+  "workerSearchEstimateFrom": "Estimated from",
+  "workerSearchAvailableNow": "Available",
+  "workerSearchBusyNow": "Busy",
+  "workerSearchActionContact": "Contact",
+  "workerSearchActionBookAhead": "Book ahead",
+  "workerSearchSpecialty": "Specialty: {specialty}",
+  "@workerSearchSpecialty": {
+    "placeholders": {
+      "specialty": {}
+    }
+  },
   "matchingResults": "{count} matching results",
   "@matchingResults": {
     "placeholders": {

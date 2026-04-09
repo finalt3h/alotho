@@ -656,6 +656,114 @@ abstract class AppLocalizations {
   /// **'Danh sách thợ'**
   String get workerListTitle;
 
+  /// No description provided for @workerSearchGreetingMorning.
+  ///
+  /// In vi, this message translates to:
+  /// **'Chào buổi sáng,'**
+  String get workerSearchGreetingMorning;
+
+  /// No description provided for @workerSearchGreetingGuestName.
+  ///
+  /// In vi, this message translates to:
+  /// **'Bạn'**
+  String get workerSearchGreetingGuestName;
+
+  /// No description provided for @workerSearchCurrentCity.
+  ///
+  /// In vi, this message translates to:
+  /// **'Hà Nội'**
+  String get workerSearchCurrentCity;
+
+  /// No description provided for @workerSearchPromoEyebrow.
+  ///
+  /// In vi, this message translates to:
+  /// **'Cam kết chất lượng'**
+  String get workerSearchPromoEyebrow;
+
+  /// No description provided for @workerSearchPromoTitleLineOne.
+  ///
+  /// In vi, this message translates to:
+  /// **'Thợ uy tín,'**
+  String get workerSearchPromoTitleLineOne;
+
+  /// No description provided for @workerSearchPromoTitleLineTwo.
+  ///
+  /// In vi, this message translates to:
+  /// **'Giá minh bạch'**
+  String get workerSearchPromoTitleLineTwo;
+
+  /// No description provided for @workerSearchPromoButton.
+  ///
+  /// In vi, this message translates to:
+  /// **'Đặt lịch ngay'**
+  String get workerSearchPromoButton;
+
+  /// No description provided for @workerSearchPopularServicesTitle.
+  ///
+  /// In vi, this message translates to:
+  /// **'Dịch vụ phổ biến'**
+  String get workerSearchPopularServicesTitle;
+
+  /// No description provided for @workerSearchUrgentTitle.
+  ///
+  /// In vi, this message translates to:
+  /// **'Cần thợ gấp?'**
+  String get workerSearchUrgentTitle;
+
+  /// No description provided for @workerSearchUrgentSubtitle.
+  ///
+  /// In vi, this message translates to:
+  /// **'Thợ sẽ có mặt trong vòng 30 phút'**
+  String get workerSearchUrgentSubtitle;
+
+  /// No description provided for @workerSearchUrgentAction.
+  ///
+  /// In vi, this message translates to:
+  /// **'Gọi ngay'**
+  String get workerSearchUrgentAction;
+
+  /// No description provided for @workerSearchNearbyTitle.
+  ///
+  /// In vi, this message translates to:
+  /// **'Thợ gần bạn'**
+  String get workerSearchNearbyTitle;
+
+  /// No description provided for @workerSearchEstimateFrom.
+  ///
+  /// In vi, this message translates to:
+  /// **'Ước tính từ'**
+  String get workerSearchEstimateFrom;
+
+  /// No description provided for @workerSearchAvailableNow.
+  ///
+  /// In vi, this message translates to:
+  /// **'Đang rảnh'**
+  String get workerSearchAvailableNow;
+
+  /// No description provided for @workerSearchBusyNow.
+  ///
+  /// In vi, this message translates to:
+  /// **'Đang bận'**
+  String get workerSearchBusyNow;
+
+  /// No description provided for @workerSearchActionContact.
+  ///
+  /// In vi, this message translates to:
+  /// **'Liên hệ'**
+  String get workerSearchActionContact;
+
+  /// No description provided for @workerSearchActionBookAhead.
+  ///
+  /// In vi, this message translates to:
+  /// **'Đặt trước'**
+  String get workerSearchActionBookAhead;
+
+  /// No description provided for @workerSearchSpecialty.
+  ///
+  /// In vi, this message translates to:
+  /// **'Chuyên: {specialty}'**
+  String workerSearchSpecialty(Object specialty);
+
   /// No description provided for @matchingResults.
   ///
   /// In vi, this message translates to:
