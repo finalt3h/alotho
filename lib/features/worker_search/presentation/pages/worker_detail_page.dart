@@ -1,5 +1,6 @@
 import 'dart:math' as math;
 
+import 'package:alo_tho/app/theme/app_theme.dart';
 import 'package:alo_tho/core/constants/app_spacing.dart';
 import 'package:alo_tho/core/l10n/app_localizations.dart';
 import 'package:alo_tho/core/preview/app_preview.dart';
@@ -12,16 +13,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/widget_previews.dart';
 
-const _pageBackground = Color(0xFFFCF9F8);
+const _pageBackground = AppThemeColors.hex0xFFFCF9F8;
 const _cardBackground = Colors.white;
-const _softCardBackground = Color(0xFFF6F3F2);
-const _primaryText = Color(0xFF1B1C1C);
-const _secondaryText = Color(0xFF5A4136);
-const _accent = Color(0xFFA04100);
-const _accentSoft = Color(0x33FE9A69);
-const _accentBorder = Color(0x4DFE9A69);
-const _mapOverlay = Color(0xE6FCF9F8);
-const _starColor = Color(0xFFF3B400);
+const _softCardBackground = AppThemeColors.hex0xFFF6F3F2;
+const _primaryText = AppThemeColors.hex0xFF1B1C1C;
+const _secondaryText = AppThemeColors.hex0xFF5A4136;
+const _accent = AppThemeColors.hex0xFFA04100;
+const _accentSoft = AppThemeColors.hex0x33FE9A69;
+const _accentBorder = AppThemeColors.hex0x4DFE9A69;
+const _mapOverlay = AppThemeColors.hex0xE6FCF9F8;
+const _starColor = AppThemeColors.hex0xFFF3B400;
 
 @Preview(
   group: 'Screens',
@@ -145,7 +146,7 @@ class _HeroHeader extends StatelessWidget {
               width: 128,
               height: 128,
               decoration: const BoxDecoration(
-                color: Color(0x0DA04100),
+                color: AppThemeColors.hex0x0DA04100,
                 shape: BoxShape.circle,
               ),
             ),
@@ -229,10 +230,10 @@ class _ProfileAvatar extends StatelessWidget {
             padding: const EdgeInsets.all(4),
             decoration: BoxDecoration(
               shape: BoxShape.circle,
-              border: Border.all(color: const Color(0xFFF1D2C1)),
+              border: Border.all(color: AppThemeColors.hex0xFFF1D2C1),
               boxShadow: const [
                 BoxShadow(
-                  color: Color(0x33A04100),
+                  color: AppThemeColors.hex0x33A04100,
                   blurRadius: 0,
                   spreadRadius: 2,
                 ),
@@ -256,7 +257,7 @@ class _ProfileAvatar extends StatelessWidget {
               width: 28,
               height: 28,
               decoration: BoxDecoration(
-                color: const Color(0xFF0062A1),
+                color: AppThemeColors.hex0xFF0062A1,
                 shape: BoxShape.circle,
                 border: Border.all(color: Colors.white, width: 2),
                 boxShadow: [
@@ -296,7 +297,7 @@ class _AvatarFallback extends StatelessWidget {
         .join();
 
     return Container(
-      color: const Color(0xFFF5E9E2),
+      color: AppThemeColors.hex0xFFF5E9E2,
       alignment: Alignment.center,
       child: Text(
         initials,
@@ -412,7 +413,7 @@ class _ServiceChip extends StatelessWidget {
       child: Text(
         label,
         style: Theme.of(context).textTheme.labelLarge?.copyWith(
-          color: const Color(0xFF763006),
+          color: AppThemeColors.hex0xFF763006,
           fontWeight: FontWeight.w700,
         ),
       ),
@@ -453,7 +454,7 @@ class _LocationSection extends StatelessWidget {
                     decoration: BoxDecoration(
                       color: _mapOverlay,
                       borderRadius: BorderRadius.circular(AppRadius.pill),
-                      border: Border.all(color: const Color(0x33E2BFB0)),
+                      border: Border.all(color: AppThemeColors.hex0x33E2BFB0),
                       boxShadow: [
                         BoxShadow(
                           color: Colors.black.withValues(alpha: 0.05),
@@ -468,7 +469,7 @@ class _LocationSection extends StatelessWidget {
                         const Icon(
                           Icons.location_on_outlined,
                           size: 16,
-                          color: Color(0xFFAD5C33),
+                          color: AppThemeColors.hex0xFFAD5C33,
                         ),
                         const SizedBox(width: 6),
                         Text(

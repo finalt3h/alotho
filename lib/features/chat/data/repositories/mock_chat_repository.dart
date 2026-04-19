@@ -1,6 +1,7 @@
 import 'package:alo_tho/core/errors/failure.dart';
 import 'package:alo_tho/core/result/result.dart';
 import 'package:alo_tho/features/chat/data/datasources/mock_chat_data_source.dart';
+import 'package:alo_tho/features/chat/domain/entities/chat_conversation_detail.dart';
 import 'package:alo_tho/features/chat/domain/entities/chat_preview.dart';
 import 'package:alo_tho/features/chat/domain/repositories/chat_repository.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -22,6 +23,18 @@ class MockChatRepository implements ChatRepository {
       return Success(previews.map((item) => item.toEntity()).toList());
     } catch (_) {
       return const Error(Failure('Khong tai duoc danh sach tro chuyen.'));
+    }
+  }
+
+  @override
+  Future<Result<ChatConversationDetail>> getConversationDetail(
+    String conversationId,
+  ) async {
+    try {
+      final detail = await _dataSource.getConversationDetail(conversationId);
+      return Success(detail.toEntity());
+    } catch (_) {
+      return const Error(Failure('Khong tai duoc hoi tho.'));
     }
   }
 }

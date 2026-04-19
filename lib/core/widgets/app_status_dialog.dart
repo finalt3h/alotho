@@ -201,7 +201,8 @@ class _DialogIconStyle {
   ) {
     final theme = Theme.of(context);
     final warningColor =
-        theme.extension<AppThemeAccent>()?.warning ?? const Color(0xFFF59E0B);
+        theme.extension<AppThemeAccent>()?.warning ??
+        AppThemeColors.hex0xFFF59E0B;
 
     return switch (state) {
       AppStatusDialogState.success => _DialogIconStyle(
@@ -241,7 +242,7 @@ Widget previewAppStatusDialog() {
       final materialLocalizations = MaterialLocalizations.of(context);
 
       return Scaffold(
-        backgroundColor: const Color(0x14000000),
+        backgroundColor: AppThemeColors.hex0x14000000,
         body: Center(
           child: AppStatusDialog(
             state: AppStatusDialogState.confirm,

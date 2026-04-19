@@ -465,6 +465,54 @@ class AppLocalizationsVi extends AppLocalizations {
   String get readyWorkersSubtitle => 'Gợi ý thêm để bạn mở rộng liên hệ nhanh.';
 
   @override
+  String get messageDetailTyping => 'Đang nhập...';
+
+  @override
+  String get messageDetailOnline => 'Đang hoạt động';
+
+  @override
+  String messageDetailLastSeenAt(String time) {
+    return 'Hoạt động lần cuối lúc $time';
+  }
+
+  @override
+  String get messageDetailInputHint => 'Nhập tin nhắn...';
+
+  @override
+  String get messageDetailAttachImage => 'Đính kèm ảnh';
+
+  @override
+  String get messageDetailChangeImage => 'Đổi ảnh';
+
+  @override
+  String get messageDetailRemoveImage => 'Bỏ ảnh';
+
+  @override
+  String get messageDetailAttachmentTitle => 'Chọn ảnh đính kèm';
+
+  @override
+  String get messageDetailAttachmentHint =>
+      'Chọn nhanh ảnh minh họa để gửi cùng tin nhắn.';
+
+  @override
+  String get messageDetailSelectedImage => 'Ảnh đính kèm đã được chọn';
+
+  @override
+  String get messageDetailSend => 'Gửi tin nhắn';
+
+  @override
+  String get messageStatusSending => 'Đang gửi';
+
+  @override
+  String get messageStatusSent => 'Đã gửi';
+
+  @override
+  String get messageStatusRead => 'Đã đọc';
+
+  @override
+  String get messageStatusFailedTapToRetry => 'Gửi thất bại • Chạm để gửi lại';
+
+  @override
   String get myWorkAppBar => 'Việc của tôi';
 
   @override
@@ -739,6 +787,37 @@ class AppLocalizationsVi extends AppLocalizations {
   @override
   String get chatMessageSlot1630 =>
       'Chiều nay em có slot 16:30, mình xác nhận để em mang đúng linh kiện.';
+
+  @override
+  String get chatMessageSeenIssue => 'Chào anh, em đã xem qua mô tả sự cố rồi.';
+
+  @override
+  String get chatMessageAptomatOrOutlet =>
+      'Anh ưu tiên sửa aptomat hay ổ cắm bị chập?';
+
+  @override
+  String get chatMessageBreakerTrips =>
+      'Anh nghĩ aptomat bị nhảy liên tục, em xem giúp nhé.';
+
+  @override
+  String get chatMessageCurrentBreakerPhoto =>
+      'Đây là hình aptomat hiện tại nhà anh.';
+
+  @override
+  String get chatMessageBringSpareBreaker =>
+      'Dạ rõ, em mang theo aptomat dự phòng khi qua.';
+
+  @override
+  String get chatMessageAutoReplyCheckingSchedule =>
+      'Em đã nhận thông tin. Em đang kiểm tra lịch và phản hồi ngay.';
+
+  @override
+  String get chatMessageAutoReplyReviewingImage =>
+      'Ok anh, em đã xem ảnh gửi. Em sẽ cập nhật trong ít phút.';
+
+  @override
+  String get chatMessageAutoReplyArrangeSoon =>
+      'Dạ nhận anh nhé. Em sắp xếp thợ đến sớm nhất có thể.';
 
   @override
   String get failureLoadGlobalConfig =>

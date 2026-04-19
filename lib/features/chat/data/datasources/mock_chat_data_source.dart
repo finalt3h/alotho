@@ -1,4 +1,7 @@
+import 'package:alo_tho/features/chat/data/models/chat_conversation_detail_model.dart';
+import 'package:alo_tho/features/chat/data/models/chat_message_model.dart';
 import 'package:alo_tho/features/chat/data/models/chat_preview_model.dart';
+import 'package:alo_tho/features/chat/domain/entities/chat_message.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final chatDataSourceProvider = Provider<MockChatDataSource>(
@@ -77,5 +80,113 @@ class MockChatDataSource {
         unreadCount: 3,
       ),
     ];
+  }
+
+  Future<ChatConversationDetailModel> getConversationDetail(
+    String conversationId,
+  ) async {
+    await Future<void>.delayed(const Duration(milliseconds: 360));
+
+    final previews = await getChatPreviews();
+    final preview = previews.firstWhere(
+      (item) => item.conversationId == conversationId,
+      orElse: () => throw StateError('conversation not found'),
+    );
+
+    return ChatConversationDetailModel(
+      conversationId: preview.conversationId,
+      workerId: preview.workerId,
+      workerName: preview.workerName,
+      workerAvatarUrl: preview.workerAvatarUrl,
+      professionTitle: preview.professionTitle,
+      isWorkerOnline: conversationId == 'conversation-001',
+      lastActiveAt: DateTime.now().subtract(const Duration(minutes: 3)),
+      messages: _messagesForConversation(conversationId),
+    );
+  }
+
+  List<ChatMessageModel> _messagesForConversation(String conversationId) {
+    final now = DateTime.now();
+
+    return switch (conversationId) {
+      'conversation-001' => [
+        ChatMessageModel(
+          id: 'message-001',
+          conversationId: conversationId,
+          isFromCurrentUser: false,
+          text: 'Chao anh, em da xem qua mo ta su co roi.',
+          createdAt: now.subtract(const Duration(minutes: 36)),
+        ),
+        ChatMessageModel(
+          id: 'message-002',
+          conversationId: conversationId,
+          isFromCurrentUser: true,
+          text: 'Anh nghi aptomat bi nhay lien tuc, em xem giup nhe.',
+          createdAt: now.subtract(const Duration(minutes: 33)),
+          deliveryStatus: ChatMessageDeliveryStatus.read,
+        ),
+        ChatMessageModel(
+          id: 'message-003',
+          conversationId: conversationId,
+          isFromCurrentUser: false,
+          text: 'Anh uu tien sua aptomat hay o cam bi chap?',
+          createdAt: now.subtract(const Duration(minutes: 29)),
+        ),
+        ChatMessageModel(
+          id: 'message-004',
+          conversationId: conversationId,
+          isFromCurrentUser: true,
+          text: 'Day la hinh aptomat hien tai nha anh.',
+          imageAssetPath: 'assets/worker_detail/portfolio_1.png',
+          createdAt: now.subtract(const Duration(minutes: 22)),
+          deliveryStatus: ChatMessageDeliveryStatus.read,
+        ),
+        ChatMessageModel(
+          id: 'message-005',
+          conversationId: conversationId,
+          isFromCurrentUser: false,
+          text: 'Em co the qua kiem tra o cam cho minh luc 19:00.',
+          createdAt: now.subtract(const Duration(minutes: 18)),
+        ),
+      ],
+      'conversation-002' => [
+        ChatMessageModel(
+          id: 'message-021',
+          conversationId: conversationId,
+          isFromCurrentUser: false,
+          text: 'Anh da gui bao gia va thoi gian qua nha ngay mai.',
+          createdAt: now.subtract(const Duration(hours: 3)),
+        ),
+      ],
+      'conversation-003' => [
+        ChatMessageModel(
+          id: 'message-031',
+          conversationId: conversationId,
+          isFromCurrentUser: false,
+          text: 'Minh chup them hien trang duong ong giup em nhe.',
+          createdAt: now.subtract(const Duration(days: 1, hours: 1)),
+        ),
+      ],
+      'conversation-004' => [
+        ChatMessageModel(
+          id: 'message-041',
+          conversationId: conversationId,
+          isFromCurrentUser: false,
+          text: 'Phan ro ngam nay em can ghé do ap luc nuoc trước khi bao gia.',
+          createdAt: now.subtract(const Duration(hours: 6, minutes: 20)),
+        ),
+      ],
+      'conversation-005' => [
+        ChatMessageModel(
+          id: 'message-051',
+          conversationId: conversationId,
+          isFromCurrentUser: false,
+          text:
+              'Chieu nay em co slot 16:30, minh xac nhan de em mang dung linh kien.',
+          createdAt: now.subtract(const Duration(days: 2, hours: 4)),
+        ),
+      ],
+      _ => [],
+    };
   }
 }

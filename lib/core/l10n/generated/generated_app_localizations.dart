@@ -926,6 +926,96 @@ abstract class AppLocalizations {
   /// **'Gợi ý thêm để bạn mở rộng liên hệ nhanh.'**
   String get readyWorkersSubtitle;
 
+  /// No description provided for @messageDetailTyping.
+  ///
+  /// In vi, this message translates to:
+  /// **'Đang nhập...'**
+  String get messageDetailTyping;
+
+  /// No description provided for @messageDetailOnline.
+  ///
+  /// In vi, this message translates to:
+  /// **'Đang hoạt động'**
+  String get messageDetailOnline;
+
+  /// No description provided for @messageDetailLastSeenAt.
+  ///
+  /// In vi, this message translates to:
+  /// **'Hoạt động lần cuối lúc {time}'**
+  String messageDetailLastSeenAt(String time);
+
+  /// No description provided for @messageDetailInputHint.
+  ///
+  /// In vi, this message translates to:
+  /// **'Nhập tin nhắn...'**
+  String get messageDetailInputHint;
+
+  /// No description provided for @messageDetailAttachImage.
+  ///
+  /// In vi, this message translates to:
+  /// **'Đính kèm ảnh'**
+  String get messageDetailAttachImage;
+
+  /// No description provided for @messageDetailChangeImage.
+  ///
+  /// In vi, this message translates to:
+  /// **'Đổi ảnh'**
+  String get messageDetailChangeImage;
+
+  /// No description provided for @messageDetailRemoveImage.
+  ///
+  /// In vi, this message translates to:
+  /// **'Bỏ ảnh'**
+  String get messageDetailRemoveImage;
+
+  /// No description provided for @messageDetailAttachmentTitle.
+  ///
+  /// In vi, this message translates to:
+  /// **'Chọn ảnh đính kèm'**
+  String get messageDetailAttachmentTitle;
+
+  /// No description provided for @messageDetailAttachmentHint.
+  ///
+  /// In vi, this message translates to:
+  /// **'Chọn nhanh ảnh minh họa để gửi cùng tin nhắn.'**
+  String get messageDetailAttachmentHint;
+
+  /// No description provided for @messageDetailSelectedImage.
+  ///
+  /// In vi, this message translates to:
+  /// **'Ảnh đính kèm đã được chọn'**
+  String get messageDetailSelectedImage;
+
+  /// No description provided for @messageDetailSend.
+  ///
+  /// In vi, this message translates to:
+  /// **'Gửi tin nhắn'**
+  String get messageDetailSend;
+
+  /// No description provided for @messageStatusSending.
+  ///
+  /// In vi, this message translates to:
+  /// **'Đang gửi'**
+  String get messageStatusSending;
+
+  /// No description provided for @messageStatusSent.
+  ///
+  /// In vi, this message translates to:
+  /// **'Đã gửi'**
+  String get messageStatusSent;
+
+  /// No description provided for @messageStatusRead.
+  ///
+  /// In vi, this message translates to:
+  /// **'Đã đọc'**
+  String get messageStatusRead;
+
+  /// No description provided for @messageStatusFailedTapToRetry.
+  ///
+  /// In vi, this message translates to:
+  /// **'Gửi thất bại • Chạm để gửi lại'**
+  String get messageStatusFailedTapToRetry;
+
   /// No description provided for @myWorkAppBar.
   ///
   /// In vi, this message translates to:
@@ -1417,6 +1507,54 @@ abstract class AppLocalizations {
   /// In vi, this message translates to:
   /// **'Chiều nay em có slot 16:30, mình xác nhận để em mang đúng linh kiện.'**
   String get chatMessageSlot1630;
+
+  /// No description provided for @chatMessageSeenIssue.
+  ///
+  /// In vi, this message translates to:
+  /// **'Chào anh, em đã xem qua mô tả sự cố rồi.'**
+  String get chatMessageSeenIssue;
+
+  /// No description provided for @chatMessageAptomatOrOutlet.
+  ///
+  /// In vi, this message translates to:
+  /// **'Anh ưu tiên sửa aptomat hay ổ cắm bị chập?'**
+  String get chatMessageAptomatOrOutlet;
+
+  /// No description provided for @chatMessageBreakerTrips.
+  ///
+  /// In vi, this message translates to:
+  /// **'Anh nghĩ aptomat bị nhảy liên tục, em xem giúp nhé.'**
+  String get chatMessageBreakerTrips;
+
+  /// No description provided for @chatMessageCurrentBreakerPhoto.
+  ///
+  /// In vi, this message translates to:
+  /// **'Đây là hình aptomat hiện tại nhà anh.'**
+  String get chatMessageCurrentBreakerPhoto;
+
+  /// No description provided for @chatMessageBringSpareBreaker.
+  ///
+  /// In vi, this message translates to:
+  /// **'Dạ rõ, em mang theo aptomat dự phòng khi qua.'**
+  String get chatMessageBringSpareBreaker;
+
+  /// No description provided for @chatMessageAutoReplyCheckingSchedule.
+  ///
+  /// In vi, this message translates to:
+  /// **'Em đã nhận thông tin. Em đang kiểm tra lịch và phản hồi ngay.'**
+  String get chatMessageAutoReplyCheckingSchedule;
+
+  /// No description provided for @chatMessageAutoReplyReviewingImage.
+  ///
+  /// In vi, this message translates to:
+  /// **'Ok anh, em đã xem ảnh gửi. Em sẽ cập nhật trong ít phút.'**
+  String get chatMessageAutoReplyReviewingImage;
+
+  /// No description provided for @chatMessageAutoReplyArrangeSoon.
+  ///
+  /// In vi, this message translates to:
+  /// **'Dạ nhận anh nhé. Em sắp xếp thợ đến sớm nhất có thể.'**
+  String get chatMessageAutoReplyArrangeSoon;
 
   /// No description provided for @failureLoadGlobalConfig.
   ///

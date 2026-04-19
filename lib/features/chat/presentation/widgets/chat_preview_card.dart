@@ -6,9 +6,10 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
 class ChatPreviewCard extends StatelessWidget {
-  const ChatPreviewCard({required this.preview, super.key});
+  const ChatPreviewCard({required this.preview, this.onTap, super.key});
 
   final ChatPreview preview;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +34,7 @@ class ChatPreviewCard extends StatelessWidget {
               : null,
         ),
         child: ListTile(
+          onTap: onTap,
           contentPadding: const EdgeInsets.all(AppSpacing.md),
           leading: AvatarView(
             name: displayName,

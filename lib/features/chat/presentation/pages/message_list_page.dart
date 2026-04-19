@@ -24,6 +24,7 @@ import 'package:go_router/go_router.dart';
   wrapper: appPreviewWrapper,
 )
 Widget previewMessageListPage() => const MessageListPage();
+
 class MessageListPage extends ConsumerWidget {
   const MessageListPage({super.key});
   @override
@@ -103,7 +104,14 @@ class MessageListPage extends ConsumerWidget {
                   ...state.filteredPreviews.map(
                     (preview) => Padding(
                       padding: const EdgeInsets.only(bottom: AppSpacing.md),
-                      child: ChatPreviewCard(preview: preview),
+                      child: ChatPreviewCard(
+                        preview: preview,
+                        onTap: () {
+                          context.push(
+                            AppRoutes.messageDetailPath(preview.conversationId),
+                          );
+                        },
+                      ),
                     ),
                   ),
                 const SizedBox(height: AppSpacing.lg),
@@ -131,5 +139,3 @@ class MessageListPage extends ConsumerWidget {
     );
   }
 }
-
-

@@ -216,6 +216,28 @@
   "noMatchingConversationsDescription": "Thử đổi bộ lọc hoặc tìm bằng từ khóa khác.",
   "readyWorkersTitle": "Thợ đang sẵn sàng nhận việc",
   "readyWorkersSubtitle": "Gợi ý thêm để bạn mở rộng liên hệ nhanh.",
+  "messageDetailTyping": "Đang nhập...",
+  "messageDetailOnline": "Đang hoạt động",
+  "messageDetailLastSeenAt": "Hoạt động lần cuối lúc {time}",
+  "@messageDetailLastSeenAt": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "messageDetailInputHint": "Nhập tin nhắn...",
+  "messageDetailAttachImage": "Đính kèm ảnh",
+  "messageDetailChangeImage": "Đổi ảnh",
+  "messageDetailRemoveImage": "Bỏ ảnh",
+  "messageDetailAttachmentTitle": "Chọn ảnh đính kèm",
+  "messageDetailAttachmentHint": "Chọn nhanh ảnh minh họa để gửi cùng tin nhắn.",
+  "messageDetailSelectedImage": "Ảnh đính kèm đã được chọn",
+  "messageDetailSend": "Gửi tin nhắn",
+  "messageStatusSending": "Đang gửi",
+  "messageStatusSent": "Đã gửi",
+  "messageStatusRead": "Đã đọc",
+  "messageStatusFailedTapToRetry": "Gửi thất bại • Chạm để gửi lại",
   "myWorkAppBar": "Việc của tôi",
   "myWorkHeadline": "Bài đăng đang hiển thị",
   "myWorkSubtitle": "Theo dõi các bài viết về mình đang xuất hiện trong từng danh mục.",
@@ -319,6 +341,14 @@
   "chatMessageNeedMorePipePhotos": "Mình chụp thêm hiện trạng đường ống giúp em nhé.",
   "chatMessageNeedPressureCheck": "Phần rò ngầm này em cần ghé đo áp lực nước trước khi báo giá.",
   "chatMessageSlot1630": "Chiều nay em có slot 16:30, mình xác nhận để em mang đúng linh kiện.",
+  "chatMessageSeenIssue": "Chào anh, em đã xem qua mô tả sự cố rồi.",
+  "chatMessageAptomatOrOutlet": "Anh ưu tiên sửa aptomat hay ổ cắm bị chập?",
+  "chatMessageBreakerTrips": "Anh nghĩ aptomat bị nhảy liên tục, em xem giúp nhé.",
+  "chatMessageCurrentBreakerPhoto": "Đây là hình aptomat hiện tại nhà anh.",
+  "chatMessageBringSpareBreaker": "Dạ rõ, em mang theo aptomat dự phòng khi qua.",
+  "chatMessageAutoReplyCheckingSchedule": "Em đã nhận thông tin. Em đang kiểm tra lịch và phản hồi ngay.",
+  "chatMessageAutoReplyReviewingImage": "Ok anh, em đã xem ảnh gửi. Em sẽ cập nhật trong ít phút.",
+  "chatMessageAutoReplyArrangeSoon": "Dạ nhận anh nhé. Em sắp xếp thợ đến sớm nhất có thể.",
   "failureLoadGlobalConfig": "Không thể tải cấu hình ứng dụng lúc này.",
   "failureLoginUnavailable": "Đăng nhập không thành công. Vui lòng thử lại.",
   "failureInvalidLoginCredentials": "Thông tin đăng nhập không chính xác.",

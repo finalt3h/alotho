@@ -469,6 +469,54 @@ class AppLocalizationsEn extends AppLocalizations {
       'Extra suggestions to help you contact faster.';
 
   @override
+  String get messageDetailTyping => 'Typing...';
+
+  @override
+  String get messageDetailOnline => 'Online';
+
+  @override
+  String messageDetailLastSeenAt(String time) {
+    return 'Last active at $time';
+  }
+
+  @override
+  String get messageDetailInputHint => 'Type a message...';
+
+  @override
+  String get messageDetailAttachImage => 'Attach image';
+
+  @override
+  String get messageDetailChangeImage => 'Change image';
+
+  @override
+  String get messageDetailRemoveImage => 'Remove image';
+
+  @override
+  String get messageDetailAttachmentTitle => 'Choose an attachment';
+
+  @override
+  String get messageDetailAttachmentHint =>
+      'Pick a sample image to send with your message.';
+
+  @override
+  String get messageDetailSelectedImage => 'Image attached';
+
+  @override
+  String get messageDetailSend => 'Send message';
+
+  @override
+  String get messageStatusSending => 'Sending';
+
+  @override
+  String get messageStatusSent => 'Sent';
+
+  @override
+  String get messageStatusRead => 'Read';
+
+  @override
+  String get messageStatusFailedTapToRetry => 'Failed to send • Tap to retry';
+
+  @override
   String get myWorkAppBar => 'My work';
 
   @override
@@ -744,6 +792,37 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get chatMessageSlot1630 =>
       'I have a 4:30 PM slot this afternoon. Please confirm so I can bring the right parts.';
+
+  @override
+  String get chatMessageSeenIssue => 'I reviewed your issue description.';
+
+  @override
+  String get chatMessageAptomatOrOutlet =>
+      'Would you like to prioritize the breaker or the short-circuit outlet first?';
+
+  @override
+  String get chatMessageBreakerTrips =>
+      'I think the breaker keeps tripping, please help check it.';
+
+  @override
+  String get chatMessageCurrentBreakerPhoto =>
+      'Here is the current breaker photo at my place.';
+
+  @override
+  String get chatMessageBringSpareBreaker =>
+      'Got it. I will bring a spare breaker when I visit.';
+
+  @override
+  String get chatMessageAutoReplyCheckingSchedule =>
+      'I got the details. I am checking my schedule and will reply shortly.';
+
+  @override
+  String get chatMessageAutoReplyReviewingImage =>
+      'Okay, I reviewed the image you sent. I will update you in a few minutes.';
+
+  @override
+  String get chatMessageAutoReplyArrangeSoon =>
+      'Received. I will arrange the earliest possible visit.';
 
   @override
   String get failureLoadGlobalConfig =>

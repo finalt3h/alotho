@@ -59,3 +59,8 @@ App da co them luong tai `global config` tu bang Supabase `public.global_configs
 Mau schema va seed data nam o:
 
 - `supabase/global_configs.sql`
+
+## Project planning va tracking
+
+- Ke hoach trien khai tong the: `docs/IMPLEMENTATION_PLAN.md`
+- Trang thai cong viec va session log: `docs/WORK_STATUS.md`

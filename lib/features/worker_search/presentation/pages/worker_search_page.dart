@@ -681,10 +681,10 @@ class _WorkerSpotlightCard extends StatelessWidget {
         ? l10n.workerSearchAvailableNow
         : l10n.workerSearchBusyNow;
     final availabilityBackground = isAvailable
-        ? const Color(0xFFDCFCE7)
+        ? AppThemeColors.hex0xFFDCFCE7
         : theme.colorScheme.surfaceContainerLow;
     final availabilityForeground = isAvailable
-        ? const Color(0xFF15803D)
+        ? AppThemeColors.hex0xFF15803D
         : theme.colorScheme.onSurfaceVariant;
     final warningColor =
         theme.extension<AppThemeAccent>()?.warning ??

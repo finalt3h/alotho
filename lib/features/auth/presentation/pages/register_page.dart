@@ -1,4 +1,5 @@
 import 'package:alo_tho/app/app_routes.dart';
+import 'package:alo_tho/app/theme/app_theme.dart';
 import 'package:alo_tho/core/constants/app_spacing.dart';
 import 'package:alo_tho/core/l10n/app_localizations.dart';
 import 'package:alo_tho/core/preview/app_preview.dart';
@@ -53,10 +54,10 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
     final controller = ref.read(registerControllerProvider.notifier);
 
     return Scaffold(
-      backgroundColor: const Color(0xFFF4EFEC),
+      backgroundColor: AppThemeColors.hex0xFFF4EFEC,
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        backgroundColor: const Color(0xFFF4EFEC),
+        backgroundColor: AppThemeColors.hex0xFFF4EFEC,
         surfaceTintColor: Colors.transparent,
         elevation: 0,
         centerTitle: true,
@@ -68,14 +69,14 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
             icon: const Icon(
               Icons.arrow_back_rounded,
               size: 22,
-              color: Color(0xFF5D4B43),
+              color: AppThemeColors.hex0xFF5D4B43,
             ),
           ),
         ),
         title: Text(
           l10n.appWordmark,
           style: theme.textTheme.titleMedium?.copyWith(
-            color: const Color(0xFFFF6B00),
+            color: AppThemeColors.hex0xFFFF6B00,
             fontWeight: FontWeight.w900,
             letterSpacing: 0.6,
           ),
@@ -91,7 +92,7 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                 Text(
                   l10n.registerTitle,
                   style: theme.textTheme.headlineMedium?.copyWith(
-                    color: const Color(0xFF28211E),
+                    color: AppThemeColors.hex0xFF28211E,
                     fontWeight: FontWeight.w900,
                     letterSpacing: -0.6,
                   ),
@@ -100,7 +101,7 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                 Text(
                   l10n.registerDescription,
                   style: theme.textTheme.bodyMedium?.copyWith(
-                    color: const Color(0xFF786860),
+                    color: AppThemeColors.hex0xFF786860,
                     height: 1.45,
                     fontWeight: FontWeight.w500,
                   ),
@@ -160,7 +161,7 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                           ? Icons.visibility_outlined
                           : Icons.visibility_off_outlined,
                       size: 20,
-                      color: const Color(0xFFAC978D),
+                      color: AppThemeColors.hex0xFFAC978D,
                     ),
                   ),
                 ),
@@ -183,7 +184,7 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                           ? Icons.visibility_outlined
                           : Icons.visibility_off_outlined,
                       size: 20,
-                      color: const Color(0xFFAC978D),
+                      color: AppThemeColors.hex0xFFAC978D,
                     ),
                   ),
                 ),
@@ -236,7 +237,7 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                       textAlign: TextAlign.center,
                       text: TextSpan(
                         style: theme.textTheme.bodySmall?.copyWith(
-                          color: const Color(0xFF8B7970),
+                          color: AppThemeColors.hex0xFF8B7970,
                           height: 1.5,
                           fontWeight: FontWeight.w500,
                         ),
@@ -245,7 +246,7 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                           TextSpan(
                             text: l10n.registerAgreementHighlight,
                             style: theme.textTheme.bodySmall?.copyWith(
-                              color: const Color(0xFFB24E0D),
+                              color: AppThemeColors.hex0xFFB24E0D,
                               fontWeight: FontWeight.w800,
                             ),
                           ),
@@ -258,7 +259,7 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                 const SizedBox(height: 16),
                 const Divider(
                   height: 1,
-                  color: Color(0xFFF0E6E1),
+                  color: AppThemeColors.hex0xFFF0E6E1,
                   thickness: 1,
                 ),
                 const SizedBox(height: 14),
@@ -270,7 +271,7 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                       Text(
                         l10n.registerExistingAccountPrompt,
                         style: theme.textTheme.bodyMedium?.copyWith(
-                          color: const Color(0xFF786860),
+                          color: AppThemeColors.hex0xFF786860,
                           fontWeight: FontWeight.w600,
                         ),
                       ),
@@ -278,7 +279,7 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                       TextButton(
                         onPressed: () => context.go(AppRoutes.loginPath),
                         style: TextButton.styleFrom(
-                          foregroundColor: const Color(0xFFDB6500),
+                          foregroundColor: AppThemeColors.hex0xFFDB6500,
                           padding: EdgeInsets.zero,
                           minimumSize: Size.zero,
                           tapTargetSize: MaterialTapTargetSize.shrinkWrap,
@@ -368,13 +369,13 @@ class _RegisterRoleChip extends StatelessWidget {
           height: 54,
           decoration: BoxDecoration(
             color: isSelected
-                ? const Color(0xFFFF6B00)
-                : const Color(0xFFF1EDEC),
+                ? AppThemeColors.hex0xFFFF6B00
+                : AppThemeColors.hex0xFFF1EDEC,
             borderRadius: BorderRadius.circular(AppRadius.sm),
             boxShadow: isSelected
                 ? const [
                     BoxShadow(
-                      color: Color(0x29FF6B00),
+                      color: AppThemeColors.hex0x29FF6B00,
                       blurRadius: 18,
                       offset: Offset(0, 8),
                     ),
@@ -387,13 +388,15 @@ class _RegisterRoleChip extends StatelessWidget {
               Icon(
                 icon,
                 size: 17,
-                color: isSelected ? Colors.white : const Color(0xFF7A6A62),
+                color: isSelected ? Colors.white : AppThemeColors.hex0xFF7A6A62,
               ),
               const SizedBox(height: 3),
               Text(
                 label,
                 style: theme.textTheme.labelLarge?.copyWith(
-                  color: isSelected ? Colors.white : const Color(0xFF6E5C54),
+                  color: isSelected
+                      ? Colors.white
+                      : AppThemeColors.hex0xFF6E5C54,
                   fontWeight: FontWeight.w800,
                 ),
               ),
@@ -415,7 +418,7 @@ class _RegisterFieldLabel extends StatelessWidget {
     return Text(
       label.toUpperCase(),
       style: Theme.of(context).textTheme.labelSmall?.copyWith(
-        color: const Color(0xFF7A655B),
+        color: AppThemeColors.hex0xFF7A655B,
         fontWeight: FontWeight.w900,
         letterSpacing: 0.8,
       ),
@@ -449,19 +452,23 @@ class _RegisterTextField extends StatelessWidget {
       keyboardType: keyboardType,
       obscureText: obscureText,
       style: theme.textTheme.bodyLarge?.copyWith(
-        color: const Color(0xFF40322D),
+        color: AppThemeColors.hex0xFF40322D,
         fontWeight: FontWeight.w600,
       ),
       decoration: InputDecoration(
         hintText: hintText,
         hintStyle: theme.textTheme.bodyLarge?.copyWith(
-          color: const Color(0xFFB7A7A0),
+          color: AppThemeColors.hex0xFFB7A7A0,
           fontWeight: FontWeight.w500,
         ),
-        prefixIcon: Icon(prefixIcon, size: 18, color: const Color(0xFFC2B4AE)),
+        prefixIcon: Icon(
+          prefixIcon,
+          size: 18,
+          color: AppThemeColors.hex0xFFC2B4AE,
+        ),
         suffixIcon: suffix,
         filled: true,
-        fillColor: const Color(0xFFF3EFED),
+        fillColor: AppThemeColors.hex0xFFF3EFED,
         contentPadding: const EdgeInsets.symmetric(
           horizontal: 14,
           vertical: 14,
@@ -476,7 +483,10 @@ class _RegisterTextField extends StatelessWidget {
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppRadius.sm),
-          borderSide: const BorderSide(color: Color(0xFFFF6B00), width: 1.3),
+          borderSide: const BorderSide(
+            color: AppThemeColors.hex0xFFFF6B00,
+            width: 1.3,
+          ),
         ),
       ),
     );
@@ -502,13 +512,19 @@ class _RegisterPrimaryButton extends StatelessWidget {
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
             colors: enabled
-                ? const [Color(0xFFFF7400), Color(0xFFE15C00)]
-                : const [Color(0xFFFFC8A4), Color(0xFFF3A979)],
+                ? const [
+                    AppThemeColors.hex0xFFFF7400,
+                    AppThemeColors.hex0xFFE15C00,
+                  ]
+                : const [
+                    AppThemeColors.hex0xFFFFC8A4,
+                    AppThemeColors.hex0xFFF3A979,
+                  ],
           ),
           boxShadow: enabled
               ? const [
                   BoxShadow(
-                    color: Color(0x30E15C00),
+                    color: AppThemeColors.hex0x30E15C00,
                     blurRadius: 18,
                     offset: Offset(0, 10),
                   ),

@@ -216,6 +216,28 @@
   "noMatchingConversationsDescription": "Try another filter or search term.",
   "readyWorkersTitle": "Workers ready to take jobs",
   "readyWorkersSubtitle": "Extra suggestions to help you contact faster.",
+  "messageDetailTyping": "Typing...",
+  "messageDetailOnline": "Online",
+  "messageDetailLastSeenAt": "Last active at {time}",
+  "@messageDetailLastSeenAt": {
+    "placeholders": {
+      "time": {
+        "type": "String"
+      }
+    }
+  },
+  "messageDetailInputHint": "Type a message...",
+  "messageDetailAttachImage": "Attach image",
+  "messageDetailChangeImage": "Change image",
+  "messageDetailRemoveImage": "Remove image",
+  "messageDetailAttachmentTitle": "Choose an attachment",
+  "messageDetailAttachmentHint": "Pick a sample image to send with your message.",
+  "messageDetailSelectedImage": "Image attached",
+  "messageDetailSend": "Send message",
+  "messageStatusSending": "Sending",
+  "messageStatusSent": "Sent",
+  "messageStatusRead": "Read",
+  "messageStatusFailedTapToRetry": "Failed to send • Tap to retry",
   "myWorkAppBar": "My work",
   "myWorkHeadline": "Visible work posts",
   "myWorkSubtitle": "Track which of your posts are showing in each category.",
@@ -319,6 +341,14 @@
   "chatMessageNeedMorePipePhotos": "Please send one more photo of the pipe condition for me.",
   "chatMessageNeedPressureCheck": "For this hidden leak I need to check water pressure on site before quoting.",
   "chatMessageSlot1630": "I have a 4:30 PM slot this afternoon. Please confirm so I can bring the right parts.",
+  "chatMessageSeenIssue": "I reviewed your issue description.",
+  "chatMessageAptomatOrOutlet": "Would you like to prioritize the breaker or the short-circuit outlet first?",
+  "chatMessageBreakerTrips": "I think the breaker keeps tripping, please help check it.",
+  "chatMessageCurrentBreakerPhoto": "Here is the current breaker photo at my place.",
+  "chatMessageBringSpareBreaker": "Got it. I will bring a spare breaker when I visit.",
+  "chatMessageAutoReplyCheckingSchedule": "I got the details. I am checking my schedule and will reply shortly.",
+  "chatMessageAutoReplyReviewingImage": "Okay, I reviewed the image you sent. I will update you in a few minutes.",
+  "chatMessageAutoReplyArrangeSoon": "Received. I will arrange the earliest possible visit.",
   "failureLoadGlobalConfig": "Unable to load app configuration right now.",
   "failureLoginUnavailable": "Sign-in failed. Please try again.",
   "failureInvalidLoginCredentials": "The login details are incorrect.",

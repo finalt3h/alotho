@@ -5,6 +5,7 @@ import 'package:alo_tho/features/auth/presentation/pages/splash_page.dart';
 import 'package:alo_tho/features/auth/presentation/pages/verify_otp_page.dart';
 import 'package:alo_tho/features/auth/presentation/viewmodels/auth_session_controller.dart';
 import 'package:alo_tho/features/auth/presentation/viewmodels/auth_session_state.dart';
+import 'package:alo_tho/features/chat/presentation/pages/chat_detail_page.dart';
 import 'package:alo_tho/features/chat/presentation/pages/message_list_page.dart';
 import 'package:alo_tho/features/home/presentation/pages/main_shell_page.dart';
 import 'package:alo_tho/features/home/presentation/pages/my_work_page.dart';
@@ -89,6 +90,17 @@ final routerProvider = Provider<GoRouter>((ref) {
                 path: AppRoutes.messagesPath,
                 name: AppRoutes.messagesName,
                 builder: (context, state) => const MessageListPage(),
+                routes: [
+                  GoRoute(
+                    path: ':conversationId',
+                    name: AppRoutes.messageDetailName,
+                    builder: (context, state) {
+                      final conversationId =
+                          state.pathParameters['conversationId']!;
+                      return ChatDetailPage(conversationId: conversationId);
+                    },
+                  ),
+                ],
               ),
             ],
           ),

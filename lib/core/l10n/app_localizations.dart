@@ -111,6 +111,20 @@ extension AppLocalizationsHelpers on AppLocalizations {
         chatMessageNeedPressureCheck,
       'Chieu nay em co slot 16:30, minh xac nhan de em mang dung linh kien.' =>
         chatMessageSlot1630,
+      'Chao anh, em da xem qua mo ta su co roi.' => chatMessageSeenIssue,
+      'Anh uu tien sua aptomat hay o cam bi chap?' =>
+        chatMessageAptomatOrOutlet,
+      'Anh nghi aptomat bi nhay lien tuc, em xem giup nhe.' =>
+        chatMessageBreakerTrips,
+      'Day la hinh aptomat hien tai nha anh.' => chatMessageCurrentBreakerPhoto,
+      'Da ro, em mang theo aptomat du phong khi qua.' =>
+        chatMessageBringSpareBreaker,
+      'Em da nhan thong tin. Em dang kiem tra lich va phan hoi ngay.' =>
+        chatMessageAutoReplyCheckingSchedule,
+      'Ok anh, em da xem anh gui. Em se cap nhat trong it phut.' =>
+        chatMessageAutoReplyReviewingImage,
+      'Da nhan anh nhe. Em sap xep tho den som nhat co the.' =>
+        chatMessageAutoReplyArrangeSoon,
       _ => raw,
     };
   }

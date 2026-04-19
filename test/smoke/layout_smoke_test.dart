@@ -3,6 +3,7 @@ import 'package:alo_tho/core/l10n/app_localizations.dart';
 import 'package:alo_tho/features/auth/presentation/pages/login_page.dart';
 import 'package:alo_tho/features/auth/presentation/pages/register_page.dart';
 import 'package:alo_tho/features/auth/presentation/pages/splash_page.dart';
+import 'package:alo_tho/features/chat/presentation/pages/chat_detail_page.dart';
 import 'package:alo_tho/features/chat/presentation/pages/message_list_page.dart';
 import 'package:alo_tho/features/home/presentation/pages/my_work_page.dart';
 import 'package:alo_tho/features/profile/presentation/pages/profile_page.dart';
@@ -48,7 +49,7 @@ void main() {
 
     expect(tester.takeException(), isNull);
 
-    await tester.tap(find.byType(FilterChip).first);
+    await tester.tap(find.byType(InkWell).first);
     await tester.pumpAndSettle();
 
     expect(tester.takeException(), isNull);
@@ -91,6 +92,23 @@ void main() {
 
   testWidgets('worker detail page lays out', (tester) async {
     await pumpPage(tester, const WorkerDetailPage(workerId: 'worker-003'));
+
+    expect(tester.takeException(), isNull);
+  });
+
+  testWidgets('chat detail page lays out and sends text message', (
+    tester,
+  ) async {
+    await pumpPage(
+      tester,
+      const ChatDetailPage(conversationId: 'conversation-001'),
+    );
+
+    expect(tester.takeException(), isNull);
+
+    await tester.enterText(find.byType(TextField).first, 'Test message');
+    await tester.tap(find.byIcon(Icons.send_rounded));
+    await tester.pump(const Duration(milliseconds: 120));
 
     expect(tester.takeException(), isNull);
   });

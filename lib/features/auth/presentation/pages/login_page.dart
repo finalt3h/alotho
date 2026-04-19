@@ -1,4 +1,5 @@
 import 'package:alo_tho/app/app_routes.dart';
+import 'package:alo_tho/app/theme/app_theme.dart';
 import 'package:alo_tho/core/constants/app_spacing.dart';
 import 'package:alo_tho/core/l10n/app_localizations.dart';
 import 'package:alo_tho/core/preview/app_preview.dart';
@@ -82,7 +83,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
     final controller = ref.read(loginControllerProvider.notifier);
 
     return Scaffold(
-      backgroundColor: const Color(0xFFFCF9F8),
+      backgroundColor: AppThemeColors.hex0xFFFCF9F8,
       bottomNavigationBar: SafeArea(
         top: false,
         child: Padding(
@@ -94,7 +95,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
               Text(
                 l10n.noAccountPrompt,
                 style: theme.textTheme.bodyLarge?.copyWith(
-                  color: const Color(0xFF5A4136),
+                  color: AppThemeColors.hex0xFF5A4136,
                   fontWeight: FontWeight.w500,
                 ),
               ),
@@ -102,7 +103,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
               TextButton(
                 onPressed: () => context.go(AppRoutes.registerPath),
                 style: TextButton.styleFrom(
-                  foregroundColor: const Color(0xFFA04100),
+                  foregroundColor: AppThemeColors.hex0xFFA04100,
                   padding: EdgeInsets.zero,
                   minimumSize: Size.zero,
                   tapTargetSize: MaterialTapTargetSize.shrinkWrap,
@@ -129,14 +130,14 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                   children: [
                     Icon(
                       Icons.handyman_rounded,
-                      color: const Color(0xFFFF6B00),
+                      color: AppThemeColors.hex0xFFFF6B00,
                       size: 20,
                     ),
                     const SizedBox(width: 8),
                     Text(
                       l10n.appWordmark,
                       style: theme.textTheme.titleLarge?.copyWith(
-                        color: const Color(0xFFFF6B00),
+                        color: AppThemeColors.hex0xFFFF6B00,
                         fontWeight: FontWeight.w900,
                         letterSpacing: 1,
                       ),
@@ -147,7 +148,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                       tooltip: l10n.loginHelpTooltip,
                       icon: const Icon(
                         Icons.help_outline_rounded,
-                        color: Color(0xFF7B6B64),
+                        color: AppThemeColors.hex0xFF7B6B64,
                       ),
                     ),
                   ],
@@ -178,7 +179,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                           ? null
                           : () => _showForgotPasswordPlaceholder(context, l10n),
                       style: TextButton.styleFrom(
-                        foregroundColor: const Color(0xFFA04100),
+                        foregroundColor: AppThemeColors.hex0xFFA04100,
                         padding: EdgeInsets.zero,
                         minimumSize: Size.zero,
                         tapTargetSize: MaterialTapTargetSize.shrinkWrap,
@@ -210,7 +211,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                           ? Icons.visibility_outlined
                           : Icons.visibility_off_outlined,
                       size: 20,
-                      color: const Color(0xFF9A7A6D),
+                      color: AppThemeColors.hex0xFF9A7A6D,
                     ),
                   ),
                 ),
@@ -230,7 +231,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                   children: [
                     Expanded(
                       child: Divider(
-                        color: const Color(0xFFE4E2E1),
+                        color: AppThemeColors.hex0xFFE4E2E1,
                         thickness: 1,
                       ),
                     ),
@@ -239,7 +240,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                       child: Text(
                         l10n.orLabel.toUpperCase(),
                         style: theme.textTheme.labelMedium?.copyWith(
-                          color: const Color(0xFF8E7164),
+                          color: AppThemeColors.hex0xFF8E7164,
                           fontWeight: FontWeight.w700,
                           letterSpacing: 1.2,
                         ),
@@ -247,7 +248,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                     ),
                     Expanded(
                       child: Divider(
-                        color: const Color(0xFFE4E2E1),
+                        color: AppThemeColors.hex0xFFE4E2E1,
                         thickness: 1,
                       ),
                     ),
@@ -282,7 +283,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                           width: 20,
                           height: 20,
                           decoration: const BoxDecoration(
-                            color: Color(0xFF2563EB),
+                            color: AppThemeColors.hex0xFF2563EB,
                             shape: BoxShape.circle,
                           ),
                           alignment: Alignment.center,
@@ -348,7 +349,7 @@ class _LoginHeroCard extends StatelessWidget {
         borderRadius: BorderRadius.circular(AppRadius.xxxl),
         boxShadow: const [
           BoxShadow(
-            color: Color(0x14000000),
+            color: AppThemeColors.hex0x14000000,
             blurRadius: 20,
             offset: Offset(0, 8),
           ),
@@ -366,9 +367,9 @@ class _LoginHeroCard extends StatelessWidget {
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   colors: [
-                    Color(0x00FCF9F8),
-                    Color(0x66FCF9F8),
-                    Color(0xFFFCF9F8),
+                    AppThemeColors.hex0x00FCF9F8,
+                    AppThemeColors.hex0x66FCF9F8,
+                    AppThemeColors.hex0xFFFCF9F8,
                   ],
                   stops: [0.0, 0.58, 1.0],
                 ),
@@ -385,7 +386,7 @@ class _LoginHeroCard extends StatelessWidget {
                   Text(
                     title,
                     style: theme.textTheme.headlineMedium?.copyWith(
-                      color: const Color(0xFF1B1C1C),
+                      color: AppThemeColors.hex0xFF1B1C1C,
                       fontSize: AppTextSize.heroMedium,
                       height: 1.2,
                       fontWeight: FontWeight.w800,
@@ -396,7 +397,7 @@ class _LoginHeroCard extends StatelessWidget {
                   Text(
                     subtitle,
                     style: theme.textTheme.bodyLarge?.copyWith(
-                      color: const Color(0xFF5A4136),
+                      color: AppThemeColors.hex0xFF5A4136,
                       fontSize: AppTextSize.body,
                       fontWeight: FontWeight.w500,
                     ),
@@ -421,7 +422,7 @@ class _LoginFieldLabel extends StatelessWidget {
     return Text(
       label.toUpperCase(),
       style: Theme.of(context).textTheme.labelMedium?.copyWith(
-        color: const Color(0xFF5A4136),
+        color: AppThemeColors.hex0xFF5A4136,
         fontWeight: FontWeight.w800,
         letterSpacing: 0.55,
       ),
@@ -454,16 +455,20 @@ class _LoginTextField extends StatelessWidget {
       onChanged: onChanged,
       style: Theme.of(
         context,
-      ).textTheme.bodyLarge?.copyWith(color: const Color(0xFF3D2A21)),
+      ).textTheme.bodyLarge?.copyWith(color: AppThemeColors.hex0xFF3D2A21),
       decoration: InputDecoration(
         hintText: hintText,
         hintStyle: Theme.of(
           context,
-        ).textTheme.bodyLarge?.copyWith(color: const Color(0x998E7164)),
-        prefixIcon: Icon(prefixIcon, size: 18, color: const Color(0xFF9A7A6D)),
+        ).textTheme.bodyLarge?.copyWith(color: AppThemeColors.hex0x998E7164),
+        prefixIcon: Icon(
+          prefixIcon,
+          size: 18,
+          color: AppThemeColors.hex0xFF9A7A6D,
+        ),
         suffixIcon: suffix,
         filled: true,
-        fillColor: const Color(0xFFF6F3F2),
+        fillColor: AppThemeColors.hex0xFFF6F3F2,
         contentPadding: const EdgeInsets.symmetric(
           horizontal: 16,
           vertical: 18,
@@ -478,7 +483,10 @@ class _LoginTextField extends StatelessWidget {
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppRadius.xs),
-          borderSide: const BorderSide(color: Color(0xFFFF6B00), width: 1.2),
+          borderSide: const BorderSide(
+            color: AppThemeColors.hex0xFFFF6B00,
+            width: 1.2,
+          ),
         ),
       ),
     );
@@ -505,12 +513,15 @@ class _PrimaryLoginButton extends StatelessWidget {
               : const LinearGradient(
                   begin: Alignment.topLeft,
                   end: Alignment.bottomRight,
-                  colors: [Color(0xFFFF6B00), Color(0xFFA04100)],
+                  colors: [
+                    AppThemeColors.hex0xFFFF6B00,
+                    AppThemeColors.hex0xFFA04100,
+                  ],
                 ),
-          color: disabled ? const Color(0xFFFFB98A) : null,
+          color: disabled ? AppThemeColors.hex0xFFFFB98A : null,
           boxShadow: const [
             BoxShadow(
-              color: Color(0x33A04100),
+              color: AppThemeColors.hex0x33A04100,
               blurRadius: 15,
               offset: Offset(0, 8),
             ),
@@ -557,7 +568,7 @@ class _SocialLoginButton extends StatelessWidget {
       style: OutlinedButton.styleFrom(
         minimumSize: const Size.fromHeight(54),
         backgroundColor: Colors.white,
-        side: const BorderSide(color: Color(0x4DE2BFB0)),
+        side: const BorderSide(color: AppThemeColors.hex0x4DE2BFB0),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(AppRadius.xs),
         ),
@@ -573,7 +584,7 @@ class _SocialLoginButton extends StatelessWidget {
               label,
               overflow: TextOverflow.ellipsis,
               style: Theme.of(context).textTheme.labelLarge?.copyWith(
-                color: const Color(0xFF1B1C1C),
+                color: AppThemeColors.hex0xFF1B1C1C,
                 fontWeight: FontWeight.w700,
               ),
             ),

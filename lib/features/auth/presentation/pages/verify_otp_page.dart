@@ -1,4 +1,5 @@
 import 'package:alo_tho/app/app_routes.dart';
+import 'package:alo_tho/app/theme/app_theme.dart';
 import 'package:alo_tho/core/constants/app_spacing.dart';
 import 'package:alo_tho/core/l10n/app_localizations.dart';
 import 'package:alo_tho/core/preview/app_preview.dart';
@@ -140,7 +141,7 @@ class _VerifyOtpPageState extends ConsumerState<VerifyOtpPage> {
     }
 
     return Scaffold(
-      backgroundColor: const Color(0xFFFCF9F8),
+      backgroundColor: AppThemeColors.hex0xFFFCF9F8,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -168,7 +169,7 @@ class _VerifyOtpBottomSheet extends StatelessWidget {
         child: Align(
           alignment: Alignment.bottomCenter,
           child: Material(
-            color: const Color(0xFFFCF9F8),
+            color: AppThemeColors.hex0xFFFCF9F8,
             borderRadius: const BorderRadius.vertical(
               top: Radius.circular(AppRadius.xxxl),
             ),
@@ -185,7 +186,7 @@ class _VerifyOtpBottomSheet extends StatelessWidget {
                     width: 44,
                     height: 5,
                     decoration: BoxDecoration(
-                      color: const Color(0xFFD5C7C0),
+                      color: AppThemeColors.hex0xFFD5C7C0,
                       borderRadius: BorderRadius.circular(AppRadius.sm),
                     ),
                   ),
@@ -199,7 +200,7 @@ class _VerifyOtpBottomSheet extends StatelessWidget {
                             title,
                             textAlign: TextAlign.center,
                             style: theme.textTheme.titleMedium?.copyWith(
-                              color: const Color(0xFF1B1C1C),
+                              color: AppThemeColors.hex0xFF1B1C1C,
                               fontWeight: FontWeight.w800,
                             ),
                           ),
@@ -208,7 +209,7 @@ class _VerifyOtpBottomSheet extends StatelessWidget {
                           onPressed: () => Navigator.of(context).maybePop(),
                           icon: const Icon(
                             Icons.close_rounded,
-                            color: Color(0xFF7B6B64),
+                            color: AppThemeColors.hex0xFF7B6B64,
                           ),
                         ),
                       ],
@@ -263,7 +264,7 @@ class _VerifyOtpContent extends StatelessWidget {
                 borderRadius: BorderRadius.circular(AppRadius.xxxl),
                 boxShadow: const [
                   BoxShadow(
-                    color: Color(0x14000000),
+                    color: AppThemeColors.hex0x14000000,
                     blurRadius: 18,
                     offset: Offset(0, 8),
                   ),
@@ -276,19 +277,19 @@ class _VerifyOtpContent extends StatelessWidget {
                     width: 56,
                     height: 56,
                     decoration: const BoxDecoration(
-                      color: Color(0x14FF6B00),
+                      color: AppThemeColors.hex0x14FF6B00,
                       shape: BoxShape.circle,
                     ),
                     child: const Icon(
                       Icons.mark_email_unread_outlined,
-                      color: Color(0xFFA04100),
+                      color: AppThemeColors.hex0xFFA04100,
                     ),
                   ),
                   const SizedBox(height: 16),
                   Text(
                     l10n.verifyOtpHeadline,
                     style: theme.textTheme.headlineSmall?.copyWith(
-                      color: const Color(0xFF1B1C1C),
+                      color: AppThemeColors.hex0xFF1B1C1C,
                       fontWeight: FontWeight.w800,
                     ),
                   ),
@@ -298,7 +299,7 @@ class _VerifyOtpContent extends StatelessWidget {
                         ? l10n.verifyOtpDescriptionEmail
                         : l10n.verifyOtpDescriptionPhone,
                     style: theme.textTheme.bodyLarge?.copyWith(
-                      color: const Color(0xFF5A4136),
+                      color: AppThemeColors.hex0xFF5A4136,
                     ),
                   ),
                   const SizedBox(height: 16),
@@ -306,13 +307,13 @@ class _VerifyOtpContent extends StatelessWidget {
                     width: double.infinity,
                     padding: const EdgeInsets.all(14),
                     decoration: BoxDecoration(
-                      color: const Color(0xFFF6F3F2),
+                      color: AppThemeColors.hex0xFFF6F3F2,
                       borderRadius: BorderRadius.circular(AppRadius.sm),
                     ),
                     child: Text(
                       identifier,
                       style: theme.textTheme.titleMedium?.copyWith(
-                        color: const Color(0xFF3D2A21),
+                        color: AppThemeColors.hex0xFF3D2A21,
                         fontWeight: FontWeight.w700,
                       ),
                     ),
@@ -368,7 +369,7 @@ class _OtpFieldLabel extends StatelessWidget {
     return Text(
       label.toUpperCase(),
       style: Theme.of(context).textTheme.labelMedium?.copyWith(
-        color: const Color(0xFF5A4136),
+        color: AppThemeColors.hex0xFF5A4136,
         fontWeight: FontWeight.w800,
         letterSpacing: 0.55,
       ),
@@ -389,19 +390,19 @@ class _OtpTextField extends StatelessWidget {
       onChanged: onChanged,
       style: Theme.of(
         context,
-      ).textTheme.bodyLarge?.copyWith(color: const Color(0xFF3D2A21)),
+      ).textTheme.bodyLarge?.copyWith(color: AppThemeColors.hex0xFF3D2A21),
       decoration: InputDecoration(
         hintText: hintText,
         hintStyle: Theme.of(
           context,
-        ).textTheme.bodyLarge?.copyWith(color: const Color(0x998E7164)),
+        ).textTheme.bodyLarge?.copyWith(color: AppThemeColors.hex0x998E7164),
         prefixIcon: const Icon(
           Icons.password_rounded,
           size: 18,
-          color: Color(0xFF9A7A6D),
+          color: AppThemeColors.hex0xFF9A7A6D,
         ),
         filled: true,
-        fillColor: const Color(0xFFF6F3F2),
+        fillColor: AppThemeColors.hex0xFFF6F3F2,
         contentPadding: const EdgeInsets.symmetric(
           horizontal: 16,
           vertical: 18,
@@ -416,7 +417,10 @@ class _OtpTextField extends StatelessWidget {
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(AppRadius.xs),
-          borderSide: const BorderSide(color: Color(0xFFFF6B00), width: 1.2),
+          borderSide: const BorderSide(
+            color: AppThemeColors.hex0xFFFF6B00,
+            width: 1.2,
+          ),
         ),
       ),
     );
@@ -439,11 +443,14 @@ class _OtpPrimaryButton extends StatelessWidget {
           gradient: const LinearGradient(
             begin: Alignment.topLeft,
             end: Alignment.bottomRight,
-            colors: [Color(0xFFFF6B00), Color(0xFFA04100)],
+            colors: [
+              AppThemeColors.hex0xFFFF6B00,
+              AppThemeColors.hex0xFFA04100,
+            ],
           ),
           boxShadow: const [
             BoxShadow(
-              color: Color(0x33A04100),
+              color: AppThemeColors.hex0x33A04100,
               blurRadius: 15,
               offset: Offset(0, 8),
             ),

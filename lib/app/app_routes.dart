@@ -20,6 +20,7 @@ class AppRoutes {
 
   static const messagesName = 'messages';
   static const messagesPath = '/messages';
+  static const messageDetailName = 'message-detail';
 
   static const myWorkName = 'my-work';
   static const myWorkPath = '/my-work';
@@ -28,6 +29,8 @@ class AppRoutes {
   static const profilePath = '/profile';
 
   static String workerDetailPath(String workerId) => '$workersPath/$workerId';
+  static String messageDetailPath(String conversationId) =>
+      '$messagesPath/$conversationId';
 
   static bool isAuthPath(String location) {
     return location == splashPath ||

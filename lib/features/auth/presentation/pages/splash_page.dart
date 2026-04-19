@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+import 'package:alo_tho/app/theme/app_theme.dart';
 import 'package:alo_tho/core/constants/app_spacing.dart';
 import 'package:alo_tho/core/l10n/app_localizations.dart';
 import 'package:alo_tho/core/preview/app_preview.dart';
@@ -36,9 +37,9 @@ class SplashPage extends StatelessWidget {
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 colors: [
-                  Color(0x1AA04100),
-                  Color(0x66A04100),
-                  Color(0xE5A04100),
+                  AppThemeColors.hex0x1AA04100,
+                  AppThemeColors.hex0x66A04100,
+                  AppThemeColors.hex0xE5A04100,
                 ],
                 stops: [0.0, 0.58, 1.0],
               ),
@@ -49,14 +50,18 @@ class SplashPage extends StatelessWidget {
             bottom: -80,
             child: _GlowOrb(
               size: 256,
-              color: const Color(0x4DFF6B00),
+              color: AppThemeColors.hex0x4DFF6B00,
               blur: 50,
             ),
           ),
           const Positioned(
             right: -80,
             top: 80,
-            child: _GlowOrb(size: 192, color: Color(0x1AFFFFFF), blur: 40),
+            child: _GlowOrb(
+              size: 192,
+              color: AppThemeColors.hex0x1AFFFFFF,
+              blur: 40,
+            ),
           ),
           SafeArea(
             child: Padding(
@@ -110,7 +115,7 @@ class _BrandLockup extends StatelessWidget {
           borderRadius: BorderRadius.circular(AppRadius.hero),
           boxShadow: const [
             BoxShadow(
-              color: Color(0x40A04100),
+              color: AppThemeColors.hex0x40A04100,
               blurRadius: 40,
               offset: Offset(0, 12),
             ),
@@ -124,7 +129,7 @@ class _BrandLockup extends StatelessWidget {
               Text(
                 l10n.appWordmark,
                 style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                  color: const Color(0xFFA04100),
+                  color: AppThemeColors.hex0xFFA04100,
                   fontSize: AppTextSize.heroLarge,
                   height: 1,
                   letterSpacing: -2.4,
@@ -136,13 +141,13 @@ class _BrandLockup extends StatelessWidget {
                 width: 43,
                 height: 43,
                 decoration: const BoxDecoration(
-                  color: Color(0xFFFF6B00),
+                  color: AppThemeColors.hex0xFFFF6B00,
                   shape: BoxShape.circle,
                 ),
                 child: const Icon(
                   Icons.build_rounded,
                   size: 24,
-                  color: Color(0xFF5A2500),
+                  color: AppThemeColors.hex0xFF5A2500,
                 ),
               ),
             ],
@@ -186,7 +191,7 @@ class _Tagline extends StatelessWidget {
           width: 48,
           height: 4,
           decoration: BoxDecoration(
-            color: const Color(0xFFFE9A69),
+            color: AppThemeColors.hex0xFFFE9A69,
             borderRadius: BorderRadius.circular(AppRadius.pill),
           ),
         ),
@@ -214,7 +219,7 @@ class _LoadingPill extends StatelessWidget {
             border: Border.all(color: Colors.white.withValues(alpha: 0.20)),
             boxShadow: const [
               BoxShadow(
-                color: Color(0x29000000),
+                color: AppThemeColors.hex0x29000000,
                 blurRadius: 25,
                 offset: Offset(0, 12),
               ),
@@ -230,7 +235,9 @@ class _LoadingPill extends StatelessWidget {
                   height: 24,
                   child: CircularProgressIndicator(
                     strokeWidth: 2.8,
-                    valueColor: const AlwaysStoppedAnimation(Color(0xFFFF6B00)),
+                    valueColor: const AlwaysStoppedAnimation(
+                      AppThemeColors.hex0xFFFF6B00,
+                    ),
                     backgroundColor: Colors.transparent,
                   ),
                 ),
