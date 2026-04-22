@@ -1,4 +1,5 @@
 import 'package:alo_tho/core/constants/app_spacing.dart';
+import 'package:alo_tho/core/effects/ui_effect.dart';
 import 'package:alo_tho/core/l10n/app_localizations.dart';
 import 'package:alo_tho/core/preview/app_preview.dart';
 import 'package:alo_tho/core/widgets/app_error_view.dart';
@@ -29,19 +30,20 @@ class ProfilePage extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
 
-    ref.listen(profileControllerProvider, (previous, next) {
-      if (next.signOutErrorMessage != null &&
-          next.signOutErrorMessage != previous?.signOutErrorMessage) {
-        showAppStatusDialog(
-          context: context,
-          state: AppStatusDialogState.error,
-          title: appStatusDialogDefaultTitle(
-            context,
-            AppStatusDialogState.error,
-          ),
-          message: l10n.localizeFailureMessage(next.signOutErrorMessage!),
-        );
-      }
+    ref.listen(profileUiActionProvider, (_, next) {
+      next.whenData((action) {
+        if (action case ShowErrorMessage(:final message)) {
+          showAppStatusDialog(
+            context: context,
+            state: AppStatusDialogState.error,
+            title: appStatusDialogDefaultTitle(
+              context,
+              AppStatusDialogState.error,
+            ),
+            message: l10n.localizeFailureMessage(message),
+          );
+        }
+      });
     });
 
     final state = ref.watch(profileControllerProvider);

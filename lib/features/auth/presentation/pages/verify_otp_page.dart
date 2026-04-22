@@ -1,6 +1,9 @@
+import 'dart:async';
+
 import 'package:alo_tho/app/app_routes.dart';
 import 'package:alo_tho/app/theme/app_theme.dart';
 import 'package:alo_tho/core/constants/app_spacing.dart';
+import 'package:alo_tho/core/effects/ui_effect.dart';
 import 'package:alo_tho/core/l10n/app_localizations.dart';
 import 'package:alo_tho/core/preview/app_preview.dart';
 import 'package:alo_tho/core/widgets/app_page_body.dart';
@@ -61,32 +64,10 @@ class _VerifyOtpPageState extends ConsumerState<VerifyOtpPage> {
   Widget build(BuildContext context) {
     final l10n = context.l10n;
 
-    ref.listen(otpVerificationControllerProvider, (previous, next) {
-      if (next.errorMessage != null &&
-          next.errorMessage != previous?.errorMessage) {
-        showAppStatusDialog(
-          context: context,
-          state: AppStatusDialogState.error,
-          title: appStatusDialogDefaultTitle(
-            context,
-            AppStatusDialogState.error,
-          ),
-          message: l10n.localizeFailureMessage(next.errorMessage!),
-        );
-      }
-
-      if (next.infoMessage != null &&
-          next.infoMessage != previous?.infoMessage) {
-        showAppStatusDialog(
-          context: context,
-          state: AppStatusDialogState.success,
-          title: appStatusDialogDefaultTitle(
-            context,
-            AppStatusDialogState.success,
-          ),
-          message: l10n.localizeFailureMessage(next.infoMessage!),
-        );
-      }
+    ref.listen(otpVerificationUiActionProvider, (_, next) {
+      next.whenData((action) {
+        unawaited(_handleUiAction(action));
+      });
     });
 
     ref.listen(authSessionControllerProvider.select((state) => state.status), (
@@ -149,6 +130,38 @@ class _VerifyOtpPageState extends ConsumerState<VerifyOtpPage> {
       ),
       body: SafeArea(child: content),
     );
+  }
+
+  Future<void> _handleUiAction(UiEffect action) async {
+    if (!mounted) {
+      return;
+    }
+
+    final l10n = context.l10n;
+    switch (action) {
+      case ShowErrorMessage(:final message):
+        await showAppStatusDialog(
+          context: context,
+          state: AppStatusDialogState.error,
+          title: appStatusDialogDefaultTitle(
+            context,
+            AppStatusDialogState.error,
+          ),
+          message: l10n.localizeFailureMessage(message),
+        );
+      case ShowSuccessMessage(:final message):
+        await showAppStatusDialog(
+          context: context,
+          state: AppStatusDialogState.success,
+          title: appStatusDialogDefaultTitle(
+            context,
+            AppStatusDialogState.success,
+          ),
+          message: l10n.localizeFailureMessage(message),
+        );
+      case _:
+        return;
+    }
   }
 }
 

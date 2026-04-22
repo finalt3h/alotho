@@ -9,7 +9,6 @@ class ProfileState with _$ProfileState {
     @Default(true) bool isLoading,
     String? errorMessage,
     @Default(false) bool isSigningOut,
-    String? signOutErrorMessage,
     ProfileSummary? summary,
   }) = _ProfileState;
 }

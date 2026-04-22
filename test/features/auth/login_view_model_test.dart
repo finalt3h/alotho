@@ -1,3 +1,5 @@
+import 'package:alo_tho/core/effects/ui_effect.dart';
+import 'package:alo_tho/core/errors/failure.dart';
 import 'package:alo_tho/core/result/result.dart';
 import 'package:alo_tho/features/auth/data/repositories/supabase_auth_repository.dart';
 import 'package:alo_tho/features/auth/domain/entities/auth_registration_result.dart';
@@ -5,6 +7,7 @@ import 'package:alo_tho/features/auth/domain/entities/user.dart';
 import 'package:alo_tho/features/auth/domain/repositories/auth_repository.dart';
 import 'package:alo_tho/features/auth/presentation/viewmodels/auth_session_controller.dart';
 import 'package:alo_tho/features/auth/presentation/viewmodels/auth_session_state.dart';
+import 'package:alo_tho/features/auth/presentation/viewmodels/login_ui_action.dart';
 import 'package:alo_tho/features/auth/presentation/viewmodels/login_view_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -21,13 +24,24 @@ void main() {
       final notifier = container.read(loginControllerProvider.notifier);
       notifier.updateIdentifier('abc');
       notifier.updatePassword('123456');
+      final emittedActions = <UiEffect>[];
+      final subscription = notifier.actions.listen(emittedActions.add);
+      addTearDown(subscription.cancel);
 
       final result = await notifier.loginWithCredentials();
-      final state = container.read(loginControllerProvider);
+      await Future<void>.delayed(Duration.zero);
 
       expect(result, isFalse);
-      expect(state.errorMessage, 'So dien thoai hoac email chua hop le.');
       expect(fakeRepository.credentialsLoginCallCount, 0);
+      expect(emittedActions, hasLength(1));
+      expect(
+        emittedActions.single,
+        isA<ShowErrorMessage>().having(
+          (action) => action.message,
+          'message',
+          'So dien thoai hoac email chua hop le.',
+        ),
+      );
     });
 
     test('signs in successfully with valid credentials', () async {
@@ -67,12 +81,57 @@ void main() {
       expect(authState.status, AuthStatus.authenticated);
       expect(authState.user?.fullName, 'Test User');
     });
+
+    test(
+      'emits activation action when account requires otp activation',
+      () async {
+        final fakeRepository = _FakeAuthRepository()
+          ..credentialsLoginResult = const Error(
+            Failure(
+              'Tai khoan chua kich hoat. Vui long nhap OTP de kich hoat.',
+            ),
+          );
+        final container = ProviderContainer(
+          overrides: [authRepositoryProvider.overrideWithValue(fakeRepository)],
+        );
+        addTearDown(container.dispose);
+
+        final notifier = container.read(loginControllerProvider.notifier);
+        notifier.updateIdentifier('test@example.com');
+        notifier.updatePassword('123456');
+        final emittedActions = <UiEffect>[];
+        final subscription = notifier.actions.listen(emittedActions.add);
+        addTearDown(subscription.cancel);
+
+        final result = await notifier.loginWithCredentials();
+        await Future<void>.delayed(Duration.zero);
+
+        expect(result, isFalse);
+        expect(fakeRepository.credentialsLoginCallCount, 1);
+        expect(emittedActions, hasLength(1));
+        expect(
+          emittedActions.single,
+          isA<LoginRequiresActivationAction>()
+              .having(
+                (action) => action.identifier,
+                'identifier',
+                'test@example.com',
+              )
+              .having(
+                (action) => action.message,
+                'message',
+                'Tai khoan chua kich hoat. Vui long nhap OTP de kich hoat.',
+              ),
+        );
+      },
+    );
   });
 }
 
 class _FakeAuthRepository implements AuthRepository {
   int credentialsLoginCallCount = 0;
   int googleLoginCallCount = 0;
+  Result<User> credentialsLoginResult = Success(_testUser);
 
   @override
   Stream<User?> authStateChanges() => const Stream.empty();
@@ -125,7 +184,7 @@ class _FakeAuthRepository implements AuthRepository {
     required String password,
   }) async {
     credentialsLoginCallCount += 1;
-    return Success(_testUser.copyWith(phoneNumber: identifier));
+    return credentialsLoginResult;
   }
 
   @override

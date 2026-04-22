@@ -1,10 +1,14 @@
+import 'dart:async';
+
 import 'package:alo_tho/app/app_routes.dart';
 import 'package:alo_tho/app/theme/app_theme.dart';
 import 'package:alo_tho/core/constants/app_spacing.dart';
+import 'package:alo_tho/core/effects/ui_effect.dart';
 import 'package:alo_tho/core/l10n/app_localizations.dart';
 import 'package:alo_tho/core/preview/app_preview.dart';
 import 'package:alo_tho/core/widgets/app_status_dialog.dart';
 import 'package:alo_tho/features/auth/presentation/pages/verify_otp_page.dart';
+import 'package:alo_tho/features/auth/presentation/viewmodels/register_ui_action.dart';
 import 'package:alo_tho/features/auth/presentation/viewmodels/register_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -35,19 +39,10 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
     final l10n = context.l10n;
     final theme = Theme.of(context);
 
-    ref.listen(registerControllerProvider, (previous, next) {
-      if (next.errorMessage != null &&
-          next.errorMessage != previous?.errorMessage) {
-        showAppStatusDialog(
-          context: context,
-          state: AppStatusDialogState.error,
-          title: appStatusDialogDefaultTitle(
-            context,
-            AppStatusDialogState.error,
-          ),
-          message: l10n.localizeFailureMessage(next.errorMessage!),
-        );
-      }
+    ref.listen(registerUiActionProvider, (_, next) {
+      next.whenData((action) {
+        unawaited(_handleUiAction(action));
+      });
     });
 
     final state = ref.watch(registerControllerProvider);
@@ -195,38 +190,8 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
                       : l10n.createAccount,
                   onPressed: state.isSubmitting
                       ? null
-                      : () async {
-                          final submittedEmail = state.email.trim();
-                          final result = await controller
-                              .registerWithCredentials();
-                          if (!context.mounted || result == null) {
-                            return;
-                          }
-
-                          final successMessage = result.hasActiveSession
-                              ? l10n.registerSuccessSignedIn
-                              : l10n.registerSuccessVerifyEmail;
-
-                          await showAppStatusDialog(
-                            context: context,
-                            state: AppStatusDialogState.success,
-                            title: appStatusDialogDefaultTitle(
-                              context,
-                              AppStatusDialogState.success,
-                            ),
-                            message: successMessage,
-                          );
-
-                          if (!context.mounted) {
-                            return;
-                          }
-
-                          if (!result.hasActiveSession) {
-                            await showVerifyOtpBottomSheet(
-                              context,
-                              identifier: submittedEmail,
-                            );
-                          }
+                      : () {
+                          unawaited(controller.registerWithCredentials());
                         },
                 ),
                 const SizedBox(height: 14),
@@ -300,6 +265,53 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
         ],
       ),
     );
+  }
+
+  Future<void> _handleUiAction(UiEffect action) async {
+    if (!mounted) {
+      return;
+    }
+
+    final l10n = context.l10n;
+    switch (action) {
+      case ShowErrorMessage(:final message):
+        await showAppStatusDialog(
+          context: context,
+          state: AppStatusDialogState.error,
+          title: appStatusDialogDefaultTitle(
+            context,
+            AppStatusDialogState.error,
+          ),
+          message: l10n.localizeFailureMessage(message),
+        );
+      case RegisterRegistrationSucceededAction(
+        :final hasActiveSession,
+        :final identifier,
+      ):
+        final successMessage = hasActiveSession
+            ? l10n.registerSuccessSignedIn
+            : l10n.registerSuccessVerifyEmail;
+
+        await _handleUiAction(ShowSuccessMessage(successMessage));
+
+        if (!mounted || hasActiveSession) {
+          return;
+        }
+
+        await showVerifyOtpBottomSheet(context, identifier: identifier);
+      case ShowSuccessMessage(:final message):
+        await showAppStatusDialog(
+          context: context,
+          state: AppStatusDialogState.success,
+          title: appStatusDialogDefaultTitle(
+            context,
+            AppStatusDialogState.success,
+          ),
+          message: message,
+        );
+      case _:
+        return;
+    }
   }
 }
 

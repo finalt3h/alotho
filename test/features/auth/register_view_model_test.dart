@@ -1,4 +1,5 @@
 import 'package:alo_tho/core/result/result.dart';
+import 'package:alo_tho/core/effects/ui_effect.dart';
 import 'package:alo_tho/features/auth/data/repositories/supabase_auth_repository.dart';
 import 'package:alo_tho/features/auth/domain/entities/auth_registration_result.dart';
 import 'package:alo_tho/features/auth/domain/entities/user.dart';
@@ -24,12 +25,23 @@ void main() {
       notifier.updatePassword('123456');
       notifier.updateConfirmPassword('654321');
 
+      final emittedActions = <UiEffect>[];
+      final subscription = notifier.actions.listen(emittedActions.add);
+      addTearDown(subscription.cancel);
+
       final result = await notifier.registerWithCredentials();
-      final state = container.read(registerControllerProvider);
 
       expect(result, isNull);
-      expect(state.errorMessage, 'Mat khau xac nhan khong khop.');
       expect(fakeRepository.registerCallCount, 0);
+      expect(emittedActions, hasLength(1));
+      expect(
+        emittedActions.single,
+        isA<ShowErrorMessage>().having(
+          (action) => action.message,
+          'message',
+          'Mat khau xac nhan khong khop.',
+        ),
+      );
     });
 
     test('signs in immediately when sign up returns active session', () async {
@@ -71,6 +83,35 @@ void main() {
       expect(fakeRepository.googleLoginCallCount, 1);
       expect(authState.status, AuthStatus.authenticated);
       expect(authState.user?.fullName, 'Test User');
+    });
+
+    test('emits one-shot error action on every invalid submit', () async {
+      final fakeRepository = _FakeAuthRepository();
+      final container = ProviderContainer(
+        overrides: [authRepositoryProvider.overrideWithValue(fakeRepository)],
+      );
+      addTearDown(container.dispose);
+
+      final notifier = container.read(registerControllerProvider.notifier);
+      notifier.updateFullName('Test User');
+      notifier.updateEmail('invalid_email');
+      notifier.updatePassword('123456');
+      notifier.updateConfirmPassword('123456');
+
+      final emittedActions = <UiEffect>[];
+      final subscription = notifier.actions.listen(emittedActions.add);
+      addTearDown(subscription.cancel);
+
+      await notifier.registerWithCredentials();
+      await notifier.registerWithCredentials();
+
+      final errorActions = emittedActions.whereType<ShowErrorMessage>();
+      expect(errorActions, hasLength(2));
+      expect(
+        errorActions.every((action) => action.message == 'Email chua hop le.'),
+        isTrue,
+      );
+      expect(fakeRepository.registerCallCount, 0);
     });
   });
 }

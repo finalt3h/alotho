@@ -20,8 +20,6 @@ mixin _$OtpVerificationState {
   String get otp => throw _privateConstructorUsedError;
   bool get isSubmitting => throw _privateConstructorUsedError;
   bool get isResending => throw _privateConstructorUsedError;
-  String? get errorMessage => throw _privateConstructorUsedError;
-  String? get infoMessage => throw _privateConstructorUsedError;
 
   /// Create a copy of OtpVerificationState
   /// with the given fields replaced by the non-null parameter values.
@@ -37,13 +35,7 @@ abstract class $OtpVerificationStateCopyWith<$Res> {
     $Res Function(OtpVerificationState) then,
   ) = _$OtpVerificationStateCopyWithImpl<$Res, OtpVerificationState>;
   @useResult
-  $Res call({
-    String otp,
-    bool isSubmitting,
-    bool isResending,
-    String? errorMessage,
-    String? infoMessage,
-  });
+  $Res call({String otp, bool isSubmitting, bool isResending});
 }
 
 /// @nodoc
@@ -67,8 +59,6 @@ class _$OtpVerificationStateCopyWithImpl<
     Object? otp = null,
     Object? isSubmitting = null,
     Object? isResending = null,
-    Object? errorMessage = freezed,
-    Object? infoMessage = freezed,
   }) {
     return _then(
       _value.copyWith(
@@ -84,14 +74,6 @@ class _$OtpVerificationStateCopyWithImpl<
                 ? _value.isResending
                 : isResending // ignore: cast_nullable_to_non_nullable
                       as bool,
-            errorMessage: freezed == errorMessage
-                ? _value.errorMessage
-                : errorMessage // ignore: cast_nullable_to_non_nullable
-                      as String?,
-            infoMessage: freezed == infoMessage
-                ? _value.infoMessage
-                : infoMessage // ignore: cast_nullable_to_non_nullable
-                      as String?,
           )
           as $Val,
     );
@@ -107,13 +89,7 @@ abstract class _$$OtpVerificationStateImplCopyWith<$Res>
   ) = __$$OtpVerificationStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    String otp,
-    bool isSubmitting,
-    bool isResending,
-    String? errorMessage,
-    String? infoMessage,
-  });
+  $Res call({String otp, bool isSubmitting, bool isResending});
 }
 
 /// @nodoc
@@ -133,8 +109,6 @@ class __$$OtpVerificationStateImplCopyWithImpl<$Res>
     Object? otp = null,
     Object? isSubmitting = null,
     Object? isResending = null,
-    Object? errorMessage = freezed,
-    Object? infoMessage = freezed,
   }) {
     return _then(
       _$OtpVerificationStateImpl(
@@ -150,14 +124,6 @@ class __$$OtpVerificationStateImplCopyWithImpl<$Res>
             ? _value.isResending
             : isResending // ignore: cast_nullable_to_non_nullable
                   as bool,
-        errorMessage: freezed == errorMessage
-            ? _value.errorMessage
-            : errorMessage // ignore: cast_nullable_to_non_nullable
-                  as String?,
-        infoMessage: freezed == infoMessage
-            ? _value.infoMessage
-            : infoMessage // ignore: cast_nullable_to_non_nullable
-                  as String?,
       ),
     );
   }
@@ -170,8 +136,6 @@ class _$OtpVerificationStateImpl implements _OtpVerificationState {
     this.otp = '',
     this.isSubmitting = false,
     this.isResending = false,
-    this.errorMessage,
-    this.infoMessage,
   });
 
   @override
@@ -183,14 +147,10 @@ class _$OtpVerificationStateImpl implements _OtpVerificationState {
   @override
   @JsonKey()
   final bool isResending;
-  @override
-  final String? errorMessage;
-  @override
-  final String? infoMessage;
 
   @override
   String toString() {
-    return 'OtpVerificationState(otp: $otp, isSubmitting: $isSubmitting, isResending: $isResending, errorMessage: $errorMessage, infoMessage: $infoMessage)';
+    return 'OtpVerificationState(otp: $otp, isSubmitting: $isSubmitting, isResending: $isResending)';
   }
 
   @override
@@ -202,22 +162,11 @@ class _$OtpVerificationStateImpl implements _OtpVerificationState {
             (identical(other.isSubmitting, isSubmitting) ||
                 other.isSubmitting == isSubmitting) &&
             (identical(other.isResending, isResending) ||
-                other.isResending == isResending) &&
-            (identical(other.errorMessage, errorMessage) ||
-                other.errorMessage == errorMessage) &&
-            (identical(other.infoMessage, infoMessage) ||
-                other.infoMessage == infoMessage));
+                other.isResending == isResending));
   }
 
   @override
-  int get hashCode => Object.hash(
-    runtimeType,
-    otp,
-    isSubmitting,
-    isResending,
-    errorMessage,
-    infoMessage,
-  );
+  int get hashCode => Object.hash(runtimeType, otp, isSubmitting, isResending);
 
   /// Create a copy of OtpVerificationState
   /// with the given fields replaced by the non-null parameter values.
@@ -237,8 +186,6 @@ abstract class _OtpVerificationState implements OtpVerificationState {
     final String otp,
     final bool isSubmitting,
     final bool isResending,
-    final String? errorMessage,
-    final String? infoMessage,
   }) = _$OtpVerificationStateImpl;
 
   @override
@@ -247,10 +194,6 @@ abstract class _OtpVerificationState implements OtpVerificationState {
   bool get isSubmitting;
   @override
   bool get isResending;
-  @override
-  String? get errorMessage;
-  @override
-  String? get infoMessage;
 
   /// Create a copy of OtpVerificationState
   /// with the given fields replaced by the non-null parameter values.

@@ -12,6 +12,5 @@ class RegisterState with _$RegisterState {
     @Default('') String confirmPassword,
     @Default(false) bool isWorker,
     @Default(false) bool isSubmitting,
-    String? errorMessage,
   }) = _RegisterState;
 }

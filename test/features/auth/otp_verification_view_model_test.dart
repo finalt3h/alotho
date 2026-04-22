@@ -1,3 +1,4 @@
+import 'package:alo_tho/core/effects/ui_effect.dart';
 import 'package:alo_tho/core/result/result.dart';
 import 'package:alo_tho/features/auth/data/repositories/supabase_auth_repository.dart';
 import 'package:alo_tho/features/auth/domain/entities/auth_registration_result.dart';
@@ -43,14 +44,26 @@ void main() {
       final notifier = container.read(
         otpVerificationControllerProvider.notifier,
       );
+      final emittedActions = <UiEffect>[];
+      final subscription = notifier.actions.listen(emittedActions.add);
+      addTearDown(subscription.cancel);
+
       final result = await notifier.resendActivationOtp(
         identifier: 'test@example.com',
       );
-      final state = container.read(otpVerificationControllerProvider);
+      await Future<void>.delayed(Duration.zero);
 
       expect(result, isTrue);
       expect(fakeRepository.resendOtpCallCount, 1);
-      expect(state.infoMessage, 'Da gui lai ma OTP.');
+      expect(emittedActions, hasLength(1));
+      expect(
+        emittedActions.single,
+        isA<ShowSuccessMessage>().having(
+          (action) => action.message,
+          'message',
+          'Da gui lai ma OTP.',
+        ),
+      );
     });
   });
 }

@@ -24,7 +24,6 @@ mixin _$RegisterState {
   String get confirmPassword => throw _privateConstructorUsedError;
   bool get isWorker => throw _privateConstructorUsedError;
   bool get isSubmitting => throw _privateConstructorUsedError;
-  String? get errorMessage => throw _privateConstructorUsedError;
 
   /// Create a copy of RegisterState
   /// with the given fields replaced by the non-null parameter values.
@@ -48,7 +47,6 @@ abstract class $RegisterStateCopyWith<$Res> {
     String confirmPassword,
     bool isWorker,
     bool isSubmitting,
-    String? errorMessage,
   });
 }
 
@@ -74,7 +72,6 @@ class _$RegisterStateCopyWithImpl<$Res, $Val extends RegisterState>
     Object? confirmPassword = null,
     Object? isWorker = null,
     Object? isSubmitting = null,
-    Object? errorMessage = freezed,
   }) {
     return _then(
       _value.copyWith(
@@ -106,10 +103,6 @@ class _$RegisterStateCopyWithImpl<$Res, $Val extends RegisterState>
                 ? _value.isSubmitting
                 : isSubmitting // ignore: cast_nullable_to_non_nullable
                       as bool,
-            errorMessage: freezed == errorMessage
-                ? _value.errorMessage
-                : errorMessage // ignore: cast_nullable_to_non_nullable
-                      as String?,
           )
           as $Val,
     );
@@ -133,7 +126,6 @@ abstract class _$$RegisterStateImplCopyWith<$Res>
     String confirmPassword,
     bool isWorker,
     bool isSubmitting,
-    String? errorMessage,
   });
 }
 
@@ -158,7 +150,6 @@ class __$$RegisterStateImplCopyWithImpl<$Res>
     Object? confirmPassword = null,
     Object? isWorker = null,
     Object? isSubmitting = null,
-    Object? errorMessage = freezed,
   }) {
     return _then(
       _$RegisterStateImpl(
@@ -190,10 +181,6 @@ class __$$RegisterStateImplCopyWithImpl<$Res>
             ? _value.isSubmitting
             : isSubmitting // ignore: cast_nullable_to_non_nullable
                   as bool,
-        errorMessage: freezed == errorMessage
-            ? _value.errorMessage
-            : errorMessage // ignore: cast_nullable_to_non_nullable
-                  as String?,
       ),
     );
   }
@@ -210,7 +197,6 @@ class _$RegisterStateImpl implements _RegisterState {
     this.confirmPassword = '',
     this.isWorker = false,
     this.isSubmitting = false,
-    this.errorMessage,
   });
 
   @override
@@ -234,12 +220,10 @@ class _$RegisterStateImpl implements _RegisterState {
   @override
   @JsonKey()
   final bool isSubmitting;
-  @override
-  final String? errorMessage;
 
   @override
   String toString() {
-    return 'RegisterState(fullName: $fullName, email: $email, phoneNumber: $phoneNumber, password: $password, confirmPassword: $confirmPassword, isWorker: $isWorker, isSubmitting: $isSubmitting, errorMessage: $errorMessage)';
+    return 'RegisterState(fullName: $fullName, email: $email, phoneNumber: $phoneNumber, password: $password, confirmPassword: $confirmPassword, isWorker: $isWorker, isSubmitting: $isSubmitting)';
   }
 
   @override
@@ -259,9 +243,7 @@ class _$RegisterStateImpl implements _RegisterState {
             (identical(other.isWorker, isWorker) ||
                 other.isWorker == isWorker) &&
             (identical(other.isSubmitting, isSubmitting) ||
-                other.isSubmitting == isSubmitting) &&
-            (identical(other.errorMessage, errorMessage) ||
-                other.errorMessage == errorMessage));
+                other.isSubmitting == isSubmitting));
   }
 
   @override
@@ -274,7 +256,6 @@ class _$RegisterStateImpl implements _RegisterState {
     confirmPassword,
     isWorker,
     isSubmitting,
-    errorMessage,
   );
 
   /// Create a copy of RegisterState
@@ -295,7 +276,6 @@ abstract class _RegisterState implements RegisterState {
     final String confirmPassword,
     final bool isWorker,
     final bool isSubmitting,
-    final String? errorMessage,
   }) = _$RegisterStateImpl;
 
   @override
@@ -312,8 +292,6 @@ abstract class _RegisterState implements RegisterState {
   bool get isWorker;
   @override
   bool get isSubmitting;
-  @override
-  String? get errorMessage;
 
   /// Create a copy of RegisterState
   /// with the given fields replaced by the non-null parameter values.

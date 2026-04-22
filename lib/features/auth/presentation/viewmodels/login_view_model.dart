@@ -1,6 +1,10 @@
+import 'dart:async';
+
 import 'package:alo_tho/core/constants/app_constants.dart';
+import 'package:alo_tho/core/effects/ui_effect.dart';
 import 'package:alo_tho/features/auth/data/repositories/supabase_auth_repository.dart';
 import 'package:alo_tho/features/auth/presentation/viewmodels/auth_session_controller.dart';
+import 'package:alo_tho/features/auth/presentation/viewmodels/login_ui_action.dart';
 import 'package:alo_tho/features/auth/presentation/viewmodels/login_state.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -8,29 +12,39 @@ final loginControllerProvider = NotifierProvider<LoginController, LoginState>(
   LoginController.new,
 );
 
+final loginUiActionProvider = StreamProvider<UiEffect>((ref) {
+  return ref.watch(loginControllerProvider.notifier).actions;
+});
+
 /// Handles sign-in form state and delegates the actual auth work to the repository.
 class LoginController extends Notifier<LoginState> {
+  final StreamController<UiEffect> _actionsController =
+      StreamController<UiEffect>.broadcast();
+
+  Stream<UiEffect> get actions => _actionsController.stream;
+
   @override
-  LoginState build() => const LoginState();
+  LoginState build() {
+    ref.onDispose(_actionsController.close);
+    return const LoginState();
+  }
+
+  void _emitAction(UiEffect action) {
+    if (!_actionsController.isClosed) {
+      _actionsController.add(action);
+    }
+  }
+
+  void _emitError(String message) {
+    _emitAction(ShowErrorMessage(message));
+  }
 
   void updateIdentifier(String value) {
-    state = state.copyWith(
-      identifier: value,
-      errorMessage: null,
-      pendingActivationIdentifier: null,
-    );
+    state = state.copyWith(identifier: value);
   }
 
   void updatePassword(String value) {
-    state = state.copyWith(
-      password: value,
-      errorMessage: null,
-      pendingActivationIdentifier: null,
-    );
-  }
-
-  void clearPendingActivation() {
-    state = state.copyWith(pendingActivationIdentifier: null);
+    state = state.copyWith(password: value);
   }
 
   Future<bool> loginWithCredentials() async {
@@ -38,18 +52,16 @@ class LoginController extends Notifier<LoginState> {
     final password = state.password.trim();
 
     if (!_isValidIdentifier(normalizedIdentifier)) {
-      state = state.copyWith(
-        errorMessage: 'So dien thoai hoac email chua hop le.',
-      );
+      _emitError('So dien thoai hoac email chua hop le.');
       return false;
     }
 
     if (password.length < AppConstants.minimumPasswordLength) {
-      state = state.copyWith(errorMessage: 'Mat khau chua hop le.');
+      _emitError('Mat khau chua hop le.');
       return false;
     }
 
-    state = state.copyWith(isSubmitting: true, errorMessage: null);
+    state = state.copyWith(isSubmitting: true);
 
     final result = await ref
         .read(authRepositoryProvider)
@@ -66,12 +78,16 @@ class LoginController extends Notifier<LoginState> {
         return true;
       },
       failure: (failure) {
-        state = state.copyWith(
-          errorMessage: failure.message,
-          pendingActivationIdentifier: _requiresActivation(failure.message)
-              ? normalizedIdentifier
-              : null,
-        );
+        if (_requiresActivation(failure.message)) {
+          _emitAction(
+            LoginRequiresActivationAction(
+              identifier: normalizedIdentifier,
+              message: failure.message,
+            ),
+          );
+        } else {
+          _emitError(failure.message);
+        }
         return false;
       },
     );
@@ -97,7 +113,7 @@ class LoginController extends Notifier<LoginState> {
   }
 
   Future<bool> loginWithGoogle() async {
-    state = state.copyWith(isSubmitting: true, errorMessage: null);
+    state = state.copyWith(isSubmitting: true);
 
     final result = await ref.read(authRepositoryProvider).loginWithGoogle();
 
@@ -109,7 +125,7 @@ class LoginController extends Notifier<LoginState> {
         return true;
       },
       failure: (failure) {
-        state = state.copyWith(errorMessage: failure.message);
+        _emitError(failure.message);
         return false;
       },
     );

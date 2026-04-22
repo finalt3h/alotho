@@ -1,40 +1,66 @@
+import 'dart:async';
+
 import 'package:alo_tho/core/constants/app_constants.dart';
+import 'package:alo_tho/core/effects/ui_effect.dart';
 import 'package:alo_tho/features/auth/data/repositories/supabase_auth_repository.dart';
 import 'package:alo_tho/features/auth/domain/entities/auth_registration_result.dart';
 import 'package:alo_tho/features/auth/domain/entities/user.dart';
 import 'package:alo_tho/features/auth/presentation/viewmodels/auth_session_controller.dart';
+import 'package:alo_tho/features/auth/presentation/viewmodels/register_ui_action.dart';
 import 'package:alo_tho/features/auth/presentation/viewmodels/register_state.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 final registerControllerProvider =
     NotifierProvider<RegisterController, RegisterState>(RegisterController.new);
 
+final registerUiActionProvider = StreamProvider<UiEffect>((ref) {
+  return ref.watch(registerControllerProvider.notifier).actions;
+});
+
 class RegisterController extends Notifier<RegisterState> {
+  final StreamController<UiEffect> _actionsController =
+      StreamController<UiEffect>.broadcast();
+
+  Stream<UiEffect> get actions => _actionsController.stream;
+
   @override
-  RegisterState build() => const RegisterState();
+  RegisterState build() {
+    ref.onDispose(_actionsController.close);
+    return const RegisterState();
+  }
+
+  void _emitAction(UiEffect action) {
+    if (!_actionsController.isClosed) {
+      _actionsController.add(action);
+    }
+  }
+
+  void _emitError(String message) {
+    _emitAction(ShowErrorMessage(message));
+  }
 
   void updateFullName(String value) {
-    state = state.copyWith(fullName: value, errorMessage: null);
+    state = state.copyWith(fullName: value);
   }
 
   void updateEmail(String value) {
-    state = state.copyWith(email: value, errorMessage: null);
+    state = state.copyWith(email: value);
   }
 
   void updatePhoneNumber(String value) {
-    state = state.copyWith(phoneNumber: value, errorMessage: null);
+    state = state.copyWith(phoneNumber: value);
   }
 
   void updatePassword(String value) {
-    state = state.copyWith(password: value, errorMessage: null);
+    state = state.copyWith(password: value);
   }
 
   void updateConfirmPassword(String value) {
-    state = state.copyWith(confirmPassword: value, errorMessage: null);
+    state = state.copyWith(confirmPassword: value);
   }
 
   void updateAccountType({required bool isWorker}) {
-    state = state.copyWith(isWorker: isWorker, errorMessage: null);
+    state = state.copyWith(isWorker: isWorker);
   }
 
   Future<AuthRegistrationResult?> registerWithCredentials() async {
@@ -46,31 +72,31 @@ class RegisterController extends Notifier<RegisterState> {
     final isWorker = state.isWorker;
 
     if (fullName.isEmpty) {
-      state = state.copyWith(errorMessage: 'Ho ten chua hop le.');
+      _emitError('Ho ten chua hop le.');
       return null;
     }
 
     if (!_isValidEmail(email)) {
-      state = state.copyWith(errorMessage: 'Email chua hop le.');
+      _emitError('Email chua hop le.');
       return null;
     }
 
     if (phoneNumber.isNotEmpty && !_isValidPhoneNumber(phoneNumber)) {
-      state = state.copyWith(errorMessage: 'So dien thoai chua hop le.');
+      _emitError('So dien thoai chua hop le.');
       return null;
     }
 
     if (password.length < AppConstants.minimumPasswordLength) {
-      state = state.copyWith(errorMessage: 'Mat khau chua hop le.');
+      _emitError('Mat khau chua hop le.');
       return null;
     }
 
     if (confirmPassword != password) {
-      state = state.copyWith(errorMessage: 'Mat khau xac nhan khong khop.');
+      _emitError('Mat khau xac nhan khong khop.');
       return null;
     }
 
-    state = state.copyWith(isSubmitting: true, errorMessage: null);
+    state = state.copyWith(isSubmitting: true);
 
     final result = await ref
         .read(authRepositoryProvider)
@@ -90,17 +116,23 @@ class RegisterController extends Notifier<RegisterState> {
         if (registrationResult.hasActiveSession && user != null) {
           ref.read(authSessionControllerProvider.notifier).signIn(user);
         }
+        _emitAction(
+          RegisterRegistrationSucceededAction(
+            hasActiveSession: registrationResult.hasActiveSession,
+            identifier: email,
+          ),
+        );
         return registrationResult;
       },
       failure: (failure) {
-        state = state.copyWith(errorMessage: failure.message);
+        _emitError(failure.message);
         return null;
       },
     );
   }
 
   Future<User?> loginWithGoogle() async {
-    state = state.copyWith(isSubmitting: true, errorMessage: null);
+    state = state.copyWith(isSubmitting: true);
 
     final result = await ref.read(authRepositoryProvider).loginWithGoogle();
 
@@ -112,7 +144,7 @@ class RegisterController extends Notifier<RegisterState> {
         return user;
       },
       failure: (failure) {
-        state = state.copyWith(errorMessage: failure.message);
+        _emitError(failure.message);
         return null;
       },
     );

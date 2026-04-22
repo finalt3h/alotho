@@ -8,7 +8,5 @@ class OtpVerificationState with _$OtpVerificationState {
     @Default('') String otp,
     @Default(false) bool isSubmitting,
     @Default(false) bool isResending,
-    String? errorMessage,
-    String? infoMessage,
   }) = _OtpVerificationState;
 }

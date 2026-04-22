@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:alo_tho/core/effects/ui_effect.dart';
 import 'package:alo_tho/features/auth/data/repositories/supabase_auth_repository.dart';
 import 'package:alo_tho/features/auth/presentation/viewmodels/auth_session_controller.dart';
 import 'package:alo_tho/features/auth/presentation/viewmodels/otp_verification_state.dart';
@@ -8,26 +11,48 @@ final otpVerificationControllerProvider =
       OtpVerificationController.new,
     );
 
+final otpVerificationUiActionProvider = StreamProvider<UiEffect>((ref) {
+  return ref.watch(otpVerificationControllerProvider.notifier).actions;
+});
+
 class OtpVerificationController extends Notifier<OtpVerificationState> {
+  final StreamController<UiEffect> _actionsController =
+      StreamController<UiEffect>.broadcast();
+
+  Stream<UiEffect> get actions => _actionsController.stream;
+
   @override
-  OtpVerificationState build() => const OtpVerificationState();
+  OtpVerificationState build() {
+    ref.onDispose(_actionsController.close);
+    return const OtpVerificationState();
+  }
+
+  void _emitError(String message) {
+    if (_actionsController.isClosed) {
+      return;
+    }
+    _actionsController.add(ShowErrorMessage(message));
+  }
+
+  void _emitSuccess(String message) {
+    if (_actionsController.isClosed) {
+      return;
+    }
+    _actionsController.add(ShowSuccessMessage(message));
+  }
 
   void updateOtp(String value) {
-    state = state.copyWith(otp: value, errorMessage: null, infoMessage: null);
+    state = state.copyWith(otp: value);
   }
 
   Future<bool> verifyActivationOtp({required String identifier}) async {
     final otp = state.otp.trim();
     if (otp.length < 6) {
-      state = state.copyWith(errorMessage: 'Ma OTP chua hop le.');
+      _emitError('Ma OTP chua hop le.');
       return false;
     }
 
-    state = state.copyWith(
-      isSubmitting: true,
-      errorMessage: null,
-      infoMessage: null,
-    );
+    state = state.copyWith(isSubmitting: true);
 
     final result = await ref
         .read(authRepositoryProvider)
@@ -41,7 +66,7 @@ class OtpVerificationController extends Notifier<OtpVerificationState> {
         return true;
       },
       failure: (failure) {
-        state = state.copyWith(errorMessage: failure.message);
+        _emitError(failure.message);
         return false;
       },
     );
@@ -52,11 +77,7 @@ class OtpVerificationController extends Notifier<OtpVerificationState> {
       return false;
     }
 
-    state = state.copyWith(
-      isResending: true,
-      errorMessage: null,
-      infoMessage: null,
-    );
+    state = state.copyWith(isResending: true);
 
     final result = await ref
         .read(authRepositoryProvider)
@@ -66,11 +87,11 @@ class OtpVerificationController extends Notifier<OtpVerificationState> {
 
     return result.when(
       success: (_) {
-        state = state.copyWith(infoMessage: 'Da gui lai ma OTP.');
+        _emitSuccess('Da gui lai ma OTP.');
         return true;
       },
       failure: (failure) {
-        state = state.copyWith(errorMessage: failure.message);
+        _emitError(failure.message);
         return false;
       },
     );

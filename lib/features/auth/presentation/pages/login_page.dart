@@ -1,10 +1,14 @@
+import 'dart:async';
+
 import 'package:alo_tho/app/app_routes.dart';
 import 'package:alo_tho/app/theme/app_theme.dart';
 import 'package:alo_tho/core/constants/app_spacing.dart';
+import 'package:alo_tho/core/effects/ui_effect.dart';
 import 'package:alo_tho/core/l10n/app_localizations.dart';
 import 'package:alo_tho/core/preview/app_preview.dart';
 import 'package:alo_tho/core/widgets/app_page_body.dart';
 import 'package:alo_tho/core/widgets/app_status_dialog.dart';
+import 'package:alo_tho/features/auth/presentation/viewmodels/login_ui_action.dart';
 import 'package:alo_tho/features/auth/presentation/viewmodels/login_view_model.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -36,46 +40,10 @@ class _LoginPageState extends ConsumerState<LoginPage> {
   Widget build(BuildContext context) {
     final l10n = context.l10n;
 
-    ref.listen(loginControllerProvider, (previous, next) {
-      if (next.pendingActivationIdentifier != null &&
-          next.pendingActivationIdentifier !=
-              previous?.pendingActivationIdentifier) {
-        final identifier = next.pendingActivationIdentifier!;
-        final message = l10n.localizeFailureMessage(next.errorMessage ?? '');
-
-        ref.read(loginControllerProvider.notifier).clearPendingActivation();
-
-        showAppStatusDialog(
-          context: context,
-          state: AppStatusDialogState.alert,
-          title: appStatusDialogDefaultTitle(
-            context,
-            AppStatusDialogState.alert,
-          ),
-          message: message,
-          onPositivePressed: () {
-            if (!context.mounted) {
-              return;
-            }
-            context.go(
-              '${AppRoutes.verifyOtpPath}?identifier=${Uri.encodeComponent(identifier)}',
-            );
-          },
-        );
-        return;
-      }
-
-      if (next.errorMessage != null) {
-        showAppStatusDialog(
-          context: context,
-          state: AppStatusDialogState.error,
-          title: appStatusDialogDefaultTitle(
-            context,
-            AppStatusDialogState.error,
-          ),
-          message: l10n.localizeFailureMessage(next.errorMessage!),
-        );
-      }
+    ref.listen(loginUiActionProvider, (_, next) {
+      next.whenData((action) {
+        unawaited(_handleUiAction(action));
+      });
     });
 
     final theme = Theme.of(context);
@@ -325,6 +293,46 @@ class _LoginPageState extends ConsumerState<LoginPage> {
       title: appStatusDialogDefaultTitle(context, AppStatusDialogState.alert),
       message: l10n.authActionPlaceholder,
     );
+  }
+
+  Future<void> _handleUiAction(UiEffect action) async {
+    if (!mounted) {
+      return;
+    }
+
+    final l10n = context.l10n;
+    switch (action) {
+      case ShowErrorMessage(:final message):
+        await showAppStatusDialog(
+          context: context,
+          state: AppStatusDialogState.error,
+          title: appStatusDialogDefaultTitle(
+            context,
+            AppStatusDialogState.error,
+          ),
+          message: l10n.localizeFailureMessage(message),
+        );
+      case LoginRequiresActivationAction(:final identifier, :final message):
+        await showAppStatusDialog(
+          context: context,
+          state: AppStatusDialogState.alert,
+          title: appStatusDialogDefaultTitle(
+            context,
+            AppStatusDialogState.alert,
+          ),
+          message: l10n.localizeFailureMessage(message),
+          onPositivePressed: () {
+            if (!context.mounted) {
+              return;
+            }
+            context.go(
+              '${AppRoutes.verifyOtpPath}?identifier=${Uri.encodeComponent(identifier)}',
+            );
+          },
+        );
+      case _:
+        return;
+    }
   }
 }
 

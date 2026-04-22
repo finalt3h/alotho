@@ -29,7 +29,6 @@ void main() {
       expect(fakeRepository.signOutCallCount, 1);
       expect(authState.status, AuthStatus.unauthenticated);
       expect(profileState.isSigningOut, isFalse);
-      expect(profileState.signOutErrorMessage, isNull);
     });
   });
 }

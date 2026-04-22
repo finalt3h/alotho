@@ -20,8 +20,6 @@ mixin _$LoginState {
   String get identifier => throw _privateConstructorUsedError;
   String get password => throw _privateConstructorUsedError;
   bool get isSubmitting => throw _privateConstructorUsedError;
-  String? get errorMessage => throw _privateConstructorUsedError;
-  String? get pendingActivationIdentifier => throw _privateConstructorUsedError;
 
   /// Create a copy of LoginState
   /// with the given fields replaced by the non-null parameter values.
@@ -37,13 +35,7 @@ abstract class $LoginStateCopyWith<$Res> {
     $Res Function(LoginState) then,
   ) = _$LoginStateCopyWithImpl<$Res, LoginState>;
   @useResult
-  $Res call({
-    String identifier,
-    String password,
-    bool isSubmitting,
-    String? errorMessage,
-    String? pendingActivationIdentifier,
-  });
+  $Res call({String identifier, String password, bool isSubmitting});
 }
 
 /// @nodoc
@@ -64,8 +56,6 @@ class _$LoginStateCopyWithImpl<$Res, $Val extends LoginState>
     Object? identifier = null,
     Object? password = null,
     Object? isSubmitting = null,
-    Object? errorMessage = freezed,
-    Object? pendingActivationIdentifier = freezed,
   }) {
     return _then(
       _value.copyWith(
@@ -81,14 +71,6 @@ class _$LoginStateCopyWithImpl<$Res, $Val extends LoginState>
                 ? _value.isSubmitting
                 : isSubmitting // ignore: cast_nullable_to_non_nullable
                       as bool,
-            errorMessage: freezed == errorMessage
-                ? _value.errorMessage
-                : errorMessage // ignore: cast_nullable_to_non_nullable
-                      as String?,
-            pendingActivationIdentifier: freezed == pendingActivationIdentifier
-                ? _value.pendingActivationIdentifier
-                : pendingActivationIdentifier // ignore: cast_nullable_to_non_nullable
-                      as String?,
           )
           as $Val,
     );
@@ -104,13 +86,7 @@ abstract class _$$LoginStateImplCopyWith<$Res>
   ) = __$$LoginStateImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({
-    String identifier,
-    String password,
-    bool isSubmitting,
-    String? errorMessage,
-    String? pendingActivationIdentifier,
-  });
+  $Res call({String identifier, String password, bool isSubmitting});
 }
 
 /// @nodoc
@@ -130,8 +106,6 @@ class __$$LoginStateImplCopyWithImpl<$Res>
     Object? identifier = null,
     Object? password = null,
     Object? isSubmitting = null,
-    Object? errorMessage = freezed,
-    Object? pendingActivationIdentifier = freezed,
   }) {
     return _then(
       _$LoginStateImpl(
@@ -147,14 +121,6 @@ class __$$LoginStateImplCopyWithImpl<$Res>
             ? _value.isSubmitting
             : isSubmitting // ignore: cast_nullable_to_non_nullable
                   as bool,
-        errorMessage: freezed == errorMessage
-            ? _value.errorMessage
-            : errorMessage // ignore: cast_nullable_to_non_nullable
-                  as String?,
-        pendingActivationIdentifier: freezed == pendingActivationIdentifier
-            ? _value.pendingActivationIdentifier
-            : pendingActivationIdentifier // ignore: cast_nullable_to_non_nullable
-                  as String?,
       ),
     );
   }
@@ -167,8 +133,6 @@ class _$LoginStateImpl implements _LoginState {
     this.identifier = '',
     this.password = '',
     this.isSubmitting = false,
-    this.errorMessage,
-    this.pendingActivationIdentifier,
   });
 
   @override
@@ -180,14 +144,10 @@ class _$LoginStateImpl implements _LoginState {
   @override
   @JsonKey()
   final bool isSubmitting;
-  @override
-  final String? errorMessage;
-  @override
-  final String? pendingActivationIdentifier;
 
   @override
   String toString() {
-    return 'LoginState(identifier: $identifier, password: $password, isSubmitting: $isSubmitting, errorMessage: $errorMessage, pendingActivationIdentifier: $pendingActivationIdentifier)';
+    return 'LoginState(identifier: $identifier, password: $password, isSubmitting: $isSubmitting)';
   }
 
   @override
@@ -200,26 +160,12 @@ class _$LoginStateImpl implements _LoginState {
             (identical(other.password, password) ||
                 other.password == password) &&
             (identical(other.isSubmitting, isSubmitting) ||
-                other.isSubmitting == isSubmitting) &&
-            (identical(other.errorMessage, errorMessage) ||
-                other.errorMessage == errorMessage) &&
-            (identical(
-                  other.pendingActivationIdentifier,
-                  pendingActivationIdentifier,
-                ) ||
-                other.pendingActivationIdentifier ==
-                    pendingActivationIdentifier));
+                other.isSubmitting == isSubmitting));
   }
 
   @override
-  int get hashCode => Object.hash(
-    runtimeType,
-    identifier,
-    password,
-    isSubmitting,
-    errorMessage,
-    pendingActivationIdentifier,
-  );
+  int get hashCode =>
+      Object.hash(runtimeType, identifier, password, isSubmitting);
 
   /// Create a copy of LoginState
   /// with the given fields replaced by the non-null parameter values.
@@ -235,8 +181,6 @@ abstract class _LoginState implements LoginState {
     final String identifier,
     final String password,
     final bool isSubmitting,
-    final String? errorMessage,
-    final String? pendingActivationIdentifier,
   }) = _$LoginStateImpl;
 
   @override
@@ -245,10 +189,6 @@ abstract class _LoginState implements LoginState {
   String get password;
   @override
   bool get isSubmitting;
-  @override
-  String? get errorMessage;
-  @override
-  String? get pendingActivationIdentifier;
 
   /// Create a copy of LoginState
   /// with the given fields replaced by the non-null parameter values.
