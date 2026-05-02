@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:alo_tho/core/constants/app_constants.dart';
 import 'package:alo_tho/core/effects/ui_effect.dart';
+import 'package:alo_tho/features/auth/data/datasources/login_identifier_local_data_source.dart';
 import 'package:alo_tho/features/auth/data/repositories/supabase_auth_repository.dart';
 import 'package:alo_tho/features/auth/presentation/viewmodels/auth_session_controller.dart';
 import 'package:alo_tho/features/auth/presentation/viewmodels/login_ui_action.dart';
@@ -26,6 +27,7 @@ class LoginController extends Notifier<LoginState> {
   @override
   LoginState build() {
     ref.onDispose(_actionsController.close);
+    unawaited(_restoreLastLoginIdentifier());
     return const LoginState();
   }
 
@@ -73,11 +75,14 @@ class LoginController extends Notifier<LoginState> {
     state = state.copyWith(isSubmitting: false);
 
     return result.when(
-      success: (user) {
+      success: (user) async {
+        await ref
+            .read(loginIdentifierLocalDataSourceProvider)
+            .saveLastLoginIdentifier(normalizedIdentifier);
         ref.read(authSessionControllerProvider.notifier).signIn(user);
         return true;
       },
-      failure: (failure) {
+      failure: (failure) async {
         if (_requiresActivation(failure.message)) {
           _emitAction(
             LoginRequiresActivationAction(
@@ -129,5 +134,16 @@ class LoginController extends Notifier<LoginState> {
         return false;
       },
     );
+  }
+
+  Future<void> _restoreLastLoginIdentifier() async {
+    final identifier = await ref
+        .read(loginIdentifierLocalDataSourceProvider)
+        .getLastLoginIdentifier();
+    if (identifier.isEmpty || state.identifier.isNotEmpty) {
+      return;
+    }
+
+    state = state.copyWith(identifier: identifier);
   }
 }

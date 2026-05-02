@@ -1,28 +1,57 @@
+import 'package:alo_tho/core/utils/json_readers.dart';
 import 'package:alo_tho/features/chat/domain/entities/chat_preview.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'chat_preview_model.freezed.dart';
-part 'chat_preview_model.g.dart';
+class ChatPreviewModel {
+  const ChatPreviewModel({
+    required this.id,
+    required this.conversationId,
+    required this.workerId,
+    required this.workerName,
+    required this.workerAvatarUrl,
+    required this.professionTitle,
+    required this.lastMessage,
+    required this.updatedAt,
+    required this.isRead,
+    required this.unreadCount,
+  });
 
-@freezed
-class ChatPreviewModel with _$ChatPreviewModel {
-  const ChatPreviewModel._();
-
-  const factory ChatPreviewModel({
-    required String id,
-    required String conversationId,
-    required String workerId,
-    required String workerName,
-    required String workerAvatarUrl,
-    required String professionTitle,
-    required String lastMessage,
-    required DateTime updatedAt,
-    required bool isRead,
-    required int unreadCount,
-  }) = _ChatPreviewModel;
+  final String id;
+  final String conversationId;
+  final String workerId;
+  final String workerName;
+  final String workerAvatarUrl;
+  final String professionTitle;
+  final String lastMessage;
+  final DateTime updatedAt;
+  final bool isRead;
+  final int unreadCount;
 
   factory ChatPreviewModel.fromJson(Map<String, dynamic> json) =>
-      _$ChatPreviewModelFromJson(json);
+      ChatPreviewModel(
+        id: readString(json, 'id'),
+        conversationId: readString(json, 'conversationId'),
+        workerId: readString(json, 'workerId'),
+        workerName: readString(json, 'workerName'),
+        workerAvatarUrl: readString(json, 'workerAvatarUrl'),
+        professionTitle: readString(json, 'professionTitle'),
+        lastMessage: readString(json, 'lastMessage'),
+        updatedAt: readDateTime(json, 'updatedAt'),
+        isRead: readBool(json, 'isRead'),
+        unreadCount: readInt(json, 'unreadCount'),
+      );
+
+  Map<String, dynamic> toJson() => {
+    'id': id,
+    'conversationId': conversationId,
+    'workerId': workerId,
+    'workerName': workerName,
+    'workerAvatarUrl': workerAvatarUrl,
+    'professionTitle': professionTitle,
+    'lastMessage': lastMessage,
+    'updatedAt': updatedAt.toIso8601String(),
+    'isRead': isRead,
+    'unreadCount': unreadCount,
+  };
 
   ChatPreview toEntity() => ChatPreview(
     id: id,

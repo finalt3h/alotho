@@ -1,19 +1,51 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
+class ChatPreview {
+  const ChatPreview({
+    required this.id,
+    required this.conversationId,
+    required this.workerId,
+    required this.workerName,
+    required this.workerAvatarUrl,
+    required this.professionTitle,
+    required this.lastMessage,
+    required this.updatedAt,
+    required this.isRead,
+    required this.unreadCount,
+  });
 
-part 'chat_preview.freezed.dart';
+  final String id;
+  final String conversationId;
+  final String workerId;
+  final String workerName;
+  final String workerAvatarUrl;
+  final String professionTitle;
+  final String lastMessage;
+  final DateTime updatedAt;
+  final bool isRead;
+  final int unreadCount;
 
-@freezed
-class ChatPreview with _$ChatPreview {
-  const factory ChatPreview({
-    required String id,
-    required String conversationId,
-    required String workerId,
-    required String workerName,
-    required String workerAvatarUrl,
-    required String professionTitle,
-    required String lastMessage,
-    required DateTime updatedAt,
-    required bool isRead,
-    required int unreadCount,
-  }) = _ChatPreview;
+  ChatPreview copyWith({
+    String? id,
+    String? conversationId,
+    String? workerId,
+    String? workerName,
+    String? workerAvatarUrl,
+    String? professionTitle,
+    String? lastMessage,
+    DateTime? updatedAt,
+    bool? isRead,
+    int? unreadCount,
+  }) {
+    return ChatPreview(
+      id: id ?? this.id,
+      conversationId: conversationId ?? this.conversationId,
+      workerId: workerId ?? this.workerId,
+      workerName: workerName ?? this.workerName,
+      workerAvatarUrl: workerAvatarUrl ?? this.workerAvatarUrl,
+      professionTitle: professionTitle ?? this.professionTitle,
+      lastMessage: lastMessage ?? this.lastMessage,
+      updatedAt: updatedAt ?? this.updatedAt,
+      isRead: isRead ?? this.isRead,
+      unreadCount: unreadCount ?? this.unreadCount,
+    );
+  }
 }

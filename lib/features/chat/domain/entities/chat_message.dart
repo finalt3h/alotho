@@ -1,25 +1,53 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
-
-part 'chat_message.freezed.dart';
+import 'package:alo_tho/core/utils/copy_with.dart';
 
 enum ChatMessageDeliveryStatus { sending, sent, read, failed }
 
-@freezed
-class ChatMessage with _$ChatMessage {
-  const ChatMessage._();
+class ChatMessage {
+  const ChatMessage({
+    required this.id,
+    required this.conversationId,
+    required this.isFromCurrentUser,
+    this.text,
+    this.imageAssetPath,
+    required this.createdAt,
+    this.deliveryStatus = ChatMessageDeliveryStatus.read,
+    this.retryCount = 0,
+  });
 
-  const factory ChatMessage({
-    required String id,
-    required String conversationId,
-    required bool isFromCurrentUser,
-    String? text,
-    String? imageAssetPath,
-    required DateTime createdAt,
-    @Default(ChatMessageDeliveryStatus.read)
-    ChatMessageDeliveryStatus deliveryStatus,
-    @Default(0) int retryCount,
-  }) = _ChatMessage;
+  final String id;
+  final String conversationId;
+  final bool isFromCurrentUser;
+  final String? text;
+  final String? imageAssetPath;
+  final DateTime createdAt;
+  final ChatMessageDeliveryStatus deliveryStatus;
+  final int retryCount;
 
   bool get hasText => text?.trim().isNotEmpty ?? false;
   bool get hasImage => imageAssetPath?.trim().isNotEmpty ?? false;
+
+  ChatMessage copyWith({
+    String? id,
+    String? conversationId,
+    bool? isFromCurrentUser,
+    Object? text = copyWithUnchanged,
+    Object? imageAssetPath = copyWithUnchanged,
+    DateTime? createdAt,
+    ChatMessageDeliveryStatus? deliveryStatus,
+    int? retryCount,
+  }) {
+    return ChatMessage(
+      id: id ?? this.id,
+      conversationId: conversationId ?? this.conversationId,
+      isFromCurrentUser: isFromCurrentUser ?? this.isFromCurrentUser,
+      text: copyWithNullable<String>(text, this.text),
+      imageAssetPath: copyWithNullable<String>(
+        imageAssetPath,
+        this.imageAssetPath,
+      ),
+      createdAt: createdAt ?? this.createdAt,
+      deliveryStatus: deliveryStatus ?? this.deliveryStatus,
+      retryCount: retryCount ?? this.retryCount,
+    );
+  }
 }

@@ -1,24 +1,38 @@
 import 'package:alo_tho/features/auth/data/models/user_model.dart';
 import 'package:alo_tho/features/profile/domain/entities/profile_summary.dart';
 import 'package:alo_tho/features/worker_search/data/models/worker_model.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'profile_summary_model.freezed.dart';
-part 'profile_summary_model.g.dart';
+class ProfileSummaryModel {
+  const ProfileSummaryModel({
+    required this.user,
+    this.workerProfile,
+    required this.isKycSubmitted,
+    required this.isKycApproved,
+  });
 
-@freezed
-class ProfileSummaryModel with _$ProfileSummaryModel {
-  const ProfileSummaryModel._();
-
-  const factory ProfileSummaryModel({
-    required UserModel user,
-    WorkerModel? workerProfile,
-    required bool isKycSubmitted,
-    required bool isKycApproved,
-  }) = _ProfileSummaryModel;
+  final UserModel user;
+  final WorkerModel? workerProfile;
+  final bool isKycSubmitted;
+  final bool isKycApproved;
 
   factory ProfileSummaryModel.fromJson(Map<String, dynamic> json) =>
-      _$ProfileSummaryModelFromJson(json);
+      ProfileSummaryModel(
+        user: UserModel.fromJson(json['user'] as Map<String, dynamic>),
+        workerProfile: json['workerProfile'] == null
+            ? null
+            : WorkerModel.fromJson(
+                json['workerProfile'] as Map<String, dynamic>,
+              ),
+        isKycSubmitted: json['isKycSubmitted'] as bool? ?? false,
+        isKycApproved: json['isKycApproved'] as bool? ?? false,
+      );
+
+  Map<String, dynamic> toJson() => {
+    'user': user.toJson(),
+    'workerProfile': workerProfile?.toJson(),
+    'isKycSubmitted': isKycSubmitted,
+    'isKycApproved': isKycApproved,
+  };
 
   ProfileSummary toEntity() => ProfileSummary(
     user: user.toEntity(),

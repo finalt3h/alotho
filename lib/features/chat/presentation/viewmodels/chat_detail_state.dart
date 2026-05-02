@@ -1,18 +1,49 @@
+import 'package:alo_tho/core/utils/copy_with.dart';
 import 'package:alo_tho/features/chat/domain/entities/chat_conversation_detail.dart';
 import 'package:alo_tho/features/chat/domain/entities/chat_message.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'chat_detail_state.freezed.dart';
+class ChatDetailState {
+  const ChatDetailState({
+    this.isLoading = true,
+    this.errorMessage,
+    this.conversation,
+    this.messages = const [],
+    this.isWorkerTyping = false,
+    this.composerImageAssetPath,
+    this.availableImageAssets = const [],
+  });
 
-@freezed
-class ChatDetailState with _$ChatDetailState {
-  const factory ChatDetailState({
-    @Default(true) bool isLoading,
-    String? errorMessage,
-    ChatConversationDetail? conversation,
-    @Default([]) List<ChatMessage> messages,
-    @Default(false) bool isWorkerTyping,
-    String? composerImageAssetPath,
-    @Default([]) List<String> availableImageAssets,
-  }) = _ChatDetailState;
+  final bool isLoading;
+  final String? errorMessage;
+  final ChatConversationDetail? conversation;
+  final List<ChatMessage> messages;
+  final bool isWorkerTyping;
+  final String? composerImageAssetPath;
+  final List<String> availableImageAssets;
+
+  ChatDetailState copyWith({
+    bool? isLoading,
+    Object? errorMessage = copyWithUnchanged,
+    Object? conversation = copyWithUnchanged,
+    List<ChatMessage>? messages,
+    bool? isWorkerTyping,
+    Object? composerImageAssetPath = copyWithUnchanged,
+    List<String>? availableImageAssets,
+  }) {
+    return ChatDetailState(
+      isLoading: isLoading ?? this.isLoading,
+      errorMessage: copyWithNullable<String>(errorMessage, this.errorMessage),
+      conversation: copyWithNullable<ChatConversationDetail>(
+        conversation,
+        this.conversation,
+      ),
+      messages: messages ?? this.messages,
+      isWorkerTyping: isWorkerTyping ?? this.isWorkerTyping,
+      composerImageAssetPath: copyWithNullable<String>(
+        composerImageAssetPath,
+        this.composerImageAssetPath,
+      ),
+      availableImageAssets: availableImageAssets ?? this.availableImageAssets,
+    );
+  }
 }

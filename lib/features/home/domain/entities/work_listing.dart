@@ -1,18 +1,47 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
+class WorkListing {
+  const WorkListing({
+    required this.id,
+    required this.title,
+    required this.categoryName,
+    required this.area,
+    required this.visibleInCategory,
+    required this.viewCount,
+    required this.contactCount,
+    required this.postedAt,
+    required this.statusLabel,
+  });
 
-part 'work_listing.freezed.dart';
+  final String id;
+  final String title;
+  final String categoryName;
+  final String area;
+  final String visibleInCategory;
+  final int viewCount;
+  final int contactCount;
+  final DateTime postedAt;
+  final String statusLabel;
 
-@freezed
-class WorkListing with _$WorkListing {
-  const factory WorkListing({
-    required String id,
-    required String title,
-    required String categoryName,
-    required String area,
-    required String visibleInCategory,
-    required int viewCount,
-    required int contactCount,
-    required DateTime postedAt,
-    required String statusLabel,
-  }) = _WorkListing;
+  WorkListing copyWith({
+    String? id,
+    String? title,
+    String? categoryName,
+    String? area,
+    String? visibleInCategory,
+    int? viewCount,
+    int? contactCount,
+    DateTime? postedAt,
+    String? statusLabel,
+  }) {
+    return WorkListing(
+      id: id ?? this.id,
+      title: title ?? this.title,
+      categoryName: categoryName ?? this.categoryName,
+      area: area ?? this.area,
+      visibleInCategory: visibleInCategory ?? this.visibleInCategory,
+      viewCount: viewCount ?? this.viewCount,
+      contactCount: contactCount ?? this.contactCount,
+      postedAt: postedAt ?? this.postedAt,
+      statusLabel: statusLabel ?? this.statusLabel,
+    );
+  }
 }

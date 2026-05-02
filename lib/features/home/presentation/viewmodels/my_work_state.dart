@@ -1,13 +1,26 @@
+import 'package:alo_tho/core/utils/copy_with.dart';
 import 'package:alo_tho/features/home/domain/entities/work_listing.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'my_work_state.freezed.dart';
+class MyWorkState {
+  const MyWorkState({
+    this.isLoading = true,
+    this.errorMessage,
+    this.listings = const [],
+  });
 
-@freezed
-class MyWorkState with _$MyWorkState {
-  const factory MyWorkState({
-    @Default(true) bool isLoading,
-    String? errorMessage,
-    @Default([]) List<WorkListing> listings,
-  }) = _MyWorkState;
+  final bool isLoading;
+  final String? errorMessage;
+  final List<WorkListing> listings;
+
+  MyWorkState copyWith({
+    bool? isLoading,
+    Object? errorMessage = copyWithUnchanged,
+    List<WorkListing>? listings,
+  }) {
+    return MyWorkState(
+      isLoading: isLoading ?? this.isLoading,
+      errorMessage: copyWithNullable<String>(errorMessage, this.errorMessage),
+      listings: listings ?? this.listings,
+    );
+  }
 }

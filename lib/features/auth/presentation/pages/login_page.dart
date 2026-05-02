@@ -34,11 +34,31 @@ class _LoginPageState extends ConsumerState<LoginPage> {
   static const _heroAsset = 'assets/login/login_hero.png';
   static const _googleAsset = 'assets/login/google.png';
 
+  late final TextEditingController _identifierTextController;
   bool _obscurePassword = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _identifierTextController = TextEditingController();
+  }
+
+  @override
+  void dispose() {
+    _identifierTextController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     final l10n = context.l10n;
+
+    ref.listen(loginControllerProvider.select((state) => state.identifier), (
+      _,
+      next,
+    ) {
+      _syncIdentifierText(next);
+    });
 
     ref.listen(loginUiActionProvider, (_, next) {
       next.whenData((action) {
@@ -49,6 +69,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
     final theme = Theme.of(context);
     final state = ref.watch(loginControllerProvider);
     final controller = ref.read(loginControllerProvider.notifier);
+    _syncIdentifierText(state.identifier);
 
     return Scaffold(
       backgroundColor: AppThemeColors.hex0xFFFCF9F8,
@@ -131,6 +152,7 @@ class _LoginPageState extends ConsumerState<LoginPage> {
                 _LoginFieldLabel(label: l10n.loginIdentifierLabel),
                 const SizedBox(height: 8),
                 _LoginTextField(
+                  controller: _identifierTextController,
                   hintText: l10n.loginIdentifierHint,
                   prefixIcon: Icons.person_outline_rounded,
                   keyboardType: TextInputType.emailAddress,
@@ -334,6 +356,17 @@ class _LoginPageState extends ConsumerState<LoginPage> {
         return;
     }
   }
+
+  void _syncIdentifierText(String value) {
+    if (_identifierTextController.text == value) {
+      return;
+    }
+
+    _identifierTextController.value = TextEditingValue(
+      text: value,
+      selection: TextSelection.collapsed(offset: value.length),
+    );
+  }
 }
 
 class _LoginHeroCard extends StatelessWidget {
@@ -443,11 +476,13 @@ class _LoginTextField extends StatelessWidget {
     required this.hintText,
     required this.prefixIcon,
     required this.onChanged,
+    this.controller,
     this.obscureText = false,
     this.keyboardType,
     this.suffix,
   });
 
+  final TextEditingController? controller;
   final String hintText;
   final IconData prefixIcon;
   final ValueChanged<String> onChanged;
@@ -458,6 +493,7 @@ class _LoginTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextFormField(
+      controller: controller,
       keyboardType: keyboardType,
       obscureText: obscureText,
       onChanged: onChanged,

@@ -1,5 +1,6 @@
 import 'package:alo_tho/app/theme/app_theme.dart';
 import 'package:alo_tho/core/l10n/app_localizations.dart';
+import 'package:alo_tho/features/auth/data/datasources/login_identifier_local_data_source.dart';
 import 'package:alo_tho/features/auth/presentation/pages/login_page.dart';
 import 'package:alo_tho/features/auth/presentation/pages/register_page.dart';
 import 'package:alo_tho/features/auth/presentation/pages/splash_page.dart';
@@ -26,6 +27,11 @@ void main() {
 
     await tester.pumpWidget(
       ProviderScope(
+        overrides: [
+          loginIdentifierLocalDataSourceProvider.overrideWithValue(
+            _FakeLoginIdentifierLocalDataSource(),
+          ),
+        ],
         child: MaterialApp(
           locale: const Locale('vi'),
           supportedLocales: AppLocalizations.supportedLocales,
@@ -118,4 +124,13 @@ void main() {
 
     expect(tester.takeException(), isNull);
   });
+}
+
+class _FakeLoginIdentifierLocalDataSource
+    implements LoginIdentifierLocalDataSource {
+  @override
+  Future<String> getLastLoginIdentifier() async => '';
+
+  @override
+  Future<void> saveLastLoginIdentifier(String identifier) async {}
 }

@@ -1,12 +1,23 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
+class LoginState {
+  const LoginState({
+    this.identifier = '',
+    this.password = '',
+    this.isSubmitting = false,
+  });
 
-part 'login_state.freezed.dart';
+  final String identifier;
+  final String password;
+  final bool isSubmitting;
 
-@freezed
-class LoginState with _$LoginState {
-  const factory LoginState({
-    @Default('') String identifier,
-    @Default('') String password,
-    @Default(false) bool isSubmitting,
-  }) = _LoginState;
+  LoginState copyWith({
+    String? identifier,
+    String? password,
+    bool? isSubmitting,
+  }) {
+    return LoginState(
+      identifier: identifier ?? this.identifier,
+      password: password ?? this.password,
+      isSubmitting: isSubmitting ?? this.isSubmitting,
+    );
+  }
 }

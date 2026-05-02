@@ -1,15 +1,24 @@
+import 'package:alo_tho/core/utils/copy_with.dart';
 import 'package:alo_tho/features/auth/domain/entities/user.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
-
-part 'auth_session_state.freezed.dart';
 
 enum AuthStatus { unknown, unauthenticated, authenticated }
 
-@freezed
-class AuthSessionState with _$AuthSessionState {
-  const factory AuthSessionState({required AuthStatus status, User? user}) =
-      _AuthSessionState;
+class AuthSessionState {
+  const AuthSessionState({required this.status, this.user});
 
   factory AuthSessionState.initial() =>
       const AuthSessionState(status: AuthStatus.unknown);
+
+  final AuthStatus status;
+  final User? user;
+
+  AuthSessionState copyWith({
+    AuthStatus? status,
+    Object? user = copyWithUnchanged,
+  }) {
+    return AuthSessionState(
+      status: status ?? this.status,
+      user: copyWithNullable<User>(user, this.user),
+    );
+  }
 }

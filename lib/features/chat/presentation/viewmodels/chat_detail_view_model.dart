@@ -259,12 +259,10 @@ class ChatDetailController extends FamilyNotifier<ChatDetailState, String> {
     state = state.copyWith(
       messages: sorted,
       isWorkerTyping: isWorkerTyping ?? state.isWorkerTyping,
-      conversation: conversation == null
-          ? null
-          : conversation.copyWith(
-              messages: sorted,
-              lastActiveAt: lastActiveAt ?? conversation.lastActiveAt,
-            ),
+      conversation: conversation?.copyWith(
+        messages: sorted,
+        lastActiveAt: lastActiveAt ?? conversation.lastActiveAt,
+      ),
     );
   }
 }

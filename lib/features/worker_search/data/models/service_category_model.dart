@@ -1,22 +1,34 @@
+import 'package:alo_tho/core/utils/json_readers.dart';
 import 'package:alo_tho/features/worker_search/domain/entities/service_category.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 
-part 'service_category_model.freezed.dart';
-part 'service_category_model.g.dart';
+class ServiceCategoryModel {
+  const ServiceCategoryModel({
+    required this.id,
+    required this.name,
+    required this.iconName,
+    required this.description,
+  });
 
-@freezed
-class ServiceCategoryModel with _$ServiceCategoryModel {
-  const ServiceCategoryModel._();
+  final String id;
+  final String name;
+  final String iconName;
+  final String description;
 
-  const factory ServiceCategoryModel({
-    required String id,
-    required String name,
-    required String iconName,
-    required String description,
-  }) = _ServiceCategoryModel;
+  factory ServiceCategoryModel.fromJson(Map<String, dynamic> json) {
+    return ServiceCategoryModel(
+      id: readString(json, 'id'),
+      name: readString(json, 'name'),
+      iconName: readString(json, 'iconName', fallbackKey: 'icon_name'),
+      description: readString(json, 'description'),
+    );
+  }
 
-  factory ServiceCategoryModel.fromJson(Map<String, dynamic> json) =>
-      _$ServiceCategoryModelFromJson(json);
+  Map<String, dynamic> toJson() => {
+    'id': id,
+    'name': name,
+    'iconName': iconName,
+    'description': description,
+  };
 
   ServiceCategory toEntity() => ServiceCategory(
     id: id,

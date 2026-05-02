@@ -1,26 +1,45 @@
+import 'package:alo_tho/core/utils/json_readers.dart';
 import 'package:alo_tho/features/auth/domain/entities/user.dart';
-import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:supabase_flutter/supabase_flutter.dart' as supabase;
 
-part 'user_model.freezed.dart';
-part 'user_model.g.dart';
+class UserModel {
+  const UserModel({
+    required this.id,
+    required this.fullName,
+    required this.phoneNumber,
+    required this.city,
+    required this.isWorker,
+    this.avatarUrl,
+    required this.joinedAt,
+  });
 
-@freezed
-class UserModel with _$UserModel {
-  const UserModel._();
+  final String id;
+  final String fullName;
+  final String phoneNumber;
+  final String city;
+  final bool isWorker;
+  final String? avatarUrl;
+  final DateTime joinedAt;
 
-  const factory UserModel({
-    required String id,
-    required String fullName,
-    required String phoneNumber,
-    required String city,
-    required bool isWorker,
-    String? avatarUrl,
-    required DateTime joinedAt,
-  }) = _UserModel;
+  factory UserModel.fromJson(Map<String, dynamic> json) => UserModel(
+    id: readString(json, 'id'),
+    fullName: readString(json, 'fullName', fallbackKey: 'full_name'),
+    phoneNumber: readString(json, 'phoneNumber', fallbackKey: 'phone_number'),
+    city: readString(json, 'city'),
+    isWorker: readBool(json, 'isWorker'),
+    avatarUrl: json['avatarUrl'] as String? ?? json['avatar_url'] as String?,
+    joinedAt: readDateTime(json, 'joinedAt'),
+  );
 
-  factory UserModel.fromJson(Map<String, dynamic> json) =>
-      _$UserModelFromJson(json);
+  Map<String, dynamic> toJson() => {
+    'id': id,
+    'fullName': fullName,
+    'phoneNumber': phoneNumber,
+    'city': city,
+    'isWorker': isWorker,
+    'avatarUrl': avatarUrl,
+    'joinedAt': joinedAt.toIso8601String(),
+  };
 
   User toEntity() => User(
     id: id,
@@ -73,14 +92,10 @@ class UserModel with _$UserModel {
 
   static String _fallbackName(supabase.User authUser) {
     final email = authUser.email?.trim();
-    if (email != null && email.isNotEmpty) {
-      return email.split('@').first;
-    }
+    if (email != null && email.isNotEmpty) return email.split('@').first;
 
     final phone = authUser.phone?.trim();
-    if (phone != null && phone.isNotEmpty) {
-      return phone;
-    }
+    if (phone != null && phone.isNotEmpty) return phone;
 
     return 'Nguoi dung';
   }

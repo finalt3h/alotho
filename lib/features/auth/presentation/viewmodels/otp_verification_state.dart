@@ -1,12 +1,23 @@
-import 'package:freezed_annotation/freezed_annotation.dart';
+class OtpVerificationState {
+  const OtpVerificationState({
+    this.otp = '',
+    this.isSubmitting = false,
+    this.isResending = false,
+  });
 
-part 'otp_verification_state.freezed.dart';
+  final String otp;
+  final bool isSubmitting;
+  final bool isResending;
 
-@freezed
-class OtpVerificationState with _$OtpVerificationState {
-  const factory OtpVerificationState({
-    @Default('') String otp,
-    @Default(false) bool isSubmitting,
-    @Default(false) bool isResending,
-  }) = _OtpVerificationState;
+  OtpVerificationState copyWith({
+    String? otp,
+    bool? isSubmitting,
+    bool? isResending,
+  }) {
+    return OtpVerificationState(
+      otp: otp ?? this.otp,
+      isSubmitting: isSubmitting ?? this.isSubmitting,
+      isResending: isResending ?? this.isResending,
+    );
+  }
 }
